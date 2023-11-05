@@ -1,0 +1,7 @@
+FROM dockerfile/java:oracle-java8
+
+VOLUME /tmp
+ADD saga-architecture-order.jar /opt/saga-architecture-order/
+EXPOSE 8080
+WORKDIR /opt/saga-architecture-order/
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-Xms512m", "-Xmx1g", "-jar", "saga-architecture-order.jar"]
