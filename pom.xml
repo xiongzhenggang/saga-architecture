@@ -7,6 +7,7 @@
     <module>saga-architecture-order</module>
     <module>saga-architecture-library-infrastructure</module>
     <module>saga-architecture-goods</module>
+    <module>saga-architecture-authentication</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -18,33 +19,26 @@
   <artifactId>saga-architecture</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>saga-architecture</name>
-  <url>http://maven.apache.org</url>
+  <description>Service Mesh Architecture Demonstrate with Istio Infrastructure</description>
   <properties>
     <java.version>21</java.version>
-<!--    <argLine>-Dfile.encoding=UTF-8</argLine>-->
-<!--    <jkube.docker.host>tcp://172.20.34.234:2376</jkube.docker.host>-->
-<!--    <jkube.docker.certPath>C:\Users\Lenovo\.minikube\certs</jkube.docker.certPath>-->
-<!--    <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>-->
-<!--    <jkube.recreate>true</jkube.recreate>-->
-<!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-<!--    <jkube.version>1.9.1</jkube.version>-->
-    <!-- 自定义镜像名称 -->
-<!--    <jkube.generator.name>spring-cloud-k8s-examples/${project.artifactId}</jkube.generator.name>-->
     <spring-cloud-kubernetes.version>3.0.4</spring-cloud-kubernetes.version>
     <spring.cloud.version>2022.0.4</spring.cloud.version>
     <fabric8-maven-version>4.4.2</fabric8-maven-version>
-    <fabric8.maven.plugin.version>4.4.1</fabric8.maven.plugin.version>
-    <lombok.version>1.18.24</lombok.version>
+    <lombok.version>1.18.30</lombok.version>
+    <jwt.version>0.12.3</jwt.version>
+    <caffeine.version>3.1.8</caffeine.version>
+    <mysql.version>8.0.33</mysql.version>
   </properties>
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-kubernetes-dependencies</artifactId>
-        <version>${spring-cloud-kubernetes.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.springframework.cloud</groupId>-->
+<!--        <artifactId>spring-cloud-kubernetes-dependencies</artifactId>-->
+<!--        <version>${spring-cloud-kubernetes.version}</version>-->
+<!--        <type>pom</type>-->
+<!--        <scope>import</scope>-->
+<!--      </dependency>-->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
@@ -52,16 +46,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-<!--      <dependency>-->
-<!--        <groupId>org.apache.skywalking</groupId>-->
-<!--        <artifactId>apm-toolkit-trace</artifactId>-->
-<!--        <version>${skywalking.version}</version>-->
-<!--      </dependency>-->
-<!--      <dependency>-->
-<!--        <groupId>org.apache.skywalking</groupId>-->
-<!--        <artifactId>apm-toolkit-logback-1.x</artifactId>-->
-<!--        <version>${skywalking.version}</version>-->
-<!--      </dependency>-->
     </dependencies>
   </dependencyManagement>
   <build>
@@ -74,16 +58,7 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-        </plugin>
-        <plugin>
-          <groupId>io.fabric8</groupId>
-          <artifactId>fabric8-maven-plugin</artifactId>
-          <version>${fabric8-maven-version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

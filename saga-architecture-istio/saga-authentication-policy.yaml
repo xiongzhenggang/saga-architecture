@@ -1,0 +1,34 @@
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: authentication-mtls
+  namespace: saga-servicemesh
+spec:
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1
+kind: RequestAuthentication
+metadata:
+  name: authentication-jwt-token
+  namespace: saga-servicemesh
+spec:
+  jwtRules:
+    - issuer: "saga@gmail.com"
+      # Envoy默认只认“Bearer”作为JWT前缀，之前其他地方用的都是小写，这里专门兼容一下
+      fromHeaders:
+        - name: Authorization
+          prefix: "bearer "
+      # 在rsa-key目录下放了用来生成这个JWKS的证书，最初是用java keytool生成的jks格式，一般转jwks都是用pkcs12或者pem格式，为方便使用也一起附带了
+      jwks: |
+        {
+            "keys": [
+                {
+                    "e": "AQAB",
+                    "kid": "VRb1fKoqPXrGcdK95xH4FTlRe3wG-JA2JWjj24YQCjs",
+                    "kty": "RSA", 
+                    "n": "2efAGoS5zS-SIAADjD57mPnj1ZqqXd8upZOuKDQxFtCbk6ujRRyLITqcFpnifs960IVsId1qNgVsymcsJqe0FIV4PbS3oOjEmcRGyCKOl5VJE5oHK_kxBRxrSOIN35xn5yGFtu4EW3T7p1nAEPAuSNu9Lln5LtG_Qijys-Tu3XmB5sVyR1p2JWvDtPvr4NPGwun7A03WKEusc969Ek8VQw-KzovEihGmxMnE6qutHPQ70wLTHpDfBQva5re0L-cOLEcHSn_m4OUhTMWkfRQseCBiTEVjFSqICXOGJ3yITiSPhmhbHflTXryhJbPJxAmK6jrs0zDgP93XjFpV7hA5jw"
+                }
+            ]
+        }
+      forwardOriginalToken: true

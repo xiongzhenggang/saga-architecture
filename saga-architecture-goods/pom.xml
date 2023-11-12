@@ -7,6 +7,7 @@
         <groupId>org.xzg</groupId>
         <artifactId>saga-architecture</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>com.xzg</groupId>
