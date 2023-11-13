@@ -11,7 +11,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -27,6 +26,7 @@ public class AuthApplicationConfig {
      */
     private final UserRepository repository;
 
+    private  final PasswordEncoder passwordEncoder;
     /**
      * 获取用户详情Bean
      * 根据email查询是否存在用户,如果不存在throw用户未找到异常
@@ -52,7 +52,7 @@ public class AuthApplicationConfig {
         //设置获取用户信息的bean
         authProvider.setUserDetailsService(userDetailsService());
         //设置密码加密器
-        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
 
@@ -64,14 +64,5 @@ public class AuthApplicationConfig {
         return config.getAuthenticationManager();
     }
 
-    /**
-     * 密码加密器
-     * 主要是用来指定数据库中存储密码的加密方式,保证密码非明文存储
-     * 当security需要进行密码校验时,会把请求传进来的密码进行加密,然后和数据库中的密码进行比对
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 }

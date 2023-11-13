@@ -1,4 +1,4 @@
-package com.xzg.library.config.infrastructure.utility;
+package com.xzg.authentication.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

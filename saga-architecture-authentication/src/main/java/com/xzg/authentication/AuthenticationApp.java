@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date: 9/11/2023-下午 8:41
  * @version: 1.0
  */
-@SpringBootApplication(scanBasePackages = {"com.xzg.authentication"})
+@SpringBootApplication(scanBasePackages = {"com.xzg"})
 public class AuthenticationApp {
     public static void main(String[] args) {
         SpringApplication.run(AuthenticationApp.class, args);

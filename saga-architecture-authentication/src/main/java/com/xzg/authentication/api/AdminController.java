@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/v1/admin")
-@PreAuthorize("hasRole('ADMIN')") //用户需要ADMIN角色才能访问
+//@PreAuthorize("hasRole('ADMIN')") //用户需要ADMIN角色才能访问
 public class AdminController {
 
     @GetMapping

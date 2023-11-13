@@ -18,12 +18,6 @@
 // * @version: 1.0
 // */
 //
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.http.MediaType;
-//import javax.ws.rs.core.MediaType;
-//import javax.ws.rs.core.Response;
-//import java.util.function.Consumer;
 //
 //
 //public abstract class CommonResponse {

@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.xzg.library.config.infrastructure.InfrastructureConfig

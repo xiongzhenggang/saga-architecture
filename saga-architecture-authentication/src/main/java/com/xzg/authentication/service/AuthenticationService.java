@@ -10,10 +10,10 @@ import com.xzg.authentication.entity.enums.TokenType;
 import com.xzg.authentication.model.request.AuthenticationRequest;
 import com.xzg.authentication.model.request.RegisterRequest;
 import com.xzg.authentication.model.rresponse.AuthenticationResponse;
-import com.xzg.authentication.config.JwtService;
+import com.xzg.library.config.infrastructure.auth.token.JwtService;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,14 +24,18 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class AuthenticationService {
 
-    private final UserRepository repository; //访问user数据库
-    private final TokenRepository tokenRepository; //访问token数据库
-    private final PasswordEncoder passwordEncoder; //密码加密器
-    private final JwtService jwtService; //JWT 相关方法
-    private final AuthenticationManager authenticationManager; //Spring Security 认证管理器
+    @Resource
+    private  JwtService jwtService; //JWT 相关方法
+    @Resource
+    private  UserRepository repository; //访问user数据库
+    @Resource
+    private  TokenRepository tokenRepository; //访问token数据库
+    @Resource
+    private  PasswordEncoder passwordEncoder; //密码加密器
+    @Resource
+    private  AuthenticationManager authenticationManager; //Spring Security 认证管理器
 
     /**
      * 注册方法

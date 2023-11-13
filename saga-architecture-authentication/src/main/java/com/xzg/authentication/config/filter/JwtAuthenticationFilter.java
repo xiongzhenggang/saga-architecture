@@ -1,12 +1,12 @@
 package com.xzg.authentication.config.filter;
 
 import com.xzg.authentication.dao.TokenRepository;
-import com.xzg.authentication.config.JwtService;
+import com.xzg.library.config.infrastructure.auth.token.JwtService;
+import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,12 +23,14 @@ import java.io.IOException;
  * 从请求头中获取到token.验证token的有效性并解析token中的信息存储到SecurityContextHolder上下文中,方便后续的使用
  */
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
-    private final TokenRepository tokenRepository;
+    @Resource
+    private  JwtService jwtService;
+    @Resource
+    private  UserDetailsService userDetailsService;
+    @Resource
+    private  TokenRepository tokenRepository;
 
     @Override
     protected void doFilterInternal(

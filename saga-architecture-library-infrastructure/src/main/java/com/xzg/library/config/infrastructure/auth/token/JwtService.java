@@ -1,22 +1,18 @@
-package com.xzg.authentication.config;
+package com.xzg.library.config.infrastructure.auth.token;
 
-import com.xzg.library.config.infrastructure.utility.RsaUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 
 import javax.crypto.SecretKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +44,10 @@ public class JwtService {
     @Value("${application.security.jwt.refresh-token.expiration:7200000}")
     private long refreshExpiration;
 
+    @Resource
+    private RSAPrivateKey rsaPrivateKey;
+    @Resource
+    private RSAPublicKey rsaPublicKey;
     /**
      * 从Token中获取Username
      * @param token Token
@@ -141,10 +141,10 @@ public class JwtService {
     ) {
         return Jwts.builder()                     // (1)
                 .header()                                   // (2) optional
-                .keyId("aKeyId")
+//                .keyId("aKeyId")
                 .and()
                 .subject(userDetails.getUsername())        // (3) JSON Claims, or
-                .signWith(parsePrivateKey())                       // (4) if signing, or
+                .signWith(rsaPrivateKey)                       // (4) if signing, or
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .claims(extraClaims)
@@ -194,7 +194,7 @@ public class JwtService {
      */
     private Claims extractRsaAllClaims(String token) {
         return Jwts.parser()
-                .verifyWith(parsePublicKey()) // <----
+                .verifyWith(rsaPublicKey) // <----
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
@@ -208,43 +208,5 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    /**
-     * 根据公钥证书返回公钥对象
-     * @return
-     */
-    private RSAPublicKey parsePublicKey(){
-        Resource resource = new ClassPathResource("public_key.pem");
-        String publicKeyString;
-        try {
-            publicKeyString = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
-            String publicKeyStr = publicKeyString
-                    .replace("-----BEGIN PUBLIC KEY-----", "")
-                    .replace("-----END PUBLIC KEY-----", "")
-                    .replaceAll("\\s", "");
-            byte[] decodedPublicKeyBytes = Base64.getDecoder().decode(publicKeyStr);
-            return RsaUtil.readPublicKeyByByte(decodedPublicKeyBytes);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    /**
-     *
-     * @return
-     */
-    private RSAPrivateKey parsePrivateKey(){
-        Resource resource = new ClassPathResource("private_key_pkcs8.pem");
-        String privateKeyString ;
-        try {
-            privateKeyString  = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
-            String privateKeyStr = privateKeyString
-                    .replace("-----BEGIN PRIVATE KEY-----", "")
-                    .replace("-----END PRIVATE KEY-----", "")
-                    .replaceAll("\\s", "");
-            byte[] decodedPrivateKeyBytes  = Base64.getDecoder().decode(privateKeyStr);
-            return RsaUtil.readPrivateKeyByByte(decodedPrivateKeyBytes);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
