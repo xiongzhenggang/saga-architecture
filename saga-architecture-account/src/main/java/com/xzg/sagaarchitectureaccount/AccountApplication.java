@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SagaArchitectureAccountApplication {
+public class AccountApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SagaArchitectureAccountApplication.class, args);
+        SpringApplication.run(AccountApplication.class, args);
     }
 
 }

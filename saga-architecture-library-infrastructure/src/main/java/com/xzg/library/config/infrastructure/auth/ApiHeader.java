@@ -7,7 +7,13 @@ import java.lang.annotation.Target;
 /**
  * 请求头拦截注解
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ApiHeader {
+
+    /**
+     * api header是否必须
+     * @return boolean
+     */
+    boolean required() default true;
 }

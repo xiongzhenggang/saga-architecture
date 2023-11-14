@@ -8,6 +8,7 @@
     <module>saga-architecture-library-infrastructure</module>
     <module>saga-architecture-goods</module>
     <module>saga-architecture-authentication</module>
+    <module>saga-architecture-orchestrator</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
