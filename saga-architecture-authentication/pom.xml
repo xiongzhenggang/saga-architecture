@@ -9,7 +9,6 @@
     <groupId>com.xzg</groupId>
     <artifactId>saga-architecture-authentication</artifactId>
     <name>Archetype - saga-architecture-authentication</name>
-    <url>http://maven.apache.org</url>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -22,10 +21,6 @@
             <groupId>org.xzg</groupId>
             <artifactId>saga-architecture-library-infrastructure</artifactId>
             <version>${saga-archiecture-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

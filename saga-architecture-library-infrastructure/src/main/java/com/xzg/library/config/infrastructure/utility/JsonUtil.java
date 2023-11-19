@@ -53,10 +53,40 @@ public class JsonUtil {
             throw new IllegalArgumentException("将JSON转换为对象时发生错误:" + jsonStr, e);
         }
     }
+
+    /**
+     * 类防范
+     * @param jsonStr
+     * @param targetType
+     * @return
+     * @param <T>
+     */
+    public static  <T> T jsonStr2obj(String jsonStr, Type targetType) {
+        if (jsonStr == null || jsonStr.length() <= 0){
+            return null;
+        }
+        try {
+            JavaType javaType = TypeFactory.defaultInstance().constructType(targetType);
+            return OBJECT_MAPPER.readValue(jsonStr, javaType);
+
+        } catch (Exception e) {
+            throw new IllegalArgumentException("将JSON转换为对象时发生错误:" + jsonStr, e);
+        }
+    }
     /**
      * 对象转json
      */
     public  String object2Json(Object object) {
+        try {
+            JavaTimeModule javaTimeModule = new JavaTimeModule();
+            OBJECT_MAPPER.registerModule(javaTimeModule);
+            return  OBJECT_MAPPER.writeValueAsString(object);
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
+    public  static String object2JsonStr(Object object) {
         try {
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             OBJECT_MAPPER.registerModule(javaTimeModule);

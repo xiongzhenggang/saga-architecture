@@ -6,8 +6,8 @@
     <module>saga-architecture-account</module>
     <module>saga-architecture-order</module>
     <module>saga-architecture-library-infrastructure</module>
-    <module>saga-architecture-goods</module>
     <module>saga-architecture-authentication</module>
+    <module>saga-architecture-goods</module>
     <module>saga-architecture-orchestrator</module>
   </modules>
   <parent>
@@ -30,6 +30,7 @@
     <jwt.version>0.12.3</jwt.version>
     <caffeine.version>3.1.8</caffeine.version>
     <mysql.version>8.0.33</mysql.version>
+    <saga-archiecture-version>1.0-SNAPSHOT</saga-archiecture-version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -46,6 +47,11 @@
         <version>${spring.cloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.xzg</groupId>
+        <artifactId>saga-architecture-library-infrastructure</artifactId>
+        <version>${saga-archiecture-version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

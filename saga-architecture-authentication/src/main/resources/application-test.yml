@@ -15,7 +15,8 @@ spring:
       cache: true
     cache:
       period: 86400
-
+  application:
+    name: auth_server
 logging:
   pattern:
     console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(-){faint} %clr([%t]){faint} %clr(%-40logger{39}){cyan}[%line]%clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
