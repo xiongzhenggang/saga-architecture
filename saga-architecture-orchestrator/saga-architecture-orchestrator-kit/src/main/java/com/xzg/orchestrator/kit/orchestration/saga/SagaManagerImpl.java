@@ -144,7 +144,7 @@ public class SagaManagerImpl<Data>
   }
 
   public void subscribeToReplyChannel() {
-    messageConsumer.subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),
+    messageConsumer.   subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),
             this::handleMessage);
   }
 
