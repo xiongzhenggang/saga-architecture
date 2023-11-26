@@ -1,6 +1,5 @@
 package com.xzg.orchestrator.kit.event.consumer;
 
-import lombok.ToString;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.*;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
  * @date: 22/11/2023-下午 10:14
  * @version: 1.0
  */
-@ToString
 public class TopicPartitionOffsets {
 
     /**

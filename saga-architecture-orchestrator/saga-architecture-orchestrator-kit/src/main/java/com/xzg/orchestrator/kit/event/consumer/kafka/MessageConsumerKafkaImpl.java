@@ -37,6 +37,7 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
     private KafkaConsumerFactory kafkaConsumerFactory;
     private EventuateKafkaMultiMessageConverter eventuateKafkaMultiMessageConverter = new EventuateKafkaMultiMessageConverter();
 
+
     public MessageConsumerKafkaImpl(String bootstrapServers,
                                     EventuateKafkaConsumerConfigurationProperties eventuateKafkaConsumerConfigurationProperties,
                                     KafkaConsumerFactory kafkaConsumerFactory) {

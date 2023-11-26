@@ -1,6 +1,5 @@
 package com.xzg.orchestrator.kit.event.consumer;
 
-import lombok.ToString;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -16,7 +15,6 @@ import java.util.Objects;
  * @date: 22/11/2023-下午 10:29
  * @version: 1.0
  */
-@ToString
 public class KeyValue {
     public static final int ESTIMATED_BYTES_PER_CHAR = 3;
     public static final int KEY_HEADER_SIZE = 4;

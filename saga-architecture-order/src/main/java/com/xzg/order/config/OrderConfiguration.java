@@ -21,8 +21,8 @@ import com.xzg.order.service.OrderCommandHandler;
 @Configuration
 @EnableJpaRepositories
 @EnableAutoConfiguration
-@EntityScan("com.xzg")
-@ComponentScan
+@EntityScan("com.xzg.order")
+@ComponentScan("com.xzg")
 //@Import(OptimisticLockingDecoratorConfiguration.class)
 public class OrderConfiguration {
 
