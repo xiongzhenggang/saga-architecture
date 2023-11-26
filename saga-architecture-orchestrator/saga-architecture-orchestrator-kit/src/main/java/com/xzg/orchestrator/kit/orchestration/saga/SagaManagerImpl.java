@@ -144,7 +144,7 @@ public class SagaManagerImpl<Data>
   }
 
   public void subscribeToReplyChannel() {
-    messageConsumer.   subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),
+    messageConsumer. subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),
             this::handleMessage);
   }
 
@@ -201,17 +201,13 @@ public class SagaManagerImpl<Data>
     while (true) {
 
       if (actions.getLocalException().isPresent()) {
-
         actions = getStateDefinition().handleReply(sagaType, sagaId, actions.getUpdatedState().get(), actions.getUpdatedSagaData().get(), MessageBuilder
                 .withPayload("{}")
                 .withHeader(ReplyMessageHeaders.REPLY_OUTCOME, CommandReplyOutcome.FAILURE.name())
                 .withHeader(ReplyMessageHeaders.REPLY_TYPE, Failure.class.getName())
                 .build());
-
-
       } else {
         // only do this if successful
-
         String lastRequestId = sagaCommandProducer.sendCommands(this.getSagaType(), sagaId, actions.getCommands(), this.makeSagaReplyChannel());
         sagaInstance.setLastRequestId(lastRequestId);
 

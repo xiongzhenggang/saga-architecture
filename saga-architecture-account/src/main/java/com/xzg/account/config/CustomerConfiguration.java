@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories
 @EnableAutoConfiguration
-@EntityScan("com.xzg")
+@EntityScan("com.xzg.account")
 @ComponentScan
 //@Import(OptimisticLockingDecoratorConfiguration.class)
 public class CustomerConfiguration {

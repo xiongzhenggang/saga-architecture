@@ -1,4 +1,4 @@
-package com.xzg.orchestrator.kit.event;
-
-public interface Event {
-}
+//package com.xzg.orchestrator.kit.event;
+//
+//public interface Event {
+//}

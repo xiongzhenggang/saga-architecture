@@ -4,7 +4,7 @@ import com.xzg.library.config.infrastructure.utility.JsonUtil;
 import com.xzg.orchestrator.kit.event.CommandMessage;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
-import com.xzg.orchestrator.kit.event.consumer.MessageConsumer;
+import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,15 +31,16 @@ public class CommandDispatcher {
 
     private final CommandHandlers commandHandlers;
 
-    private final MessageConsumer messageConsumer;
+//    private final MessageConsumer messageConsumer;
 
+    private final CommonMessageConsumer messageConsumer;
     private final CommandNameMapping commandNameMapping;
 
     private final CommandReplyProducer commandReplyProducer;
 
     public CommandDispatcher(String commandDispatcherId,
                              CommandHandlers commandHandlers,
-                             MessageConsumer messageConsumer,
+                             CommonMessageConsumer messageConsumer,
                              CommandNameMapping commandNameMapping,
                              CommandReplyProducer commandReplyProducer) {
         this.commandDispatcherId = commandDispatcherId;
@@ -53,6 +54,7 @@ public class CommandDispatcher {
         messageConsumer.subscribe(commandDispatcherId,
                 commandHandlers.getChannels(),
                 this::messageHandler);
+
     }
 
     public void messageHandler(Message message) {

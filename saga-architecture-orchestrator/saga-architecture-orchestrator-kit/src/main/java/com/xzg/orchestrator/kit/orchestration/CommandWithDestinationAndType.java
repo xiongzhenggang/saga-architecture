@@ -5,6 +5,10 @@ import com.xzg.orchestrator.kit.command.Command;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import lombok.Data;
 
+/**
+ * 发送名利地质信息
+ * @author xzg
+ */
 @Data
 public class CommandWithDestinationAndType {
 
@@ -31,14 +35,6 @@ public class CommandWithDestinationAndType {
     public CommandWithDestinationAndType(CommandWithDestination commandWithDestination, boolean notification) {
         this.commandWithDestination = commandWithDestination;
         this.notification = notification;
-    }
-
-    public CommandWithDestination getCommandWithDestination() {
-        return commandWithDestination;
-    }
-
-    public boolean isNotification() {
-        return notification;
     }
 
     public boolean isCommand() {

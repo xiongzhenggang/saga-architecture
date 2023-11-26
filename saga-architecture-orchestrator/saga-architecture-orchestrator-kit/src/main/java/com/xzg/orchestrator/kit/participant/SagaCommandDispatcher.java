@@ -6,7 +6,7 @@ import com.xzg.orchestrator.kit.common.*;
 import com.xzg.orchestrator.kit.event.CommandMessage;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
-import com.xzg.orchestrator.kit.event.consumer.MessageConsumer;
+import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class SagaCommandDispatcher extends CommandDispatcher {
 
   public SagaCommandDispatcher(String commandDispatcherId,
                                CommandHandlers target,
-                               MessageConsumer messageConsumer,
+                               CommonMessageConsumer messageConsumer,
                                SagaLockManager sagaLockManager,
                                CommandNameMapping commandNameMapping, CommandReplyProducer commandReplyProducer) {
     super(commandDispatcherId, target, messageConsumer, commandNameMapping, commandReplyProducer);

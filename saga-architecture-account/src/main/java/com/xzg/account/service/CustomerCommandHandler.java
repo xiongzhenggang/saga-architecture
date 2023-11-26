@@ -21,6 +21,10 @@ public class CustomerCommandHandler {
     this.customerDao = customerDao;
   }
 
+  /**
+   * 定义命令
+   * @return
+   */
   public CommandHandlers commandHandlerDefinitions() {
     return SagaCommandHandlersBuilder
             .fromChannel("customerService")

@@ -4,6 +4,13 @@ spring:
     schema: "classpath:db/${database}/schema.sql"
     data: "classpath:db/${database}/data.sql"
     sql-script-encoding: UTF-8
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: "order_account"
+#    producer:
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
   jpa:
     show-sql: false
     hibernate:
@@ -26,5 +33,9 @@ logging:
       springframework:
         security: DEBUG
       hibernate: DEBUG
+application:
+  saga:
+    topic:
+      name: account
 #  file:
 #    path: tmp/logs

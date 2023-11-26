@@ -1,18 +1,21 @@
-package com.xzg.orchestrator.kit.orchestration;
-
-
-import lombok.Data;
-
-@Data
-public class EnlistedAggregate {
-  private final Class<Object> aggregateClass;
-  private final Object aggregateId;
-
-  public EnlistedAggregate(Class<Object> aggregateClass, Object aggregateId) {
-    this.aggregateClass = aggregateClass;
-    this.aggregateId = aggregateId;
-  }
-
+//package com.xzg.orchestrator.kit.orchestration;
+//
+//
+//import lombok.Data;
+//import org.apache.commons.lang.builder.EqualsBuilder;
+//import org.apache.commons.lang.builder.HashCodeBuilder;
+//import org.apache.commons.lang.builder.ToStringBuilder;
+//
+//@Data
+//public class EnlistedAggregate {
+//  private final Class<Object> aggregateClass;
+//  private final Object aggregateId;
+//
+//  public EnlistedAggregate(Class<Object> aggregateClass, Object aggregateId) {
+//    this.aggregateClass = aggregateClass;
+//    this.aggregateId = aggregateId;
+//  }
+//
 //  @Override
 //  public int hashCode() {
 //    return HashCodeBuilder.reflectionHashCode(this);
@@ -27,12 +30,12 @@ public class EnlistedAggregate {
 //  public String toString() {
 //    return ToStringBuilder.reflectionToString(this);
 //  }
-
-  public Class<Object> getAggregateClass() {
-    return aggregateClass;
-  }
-
-  public Object getAggregateId() {
-    return aggregateId;
-  }
-}
+//
+//  public Class<Object> getAggregateClass() {
+//    return aggregateClass;
+//  }
+//
+//  public Object getAggregateId() {
+//    return aggregateId;
+//  }
+//}

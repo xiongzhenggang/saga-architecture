@@ -1,5 +1,6 @@
 //package com.xzg.orchestrator.kit.event.consumer;
 //
+//import com.xzg.orchestrator.kit.event.MessageHandler;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //
@@ -62,6 +63,5 @@
 //    }
 //
 //}
-//
 //
 //
