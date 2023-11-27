@@ -6,6 +6,7 @@ import com.xzg.account.domain.CustomerCreditLimitExceededException;
 import com.xzg.account.domain.CustomerDao;
 import com.xzg.orchestrator.kit.command.CommandHandlers;
 import com.xzg.orchestrator.kit.command.business.ReserveCreditCommand;
+import com.xzg.orchestrator.kit.common.SagaServiceEnum;
 import com.xzg.orchestrator.kit.event.CommandMessage;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.participant.SagaCommandHandlersBuilder;
@@ -27,7 +28,7 @@ public class CustomerCommandHandler {
    */
   public CommandHandlers commandHandlerDefinitions() {
     return SagaCommandHandlersBuilder
-            .fromChannel("customerService")
+            .fromChannel(SagaServiceEnum.ACCOUNT_SERVICE.getType())
             .onMessage(ReserveCreditCommand.class, this::reserveCredit)
             .build();
   }

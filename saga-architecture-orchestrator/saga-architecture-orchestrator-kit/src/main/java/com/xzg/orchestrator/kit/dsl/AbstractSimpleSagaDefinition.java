@@ -57,8 +57,9 @@ public abstract class AbstractSimpleSagaDefinition<Data, Step extends ISagaStep<
             if ((compensating ? step.hasCompensation(data) : step.hasAction(data))) {
                 ToExecute stepToExecute = makeStepToExecute(skipped, compensating, step);
                 return makeSagaActionsProvider(stepToExecute, data, state);
-            } else
+            } else {
                 skipped++;
+            }
         }
         return makeSagaActionsProvider(makeEndStateSagaActions(state));
     }

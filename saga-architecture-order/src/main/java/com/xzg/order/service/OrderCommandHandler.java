@@ -2,6 +2,7 @@ package com.xzg.order.service;
 
 
 import com.xzg.orchestrator.kit.command.CommandHandlers;
+import com.xzg.orchestrator.kit.common.SagaServiceEnum;
 import com.xzg.orchestrator.kit.event.CommandMessage;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.order.domain.Order;
@@ -23,7 +24,7 @@ public class OrderCommandHandler {
 
   public CommandHandlers commandHandlerDefinitions() {
     return    
-            fromChannel("orderService")
+            fromChannel(SagaServiceEnum.ORDER_SERVICE.getType())
             .onMessage(ApproveOrderCommand.class, this::approve)
             .onMessage(RejectOrderCommand.class, this::reject)
             .build();

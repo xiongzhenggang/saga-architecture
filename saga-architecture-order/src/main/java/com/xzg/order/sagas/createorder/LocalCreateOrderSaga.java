@@ -3,6 +3,7 @@ package com.xzg.order.sagas.createorder;
 
 import com.xzg.library.config.infrastructure.model.Money;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
+import com.xzg.orchestrator.kit.common.SagaServiceEnum;
 import com.xzg.orchestrator.kit.dsl.SimpleSaga;
 import com.xzg.orchestrator.kit.event.ResultWithEvents;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaDefinition;
@@ -56,7 +57,7 @@ public class LocalCreateOrderSaga implements SimpleSaga<LocalCreateOrderSagaData
     Long customerId = data.getOrderDetails().getCustomerId();
     Money orderTotal = data.getOrderDetails().getOrderTotal();
     return send(new ReserveCreditCommand(customerId, orderId, orderTotal))
-            .to("customerService")
+            .to(SagaServiceEnum.ACCOUNT_SERVICE.getType())
             .build();
   }
 

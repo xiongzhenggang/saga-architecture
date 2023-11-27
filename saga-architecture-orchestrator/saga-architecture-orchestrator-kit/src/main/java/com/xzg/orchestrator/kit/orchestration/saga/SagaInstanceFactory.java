@@ -20,8 +20,9 @@ public class SagaInstanceFactory {
 
   public <SagaData> SagaInstance create(Saga<SagaData> saga, SagaData data) {
     SagaManager<SagaData>  sagaManager = (SagaManager<SagaData>)sagaManagers.get(saga);
-    if (sagaManager == null)
+    if (sagaManager == null) {
       throw new RuntimeException(("No SagaManager for " + saga));
+    }
     return sagaManager.create(data);
   }
 

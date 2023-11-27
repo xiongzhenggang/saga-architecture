@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @author xiongzhenggang
+ */
 public class SagaCommandDispatcher extends CommandDispatcher {
 
   private SagaLockManager sagaLockManager;
@@ -66,16 +69,17 @@ public class SagaCommandDispatcher extends CommandDispatcher {
         String sagaId = getSagaId(message);
         String target = lockTarget.getTarget();
         lockedTarget = Optional.of(target);
-        if (!sagaLockManager.claimLock(sagaType, sagaId, target))
+        if (!sagaLockManager.claimLock(sagaType, sagaId, target)) {
           throw new StashMessageRequiredException(target);
+        }
       }
     }
 
     List<Message> messages = super.invoke(commandHandler, cm, pathVars, commandReplyToken);
 
-    if (lockedTarget.isPresent())
+    if (lockedTarget.isPresent()) {
       return addLockedHeader(messages, lockedTarget.get());
-    else {
+    } else {
       Optional<LockTarget> lt = getLock(messages);
       if (lt.isPresent()) {
         Message message = cm.getMessage();
@@ -88,8 +92,9 @@ public class SagaCommandDispatcher extends CommandDispatcher {
 
         return addLockedHeader(messages, lt.get().getTarget());
       }
-      else
+      else {
         return messages;
+      }
     }
   }
 

@@ -94,6 +94,7 @@ public class SagaManagerImpl<Data>
 
     saga.onStarting(sagaId, sagaData);
 
+    //@todo 锁定资源?
     resource.ifPresent(r -> {
       if (!sagaLockManager.claimLock(getSagaType(), sagaId, r)) {
         throw new RuntimeException("Cannot claim lock for resource");
