@@ -1,7 +1,6 @@
 package com.xzg.orchestrator.kit.orchestration.saga.dao;
 
 import com.xzg.orchestrator.kit.orchestration.DestinationAndResource;
-import com.xzg.orchestrator.kit.orchestration.SerializedSagaData;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -40,7 +39,7 @@ import java.util.Set;
 public class SagaEntity {
     @Id
     @GeneratedValue
-    private String id;
+    private Long id;
     private String sagaType;
     private String lastRequestId;
     private String stateName;

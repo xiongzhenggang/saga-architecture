@@ -9,6 +9,8 @@ spring:
     hibernate:
       ddl-auto: none
     open-in-view: false
+  kafka:
+    bootstrap-servers: localhost:9092
   resources:
     chain:
       compressed: true
@@ -22,10 +24,10 @@ logging:
   pattern:
     console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(-){faint} %clr([%t]){faint} %clr(%-40logger{39}){cyan}[%line]%clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
   level:
-    root: DEBUG
+    root: INFO
     org:
       springframework:
-        security: DEBUG
-      hibernate: DEBUG
+        security: INFO
+      hibernate: INFO
 #  file:
 #    path: tmp/logs

@@ -32,7 +32,7 @@ public class SagaOrchestratorConfiguration {
   @Resource
   private ConsumerFactory<String, byte[]> consumerFactory;
   @Bean
-  public CommandProducer sagaCommandProducer() {
+  public CommandProducer commandProducer() {
     return new CommandProducerImpl(messageProducer,commandNameMapping);
   }
 

@@ -1,6 +1,9 @@
 package com.xzg.orchestrator.kit.orchestration.saga.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -28,5 +31,6 @@ import org.springframework.data.repository.CrudRepository;
  * @date 11/28/2023
  * </p>
  */
-public interface SagaRepository extends CrudRepository<SagaEntity, Long> {
+@Repository
+public interface SagaRepository extends JpaRepository<SagaEntity, Long>, Serializable {
 }
