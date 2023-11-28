@@ -22,6 +22,9 @@ import java.util.Map;
 @Service
 public class DomainEventPublisherImpl implements DomainEventPublisher {
 
+    /**
+     * 导入
+     */
     @Resource
     private MessageProducer messageProducer;
     @Resource

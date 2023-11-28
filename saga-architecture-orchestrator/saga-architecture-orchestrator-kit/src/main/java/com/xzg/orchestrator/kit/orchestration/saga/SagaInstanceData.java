@@ -1,5 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
+
 public class SagaInstanceData<Data> {
 
   private final SagaInstance sagaInstance;

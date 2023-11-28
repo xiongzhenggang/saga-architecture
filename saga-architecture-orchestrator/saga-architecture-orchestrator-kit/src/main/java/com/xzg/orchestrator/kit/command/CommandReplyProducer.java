@@ -3,8 +3,10 @@ package com.xzg.orchestrator.kit.command;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
 import com.xzg.orchestrator.kit.event.producer.MessageProducer;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,10 +22,13 @@ import java.util.List;
  * @date: 19/11/2023-下午 2:53
  * @version: 1.0
  */
+
+@Service
 public class CommandReplyProducer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Resource
     private final MessageProducer messageProducer;
 
     public CommandReplyProducer(MessageProducer messageProducer) {
@@ -42,12 +47,10 @@ public class CommandReplyProducer {
             }
             return Collections.emptyList();
         }
-
-        if (replies.isEmpty())
+        if (replies.isEmpty()) {
             logger.trace("Null replies - not publishing");
-
+        }
         String replyChannel = commandReplyToken.getReplyChannel();
-
         List<Message> results = new ArrayList<>(replies.size());
 
         for (Message reply : replies) {

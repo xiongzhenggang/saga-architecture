@@ -5,12 +5,13 @@ import com.xzg.orchestrator.kit.command.CommandMessageHeaders;
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
 import com.xzg.orchestrator.kit.command.Failure;
 import com.xzg.orchestrator.kit.command.Success;
-import com.xzg.orchestrator.kit.dsl.ReplyMessageHeaders;
-import com.xzg.orchestrator.kit.dsl.enums.CommandReplyOutcome;
+import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.orchestration.dsl.ReplyMessageHeaders;
+import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
-import com.xzg.orchestrator.kit.event.consumer.MessageConsumer;
 import com.xzg.orchestrator.kit.orchestration.DestinationAndResource;
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,21 +30,18 @@ public class SagaManagerImpl<Data>
   private Saga<Data> saga;
   private SagaInstanceRepository sagaInstanceRepository;
   private CommandProducer commandProducer;
-  private MessageConsumer messageConsumer;
-  private SagaLockManager sagaLockManager;
+  private CommonMessageConsumer messageConsumer;
   private SagaCommandProducer sagaCommandProducer;
 
   public SagaManagerImpl(Saga<Data> saga,
                          SagaInstanceRepository sagaInstanceRepository,
                          CommandProducer commandProducer,
-                         MessageConsumer messageConsumer,
-                         SagaLockManager sagaLockManager,
+                         CommonMessageConsumer messageConsumer,
                          SagaCommandProducer sagaCommandProducer) {
     this.saga = saga;
     this.sagaInstanceRepository = sagaInstanceRepository;
     this.commandProducer = commandProducer;
     this.messageConsumer = messageConsumer;
-    this.sagaLockManager = sagaLockManager;
     this.sagaCommandProducer = sagaCommandProducer;
   }
 
@@ -59,14 +57,14 @@ public class SagaManagerImpl<Data>
     this.commandProducer = commandProducer;
   }
 
-  public void setMessageConsumer(MessageConsumer messageConsumer) {
+  public void setCommonMessageConsumer(CommonMessageConsumer messageConsumer) {
     this.messageConsumer = messageConsumer;
   }
 
 
-  public void setSagaLockManager(SagaLockManager sagaLockManager) {
-    this.sagaLockManager = sagaLockManager;
-  }
+//  public void setSagaLockManager(SagaLockManager sagaLockManager) {
+//    this.sagaLockManager = sagaLockManager;
+//  }
 
   @Override
   public SagaInstance create(Data sagaData) {
@@ -95,11 +93,11 @@ public class SagaManagerImpl<Data>
     saga.onStarting(sagaId, sagaData);
 
     //@todo 锁定资源?
-    resource.ifPresent(r -> {
-      if (!sagaLockManager.claimLock(getSagaType(), sagaId, r)) {
-        throw new RuntimeException("Cannot claim lock for resource");
-      }
-    });
+//    resource.ifPresent(r -> {
+//      if (!sagaLockManager.claimLock(getSagaType(), sagaId, r)) {
+//        throw new RuntimeException("Cannot claim lock for resource");
+//      }
+//    });
 
     SagaActions<Data> actions = getStateDefinition().start(sagaData);
 
@@ -121,12 +119,14 @@ public class SagaManagerImpl<Data>
       commandProducer.send(dr.getDestination(), dr.getResource(), new SagaUnlockCommand(), makeSagaReplyChannel(), headers);
     }
 
-    if (failed)
+    if (failed) {
       saga.onSagaFailed(sagaId, sagaData);
-    if (compensating)
+    }
+    if (compensating) {
       saga.onSagaRolledBack(sagaId, sagaData);
-    else
+    } else {
       saga.onSagaCompletedSuccessfully(sagaId, sagaData);
+    }
 
   }
 
@@ -144,8 +144,9 @@ public class SagaManagerImpl<Data>
     return saga.getSagaType();
   }
 
+  @Override
   public void subscribeToReplyChannel() {
-    messageConsumer. subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),
+    messageConsumer.subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),
             this::handleMessage);
   }
 
@@ -166,8 +167,9 @@ public class SagaManagerImpl<Data>
 
   private void handleReply(Message message) {
 
-    if (!isReplyForThisSagaType(message))
+    if (!isReplyForThisSagaType(message)) {
       return;
+    }
 
     logger.debug("Handle reply: {}", message);
 

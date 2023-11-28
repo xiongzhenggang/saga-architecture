@@ -15,7 +15,18 @@ import java.util.Set;
  * @version: 1.0
  */
 public interface CommonMessageConsumer {
+    /**
+     *
+     */
     public void close() ;
+
+    /**
+     *
+     * @param subscriberId
+     * @param channels
+     * @param handler
+     * @return
+     */
     public KafkaSubscription subscribe(String subscriberId, Set<String> channels, KafkaMessageHandler handler);
 
 }

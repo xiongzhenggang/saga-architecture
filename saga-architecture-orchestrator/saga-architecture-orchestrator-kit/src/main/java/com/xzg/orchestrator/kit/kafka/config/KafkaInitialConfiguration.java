@@ -17,11 +17,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KafkaInitialConfiguration {
     @Value("${application.saga.topic.name}")
-    private String orderSagaTopic;
-    // 创建一个名为testtopic的Topic并设置分区数为3，分区副本数为2
+    private String sagaServiceTopic;
+    /**
+     创建一个名为sagaServiceTopic的Topic并设置分区数为3，分区副本数为2
+     */
     @Bean
     public NewTopic initialTopic() {
-        return new NewTopic(orderSagaTopic,3, (short) 2 );
+        return new NewTopic(sagaServiceTopic,3, (short) 2 );
     }
 }
 

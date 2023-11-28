@@ -1,5 +1,7 @@
 package com.xzg.orchestrator.kit.command;
 
+import org.springframework.stereotype.Service;
+
 /**
  * @projectName: saga-architecture
  * @package: com.xzg.orchestrator.kit.command
@@ -9,6 +11,7 @@ package com.xzg.orchestrator.kit.command;
  * @date: 20/11/2023-下午 8:20
  * @version: 1.0
  */
+@Service
 public class DefaultCommandNameMapping implements CommandNameMapping {
 
     @Override

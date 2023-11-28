@@ -1,5 +1,6 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

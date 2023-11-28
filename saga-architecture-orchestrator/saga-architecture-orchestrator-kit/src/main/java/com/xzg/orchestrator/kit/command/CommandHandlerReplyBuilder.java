@@ -1,8 +1,8 @@
 package com.xzg.orchestrator.kit.command;
 
 import com.xzg.library.config.infrastructure.utility.JsonUtil;
-import com.xzg.orchestrator.kit.dsl.ReplyMessageHeaders;
-import com.xzg.orchestrator.kit.dsl.enums.CommandReplyOutcome;
+import com.xzg.orchestrator.kit.orchestration.dsl.ReplyMessageHeaders;
+import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
 

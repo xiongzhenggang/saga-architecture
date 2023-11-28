@@ -6,7 +6,7 @@ import com.xzg.orchestrator.kit.business.enums.RejectionReason;
 import com.xzg.orchestrator.kit.business.exception.CustomerCreditLimitExceeded;
 import com.xzg.orchestrator.kit.business.exception.CustomerNotFound;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
-import com.xzg.orchestrator.kit.dsl.SimpleSaga;
+import com.xzg.orchestrator.kit.orchestration.dsl.SimpleSaga;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaDefinition;
 import com.xzg.order.domain.Order;
 import com.xzg.order.event.DomainEventPublisher;

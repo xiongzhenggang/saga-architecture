@@ -1,10 +1,12 @@
 package com.xzg.orchestrator.kit.event.consumer.kafka;
 
+import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
+import org.springframework.kafka.core.ConsumerFactory;
 
 import java.time.Duration;
 import java.util.*;
@@ -20,13 +22,13 @@ import java.util.*;
  */
 public class DefaultKafkaMessageConsumer implements KafkaMessageConsumer {
 
-    private final KafkaConsumer<String, byte[]> delegate;
+    private final Consumer<String, byte[]> delegate;
 
-    public static KafkaMessageConsumer create(Properties properties) {
-        return new DefaultKafkaMessageConsumer(new KafkaConsumer<>(properties));
+    public static KafkaMessageConsumer create(ConsumerFactory<String, byte[]> consumerFactory) {
+        return new DefaultKafkaMessageConsumer(consumerFactory.createConsumer());
     }
 
-    private DefaultKafkaMessageConsumer(KafkaConsumer<String, byte[]> delegate) {
+    private DefaultKafkaMessageConsumer(Consumer<String, byte[]> delegate) {
         this.delegate = delegate;
     }
 

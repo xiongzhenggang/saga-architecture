@@ -18,6 +18,7 @@ public class KafkaMessage extends MessageImpl {
         this.payload = payload;
     }
 
+    @Override
     public String getPayload() {
         return payload;
     }

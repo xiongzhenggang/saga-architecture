@@ -8,6 +8,7 @@ import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -29,13 +30,10 @@ public class EventuateKafkaConsumer {
     private final String subscriberId;
     private final EventuateKafkaConsumerMessageHandler handler;
     private final List<String> topics;
-    private final KafkaConsumerFactory kafkaConsumerFactory;
     private final BackPressureConfig backPressureConfig;
-    private final long pollTimeout;
+    private final ConsumerFactory<String, byte[]> consumerFactory;
     private AtomicBoolean stopFlag = new AtomicBoolean(false);
-    private Properties consumerProperties;
     private volatile EventuateKafkaConsumerState state = EventuateKafkaConsumerState.CREATED;
-
     private volatile boolean closeConsumerOnStop = true;
 
     private Optional<ConsumerCallbacks> consumerCallbacks = Optional.empty();
@@ -43,18 +41,13 @@ public class EventuateKafkaConsumer {
     public EventuateKafkaConsumer(String subscriberId,
                                   EventuateKafkaConsumerMessageHandler handler,
                                   List<String> topics,
-                                  String bootstrapServers,
-                                  EventuateKafkaConsumerConfigurationProperties eventuateKafkaConsumerConfigurationProperties,
-                                  KafkaConsumerFactory kafkaConsumerFactory) {
+                                  BackPressureConfig backPressureConfig,
+                                  ConsumerFactory<String, byte[]> consumerFactory) {
         this.subscriberId = subscriberId;
         this.handler = handler;
         this.topics = topics;
-        this.kafkaConsumerFactory = kafkaConsumerFactory;
-
-        this.consumerProperties = ConsumerPropertiesFactory.makeDefaultConsumerProperties(bootstrapServers, subscriberId);
-        this.consumerProperties.putAll(eventuateKafkaConsumerConfigurationProperties.getProperties());
-        this.backPressureConfig = eventuateKafkaConsumerConfigurationProperties.getBackPressure();
-        this.pollTimeout = eventuateKafkaConsumerConfigurationProperties.getPollTimeout();
+        this.backPressureConfig = backPressureConfig;
+        this.consumerFactory = consumerFactory;
     }
 
     public void setConsumerCallbacks(Optional<ConsumerCallbacks> consumerCallbacks) {
@@ -95,31 +88,21 @@ public class EventuateKafkaConsumer {
 
     public void start() {
         try {
-            KafkaMessageConsumer consumer = kafkaConsumerFactory.makeConsumer(subscriberId, consumerProperties);
-
+            KafkaMessageConsumer consumer = DefaultKafkaMessageConsumer.create(consumerFactory);
             KafkaMessageProcessor processor = new KafkaMessageProcessor(subscriberId, handler);
-
             BackPressureManager backpressureManager = new BackPressureManager(backPressureConfig);
-
             for (String topic : topics) {
                 verifyTopicExistsBeforeSubscribing(consumer, topic);
             }
-
             subscribe(consumer);
-
             new Thread(() -> {
-
                 try {
                     runPollingLoop(consumer, processor, backpressureManager);
-
                     maybeCommitOffsets(consumer, processor);
-
                     state = EventuateKafkaConsumerState.STOPPED;
-
                     if (closeConsumerOnStop) {
                         consumer.close();
                     }
-
                 } catch (KafkaMessageProcessorFailedException e) {
                     // We are done
                     logger.trace("Terminating since KafkaMessageProcessorFailedException");
@@ -153,20 +136,24 @@ public class EventuateKafkaConsumer {
     private void runPollingLoop(KafkaMessageConsumer consumer, KafkaMessageProcessor processor, BackPressureManager backPressureManager) {
         while (!stopFlag.get()) {
             ConsumerRecords<String, byte[]> records = consumer.poll(Duration.of(100, ChronoUnit.MILLIS));
-            if (!records.isEmpty())
+            if (!records.isEmpty()) {
                 logger.debug("Got {} {} records", subscriberId, records.count());
+            }
 
-            if (records.isEmpty())
+            if (records.isEmpty()) {
                 processor.throwFailureException();
-            else
+            } else {
                 for (ConsumerRecord<String, byte[]> record : records) {
                     logger.debug("processing record {} {} {}", subscriberId, record.offset(), record.value());
-                    if (logger.isDebugEnabled())
+                    if (logger.isDebugEnabled()) {
                         logger.debug(String.format("EventuateKafkaAggregateSubscriptions subscriber = %s, offset = %d, key = %s, value = %s", subscriberId, record.offset(), record.key(), record.value()));
+                    }
                     processor.process(record);
                 }
-            if (!records.isEmpty())
+            }
+            if (!records.isEmpty()) {
                 logger.debug("Processed {} {} records", subscriberId, records.count());
+            }
 
             try {
                 maybeCommitOffsets(consumer, processor);
@@ -175,8 +162,9 @@ public class EventuateKafkaConsumer {
                 consumerCallbacks.ifPresent(ConsumerCallbacks::onCommitFailedCallback);
             }
 
-            if (!records.isEmpty())
+            if (!records.isEmpty()) {
                 logger.debug("To commit {} {}", subscriberId, processor.getPending());
+            }
 
             int backlog = processor.backlog();
 

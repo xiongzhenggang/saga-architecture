@@ -1,5 +1,11 @@
 package com.xzg.orchestrator.kit.orchestration;
 
+import lombok.Data;
+
+/**
+ * @author xiongzhenggang
+ */
+@Data
 public class SerializedSagaData {
 
   private String sagaDataType;
@@ -8,13 +14,5 @@ public class SerializedSagaData {
   public SerializedSagaData(String sagaDataType, String sagaDataJSON) {
     this.sagaDataType = sagaDataType;
     this.sagaDataJSON = sagaDataJSON;
-  }
-
-  public String getSagaDataJSON() {
-    return sagaDataJSON;
-  }
-
-  public String getSagaDataType() {
-    return sagaDataType;
   }
 }

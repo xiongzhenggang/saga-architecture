@@ -1,6 +1,6 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
-import com.xzg.orchestrator.kit.orchestration.saga.SagaInstance;
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
 
 import java.util.Optional;
 

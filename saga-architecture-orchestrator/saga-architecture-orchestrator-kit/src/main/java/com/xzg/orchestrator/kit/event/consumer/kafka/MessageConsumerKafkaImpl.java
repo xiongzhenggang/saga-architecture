@@ -1,12 +1,12 @@
 package com.xzg.orchestrator.kit.event.consumer.kafka;
 
-import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
-import com.xzg.orchestrator.kit.event.consumer.RawKafkaMessage;
-import com.xzg.orchestrator.kit.event.consumer.StringBinaryMessageEncoding;
-import com.xzg.orchestrator.kit.event.consumer.SwimlaneBasedDispatcher;
+import com.xzg.orchestrator.kit.event.consumer.*;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,21 +31,13 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
 
     private final String id = UUID.randomUUID().toString();
 
-    private String bootstrapServers;
     private List<EventuateKafkaConsumer> consumers = new ArrayList<>();
-    private EventuateKafkaConsumerConfigurationProperties eventuateKafkaConsumerConfigurationProperties;
-    private KafkaConsumerFactory kafkaConsumerFactory;
     private EventuateKafkaMultiMessageConverter eventuateKafkaMultiMessageConverter = new EventuateKafkaMultiMessageConverter();
+    private final ConsumerFactory<String, byte[]> consumerFactory;
 
-
-    public MessageConsumerKafkaImpl(String bootstrapServers,
-                                    EventuateKafkaConsumerConfigurationProperties eventuateKafkaConsumerConfigurationProperties,
-                                    KafkaConsumerFactory kafkaConsumerFactory) {
-        this.bootstrapServers = bootstrapServers;
-        this.eventuateKafkaConsumerConfigurationProperties = eventuateKafkaConsumerConfigurationProperties;
-        this.kafkaConsumerFactory = kafkaConsumerFactory;
+    public MessageConsumerKafkaImpl(ConsumerFactory<String, byte[]> consumerFactory) {
+        this.consumerFactory = consumerFactory;
     }
-
     @Override
     public KafkaSubscription subscribe(String subscriberId, Set<String> channels, KafkaMessageHandler handler) {
 
@@ -54,18 +46,13 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
         EventuateKafkaConsumerMessageHandler kcHandler = (record, callback) -> swimlaneBasedDispatcher.dispatch(new RawKafkaMessage(record.value()),
                 record.partition(),
                 message -> handle(message, callback, handler));
-
         EventuateKafkaConsumer kc = new EventuateKafkaConsumer(subscriberId,
                 kcHandler,
                 new ArrayList<>(channels),
-                bootstrapServers,
-                eventuateKafkaConsumerConfigurationProperties,
-                kafkaConsumerFactory);
-
+                new BackPressureConfig(),
+                consumerFactory);
         consumers.add(kc);
-
         kc.start();
-
         return new KafkaSubscription(() -> {
             kc.stop();
             consumers.remove(kc);

@@ -26,10 +26,11 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
       Map<String, String> headers = new HashMap<>(command.getExtraHeaders());
       headers.put(SagaCommandHeaders.SAGA_TYPE, sagaType);
       headers.put(SagaCommandHeaders.SAGA_ID, sagaId);
-      if (cwdt.isNotification())
+      if (cwdt.isNotification()) {
         messageId = commandProducer.sendNotification(command.getDestinationChannel(), command.getCommand(), headers);
-      else
+      } else {
         messageId = commandProducer.send(command.getDestinationChannel(), command.getResource(), command.getCommand(), sagaReplyChannel, headers);
+      }
     }
     return messageId;
 
