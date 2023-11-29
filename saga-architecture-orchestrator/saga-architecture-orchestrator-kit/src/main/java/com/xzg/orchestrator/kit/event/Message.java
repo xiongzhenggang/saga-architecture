@@ -3,6 +3,9 @@ package com.xzg.orchestrator.kit.event;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * 消息接口
+ */
 public interface Message {
 
     String getId();

@@ -30,6 +30,7 @@ public class MessageImpl implements Message {
     }
 
 
+    @Override
     public String getPayload() {
         return payload;
     }
@@ -42,10 +43,11 @@ public class MessageImpl implements Message {
     @Override
     public String getRequiredHeader(String name) {
         String s = headers.get(name);
-        if (s == null)
+        if (s == null) {
             throw new RuntimeException("No such header: " + name + " in this message " + this);
-        else
+        } else {
             return s;
+        }
     }
 
     @Override

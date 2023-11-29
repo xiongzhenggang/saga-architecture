@@ -40,8 +40,9 @@ public class MessageBuilder {
 
     public MessageBuilder withExtraHeaders(String prefix, Map<String, String> headers) {
 
-        for (Map.Entry<String,String> entry : headers.entrySet())
+        for (Map.Entry<String,String> entry : headers.entrySet()) {
             this.headers.put(prefix + entry.getKey(), entry.getValue());
+        }
 
         return this;
     }
