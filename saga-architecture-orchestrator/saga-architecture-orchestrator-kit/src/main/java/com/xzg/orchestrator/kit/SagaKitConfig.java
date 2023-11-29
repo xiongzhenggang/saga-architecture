@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Configuration
 @ComponentScan("com.xzg.orchestrator.kit")
-@EnableJpaRepositories("com.xzg.orchestrator.kit")
-@EntityScan(basePackages = "com.xzg.orchestrator.kit")
+@EnableJpaRepositories("com.xzg.orchestrator.kit.orchestration.saga.dao")
+@EntityScan(basePackages = "com.xzg.orchestrator.kit.orchestration.saga.dao")
 public class SagaKitConfig {
 }

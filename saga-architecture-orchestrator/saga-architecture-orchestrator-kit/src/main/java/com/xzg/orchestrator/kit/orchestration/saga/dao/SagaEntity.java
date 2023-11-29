@@ -1,12 +1,10 @@
 package com.xzg.orchestrator.kit.orchestration.saga.dao;
 
-import com.xzg.orchestrator.kit.orchestration.DestinationAndResource;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-
-import java.util.Set;
 
 /**
  * <p>
@@ -36,6 +34,7 @@ import java.util.Set;
  */
 @Data
 @Table(name="saga")
+@Entity
 public class SagaEntity {
     @Id
     @GeneratedValue
@@ -45,7 +44,7 @@ public class SagaEntity {
     private String stateName;
     private String sagaDataType;
     private String sagaDataJSON;
-    private Set<DestinationAndResource> destinationsAndResources;
+//    private Set<DestinationAndResource> destinationsAndResources;
     private Boolean endState = false;
     private Boolean compensating = false;
     private Boolean failed = false;
