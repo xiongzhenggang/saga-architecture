@@ -115,7 +115,8 @@ public class SagaManagerImpl<Data>
     for (DestinationAndResource dr : sagaInstance.getDestinationsAndResources()) {
       Map<String, String> headers = new HashMap<>();
       headers.put(SagaCommandHeaders.SAGA_ID, sagaId);
-      headers.put(SagaCommandHeaders.SAGA_TYPE, getSagaType()); // FTGO SagaCommandHandler failed without this but the OrdersAndCustomersIntegrationTest was fine?!?
+      // FTGO SagaCommandHandler failed without this but the OrdersAndCustomersIntegrationTest was fine?!?
+      headers.put(SagaCommandHeaders.SAGA_TYPE, getSagaType());
       commandProducer.send(dr.getDestination(), dr.getResource(), new SagaUnlockCommand(), makeSagaReplyChannel(), headers);
     }
 

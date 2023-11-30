@@ -31,6 +31,5 @@ import java.io.Serializable;
  * @date 11/28/2023
  * </p>
  */
-@Repository
 public interface SagaRepository extends JpaRepository<SagaEntity, Long>, Serializable {
 }

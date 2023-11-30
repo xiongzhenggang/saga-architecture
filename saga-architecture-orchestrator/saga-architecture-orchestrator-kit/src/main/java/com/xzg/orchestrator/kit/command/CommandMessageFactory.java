@@ -22,16 +22,18 @@ public class CommandMessageFactory {
 
     public static Message makeMessage(CommandNameMapping commandNameMapping, String channel, String resource, Command command, String replyTo, Map<String, String> headers) {
         MessageBuilder builder = MessageBuilder.withPayload(JsonUtil.object2JsonStr(command))
-                .withExtraHeaders("", headers) // TODO should these be prefixed??!
+                .withExtraHeaders("", headers)
                 .withHeader(CommandMessageHeaders.DESTINATION, channel)
                 .withHeader(CommandMessageHeaders.COMMAND_TYPE, commandNameMapping.commandToExternalCommandType(command))
                 ;
 
-        if (replyTo != null)
+        if (replyTo != null) {
             builder.withHeader(CommandMessageHeaders.REPLY_TO, replyTo);
+        }
 
-        if (resource != null)
+        if (resource != null) {
             builder.withHeader(CommandMessageHeaders.RESOURCE, resource);
+        }
 
         return builder.build();
     }

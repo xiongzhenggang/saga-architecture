@@ -6,6 +6,9 @@ import com.xzg.orchestrator.kit.orchestration.saga.SagaDefinition;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author xiongzhenggang
+ */
 public class SimpleSagaDefinitionBuilder<Data> {
 
   private List<SagaStep<Data>> sagaSteps = new LinkedList<>();
