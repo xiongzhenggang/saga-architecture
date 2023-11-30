@@ -19,11 +19,10 @@ import com.xzg.order.event.DomainEventPublisher;
 import com.xzg.order.service.OrderCommandHandler;
 
 @Configuration
-@EnableJpaRepositories
 @EnableAutoConfiguration
-@EntityScan("com.xzg.order")
+@EnableJpaRepositories("com.xzg.order")
+@EntityScan(basePackages = "com.xzg.order")
 @ComponentScan("com.xzg")
-//@Import(OptimisticLockingDecoratorConfiguration.class)
 public class OrderConfiguration {
 
   @Resource

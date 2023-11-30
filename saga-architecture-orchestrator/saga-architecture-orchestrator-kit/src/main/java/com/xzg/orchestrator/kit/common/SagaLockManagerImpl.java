@@ -1,39 +1,39 @@
-//package com.xzg.orchestrator.kit.common;
-//
-//import com.xzg.orchestrator.kit.event.Message;
-//import com.xzg.orchestrator.kit.event.MessageBuilder;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Optional;
-//
-///**
-// * @projectName: saga-architecture
-// * @package: com.xzg.orchestrator.kit.common
-// * @className: SagaLockManagerImpl
-// * @author: xzg
-// * @description: TODO
-// * @date: 26/11/2023-上午 11:11
-// * @version: 1.0
-// */
-//public class SagaLockManagerImpl implements SagaLockManager {
-//
-//    private Logger logger = LoggerFactory.getLogger(getClass());
-//
+package com.xzg.orchestrator.kit.common;
+
+import com.xzg.orchestrator.kit.event.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+/**
+ * @projectName: saga-architecture
+ * @package: com.xzg.orchestrator.kit.common
+ * @className: SagaLockManagerImpl
+ * @author: xzg
+ * @description: TODO
+ * @date: 26/11/2023-上午 11:11
+ * @version: 1.0
+ */
+
+@Service
+public class SagaLockManagerImpl implements SagaLockManager {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
 //    private EventuateJdbcStatementExecutor eventuateJdbcStatementExecutor;
 //
 //    private SagaLockManagerSql sagaLockManagerSql;
-//
+
 //    public SagaLockManagerImpl(EventuateJdbcStatementExecutor eventuateJdbcStatementExecutor, EventuateSchema eventuateSchema) {
 //        this.eventuateJdbcStatementExecutor = eventuateJdbcStatementExecutor;
 //
 //        sagaLockManagerSql = new SagaLockManagerSql(eventuateSchema);
 //    }
-//
-//    @Override
-//    public boolean claimLock(String sagaType, String sagaId, String target) {
+
+    @Override
+    public boolean claimLock(String sagaType, String sagaId, String target) {
 //        while (true)
 //            try {
 //                eventuateJdbcStatementExecutor.update(sagaLockManagerSql.getInsertIntoSagaLockTableSql(), target, sagaType, sagaId);
@@ -43,7 +43,7 @@
 //                Optional<String> owningSagaId = selectForUpdate(target);
 //                if (owningSagaId.isPresent()) {
 //                    if (owningSagaId.get().equals(sagaId))
-//                        return true;
+                        return true;
 //                    else {
 //                        logger.debug("Saga {} {} is blocked by {} which has locked {}", sagaType, sagaId, owningSagaId, target);
 //                        return false;
@@ -51,18 +51,18 @@
 //                }
 //                logger.debug("{}  is repeating attempt to lock {}", sagaId, target);
 //            }
-//    }
-//
+    }
+
 //    private Optional<String> selectForUpdate(String target) {
 //        return eventuateJdbcStatementExecutor
 //                .query(sagaLockManagerSql.getSelectFromSagaLockTableSql(), (rs, rowNum) -> rs.getString("saga_id"), target).stream().findFirst();
 //    }
-//
-//    @Override
-//    public void stashMessage(String sagaType, String sagaId, String target, Message message) {
-//
-//        logger.debug("Stashing message from {} for {} : {}", sagaId, target, message);
-//
+
+    @Override
+    public void stashMessage(String sagaType, String sagaId, String target, Message message) {
+
+        logger.debug("Stashing message from {} for {} : {}", sagaId, target, message);
+
 //        eventuateJdbcStatementExecutor.update(sagaLockManagerSql.getInsertIntoSagaStashTableSql(),
 //                message.getRequiredHeader(Message.ID),
 //                target,
@@ -70,10 +70,10 @@
 //                sagaId,
 //                JSonMapper.toJson(message.getHeaders()),
 //                message.getPayload());
-//    }
-//
-//    @Override
-//    public Optional<Message> unlock(String sagaId, String target) {
+    }
+
+    @Override
+    public Optional<Message> unlock(String sagaId, String target) {
 //    //"select saga_id from %s WHERE target = ? FOR UPDATE", sagaLockTable);
 //        Optional<String> owningSagaId = selectForUpdate(target);
 //
@@ -94,10 +94,10 @@
 //        }, target);
 //
 //        if (stashedMessages.isEmpty()) {
-    ////"delete from %s where target = ?", sagaLockTable);
-
+//    //"delete from %s where target = ?", sagaLockTable);
+//
 //            assertEqualToOne(eventuateJdbcStatementExecutor.update(sagaLockManagerSql.getDeleteFromSagaLockTableSql(), target));
-//            return Optional.empty();
+            return Optional.empty();
 //        }
 //
 //        StashedMessage stashedMessage = stashedMessages.get(0);
@@ -106,18 +106,17 @@
 //       //"update %s set saga_type = ?, saga_id = ? where target = ?", sagaLockTable);
 //        assertEqualToOne(eventuateJdbcStatementExecutor.update(sagaLockManagerSql.getUpdateSagaLockTableSql(), stashedMessage.getSagaType(),
 //                stashedMessage.getSagaId(), target));
-//delete from %s where message_id = ?", sagaStashTable);
+//        //delete from %s where message_id = ?", sagaStashTable);
 //        assertEqualToOne(eventuateJdbcStatementExecutor.update(sagaLockManagerSql.getDeleteFromSagaStashTableSql(), stashedMessage.getMessage().getId()));
 //
 //        return Optional.of(stashedMessage.getMessage());
-//    }
-//
-//    private void assertEqualToOne(int n) {
-//        if (n != 1)
-//            throw new RuntimeException("Expected to update one row but updated: " + n);
-//    }
-//}
-//
-//
-//
-//
+    }
+
+    private void assertEqualToOne(int n) {
+        if (n != 1)
+            throw new RuntimeException("Expected to update one row but updated: " + n);
+    }
+}
+
+
+

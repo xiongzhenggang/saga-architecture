@@ -49,7 +49,9 @@ public class DomainEventPublisherImpl implements DomainEventPublisher {
         for (DomainEvent event : domainEvents) {
             messageProducer.send(aggregateType,
                     EventUtil.makeMessageForDomainEvent(aggregateType, aggregateId, headers, event,
-                            domainEventNameMapping.eventToExternalEventType(aggregateType, event)));
+//                            commandNameMapping.
+                            domainEventNameMapping.eventToExternalEventType(aggregateType, event)
+                    ));
 
         }
     }
