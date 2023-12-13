@@ -13,8 +13,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.0</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>3.1.6</version>
+    <relativePath/> <!--3.2.0 lookup parent from repository -->
   </parent>
   <groupId>org.xzg</groupId>
   <artifactId>saga-architecture</artifactId>
@@ -24,6 +24,7 @@
   <properties>
     <java.version>21</java.version>
     <spring-cloud-kubernetes.version>3.0.4</spring-cloud-kubernetes.version>
+<!--    2023.0.0-->
     <spring.cloud.version>2022.0.4</spring.cloud.version>
     <fabric8-maven-version>4.4.2</fabric8-maven-version>
     <lombok.version>1.18.30</lombok.version>

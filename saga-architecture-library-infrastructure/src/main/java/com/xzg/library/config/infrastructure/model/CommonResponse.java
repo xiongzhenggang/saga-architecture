@@ -1,6 +1,7 @@
 package com.xzg.library.config.infrastructure.model;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
@@ -27,11 +28,12 @@ import java.util.function.Consumer;
  */
 @Slf4j
 @Builder
-public class CommonResponse {
+@Data
+public class CommonResponse<T> {
 
     private Integer status;
     private List<String> messages;
-    private Object result;
+    private T result;
     /**
      * 向客户端发送自定义操作信息
      */
@@ -42,7 +44,7 @@ public class CommonResponse {
     /**
      * 向客户端发送自定义操作信息
      */
-    public static CommonResponse send(HttpStatus status, String message,Object result) {
+    public static<T> CommonResponse send(HttpStatus status, String message,T result) {
         return CommonResponse.builder()
                 .result(result)
                 .messages(Collections.singletonList(message))
@@ -54,11 +56,16 @@ public class CommonResponse {
     public static CommonResponse failure(String message) {
         return send(HttpStatus.INTERNAL_SERVER_ERROR, message);
     }
-
+    /**
+     * 向客户端发送操作失败状态
+     */
+    public static CommonResponse failure(HttpStatus status,String msg) {
+        return send(status, msg);
+    }
     /**
      * 向客户端发送操作成功的信息
      */
-    public static CommonResponse success(String message,Object result) {
+    public static <T> CommonResponse success(String message,T result) {
         return send(HttpStatus.OK, message,result);
     }
 
@@ -67,6 +74,13 @@ public class CommonResponse {
      */
     public static CommonResponse success() {
         return send(HttpStatus.OK, "操作已成功");
+    }
+
+    /**
+     * 向客户端发送操作成功的信息
+     */
+    public static <T> CommonResponse success(T result) {
+        return send(HttpStatus.OK, "操作已成功",result);
     }
 
     /**

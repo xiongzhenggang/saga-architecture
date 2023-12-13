@@ -15,8 +15,25 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>21</java.version>
+        <docker.image.prefix>${user.name}</docker.image.prefix>
+        <saga-archiecture-version>1.0-SNAPSHOT</saga-archiecture-version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.xzg</groupId>
+            <artifactId>saga-architecture-library-infrastructure</artifactId>
+            <version>${saga-archiecture-version}</version>
+        </dependency>
     </dependencies>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

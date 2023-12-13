@@ -16,7 +16,6 @@ import java.util.function.Function;
 
 public class SagaCommandHandler extends CommandHandler {
 
-
   private Optional<BiFunction<CommandMessage, PathVariables, LockTarget>> preLock = Optional.empty();
   private Optional<PostLockFunction> postLock = Optional.empty();
 

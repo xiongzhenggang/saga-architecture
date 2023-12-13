@@ -36,8 +36,8 @@ public class Order {
     this.state = OrderState.PENDING;
   }
 
-  public static ResultWithEvents<Order> createOrder(OrderDetails orderDetails) {
-    return new ResultWithEvents<Order>(new Order(orderDetails), Collections.emptyList());
+  public static Order createOrder(OrderDetails orderDetails) {
+      return new Order(orderDetails);
   }
 
   public Long getId() {

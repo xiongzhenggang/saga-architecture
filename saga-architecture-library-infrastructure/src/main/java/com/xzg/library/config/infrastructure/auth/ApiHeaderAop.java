@@ -1,6 +1,5 @@
 package com.xzg.library.config.infrastructure.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xzg.library.config.infrastructure.auth.token.JwtService;
 import com.xzg.library.config.infrastructure.common.constant.SystemMessage;
 import com.xzg.library.config.infrastructure.common.exception.UnauthorizedException;
@@ -34,8 +33,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 public class ApiHeaderAop {
 
 
-    @Resource
-    private ObjectMapper mapper;
     @Resource
     private JwtService jwtService;
 

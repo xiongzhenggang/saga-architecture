@@ -9,7 +9,6 @@ import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import com.xzg.orchestrator.kit.orchestration.dsl.SimpleSaga;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaDefinition;
 import com.xzg.order.domain.Order;
-import com.xzg.order.event.DomainEventPublisher;
 import com.xzg.order.sagas.participants.proxy.CustomerServiceProxy;
 import com.xzg.order.service.OrderService;
 
@@ -17,10 +16,10 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
 
   private OrderService orderService;
   private CustomerServiceProxy customerService;
-  private DomainEventPublisher domainEventPublisher;
 
-  public CreateOrderSaga(DomainEventPublisher domainEventPublisher) {
-      this.domainEventPublisher=domainEventPublisher;
+  public CreateOrderSaga(OrderService orderService, CustomerServiceProxy customerService) {
+    this.orderService = orderService;
+    this.customerService = customerService;
   }
   private SagaDefinition<CreateOrderSagaData> sagaDefinition =
           step()

@@ -23,7 +23,7 @@ public class KafkaInitialConfiguration {
      */
     @Bean
     public NewTopic initialTopic() {
-        return new NewTopic(sagaServiceTopic,3, (short) 2 );
+        return new NewTopic(sagaServiceTopic,3, (short) 1 );
     }
 }
 

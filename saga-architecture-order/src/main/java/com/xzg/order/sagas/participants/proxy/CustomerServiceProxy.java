@@ -5,9 +5,11 @@ import com.xzg.library.config.infrastructure.model.Money;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import com.xzg.orchestrator.kit.command.business.ReserveCreditCommand;
 import com.xzg.orchestrator.kit.common.SagaServiceEnum;
+import org.springframework.stereotype.Component;
 
 import static com.xzg.orchestrator.kit.command.CommandWithDestinationBuilder.send;
 
+@Component
 public class CustomerServiceProxy {
 
 //  public final CommandEndpoint<ReserveCreditCommand> reserveCredit = CommandEndpointBuilder
