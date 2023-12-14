@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.xzg</groupId>
+        <groupId>com.xzg</groupId>
         <artifactId>saga-architecture</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -19,12 +19,12 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.xzg</groupId>
+            <groupId>com.xzg</groupId>
             <artifactId>saga-architecture-library-infrastructure</artifactId>
             <version>${saga-archiecture-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.xzg</groupId>
+            <groupId>com.xzg</groupId>
             <artifactId>saga-architecture-orchestrator-kit</artifactId>
             <version>${saga-archiecture-version}</version>
         </dependency>

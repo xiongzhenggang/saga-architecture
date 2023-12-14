@@ -42,7 +42,7 @@ public class SagaInstanceRepositoryImpl implements SagaInstanceRepository {
     @Override
     public void save(SagaInstance sagaInstance) {
 //        sagaRepository.sa
-        log.info("保存saga：{}",sagaInstance);
+        log.info("insert saga：{}",sagaInstance);
     }
 
     @Override
@@ -52,6 +52,6 @@ public class SagaInstanceRepositoryImpl implements SagaInstanceRepository {
 
     @Override
     public void update(SagaInstance sagaInstance) {
-
+        log.info("update saga：{}",sagaInstance);
     }
 }

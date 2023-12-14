@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class KafkaInitialConfiguration {
-    @Value("${application.saga.topic.name}")
+    @Value("${saga.topic.name}")
     private String sagaServiceTopic;
     /**
      创建一个名为sagaServiceTopic的Topic并设置分区数为3，分区副本数为2

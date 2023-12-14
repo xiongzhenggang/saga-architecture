@@ -1,5 +1,6 @@
 package com.xzg.orchestrator.kit.event.producer;
 
+import com.xzg.library.config.infrastructure.utility.JsonUtil;
 import com.xzg.orchestrator.kit.common.SagaCommandHeaders;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.consumer.StringBinaryMessageEncoding;
@@ -26,7 +27,7 @@ public class SagaKafkaProducer implements MessageProducer {
    */
   @Override
   public void send(String destination, Message message) {
-     send(destination, message.getHeader(SagaCommandHeaders.SAGA_TYPE).orElse(""),message.getPayload());
+     send(destination, message.getHeader(SagaCommandHeaders.SAGA_TYPE).orElse(""), JsonUtil.object2JsonStr(message));
   }
   public CompletableFuture<?> send(String topic, String key, String body) {
     return send(topic, key, StringBinaryMessageEncoding.stringToBytes(body));

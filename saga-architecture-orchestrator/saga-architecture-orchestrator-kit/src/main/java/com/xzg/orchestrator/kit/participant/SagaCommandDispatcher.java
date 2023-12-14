@@ -7,6 +7,7 @@ import com.xzg.orchestrator.kit.event.CommandMessage;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
 import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 /**
  * @author xiongzhenggang
  */
+@Slf4j
 public class SagaCommandDispatcher extends CommandDispatcher {
 
   private SagaLockManager sagaLockManager;
@@ -31,6 +33,7 @@ public class SagaCommandDispatcher extends CommandDispatcher {
 
   @Override
   public void messageHandler(Message message) {
+    log.info("receive message=:{}",message.getPayload());
     if (isUnlockMessage(message)) {
       String sagaType = getSagaType(message);
       String sagaId = getSagaId(message);

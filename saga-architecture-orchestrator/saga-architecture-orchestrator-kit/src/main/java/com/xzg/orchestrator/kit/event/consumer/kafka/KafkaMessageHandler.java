@@ -1,5 +1,7 @@
 package com.xzg.orchestrator.kit.event.consumer.kafka;
 
+import com.xzg.orchestrator.kit.event.MessageImpl;
+
 import java.util.function.Consumer;
 
 /**
@@ -11,7 +13,7 @@ import java.util.function.Consumer;
  * @date: 22/11/2023-下午 10:07
  * @version: 1.0
  */
-public interface KafkaMessageHandler extends Consumer<KafkaMessage> {
+public interface KafkaMessageHandler extends Consumer<MessageImpl> {
 
 }
 

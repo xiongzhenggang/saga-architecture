@@ -1,5 +1,7 @@
 package com.xzg.orchestrator.kit.event.consumer.kafka;
 
+import com.xzg.library.config.infrastructure.utility.JsonUtil;
+import com.xzg.orchestrator.kit.event.MessageImpl;
 import com.xzg.orchestrator.kit.event.consumer.*;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -67,10 +69,13 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
                         .getMessages()
                         .stream()
                         .map(EventuateKafkaMultiMessage::getValue)
-                        .map(KafkaMessage::new)
+                        .map(MessageImpl::new)
                         .forEach(kafkaMessageHandler);
             } else {
-                kafkaMessageHandler.accept(new KafkaMessage(StringBinaryMessageEncoding.bytesToString(message.getPayload())));
+                String jsonStr = StringBinaryMessageEncoding.bytesToString(message.getPayload());
+                log.info("parser jsonStr=：{}",jsonStr);
+                kafkaMessageHandler.accept(
+                        JsonUtil.jsonStr2obj(jsonStr,MessageImpl.class));
             }
             callback.accept(null, null);
         } catch (Throwable e) {

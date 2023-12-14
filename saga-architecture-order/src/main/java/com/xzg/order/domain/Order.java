@@ -2,12 +2,10 @@ package com.xzg.order.domain;
 
 
 import com.xzg.orchestrator.kit.business.enums.RejectionReason;
-import com.xzg.orchestrator.kit.event.ResultWithEvents;
 import jakarta.persistence.*;
 import lombok.Data;
 import com.xzg.order.service.OrderDetails;
 
-import java.util.Collections;
 @Data
 @Entity
 @Table(name="orders")

@@ -42,7 +42,8 @@ public class Customer {
   public void reserveCredit(Long orderId, Money orderTotal) {
     if (availableCredit().isGreaterThanOrEqual(orderTotal)) {
       creditReservations.put(orderId, orderTotal);
-    } else
+    } else {
       throw new CustomerCreditLimitExceededException();
+    }
   }
 }

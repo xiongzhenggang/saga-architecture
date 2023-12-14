@@ -23,7 +23,9 @@ public class MessageImpl implements Message {
 
     public MessageImpl() {
     }
-
+    public MessageImpl(String payload) {
+        this.payload = payload;
+    }
     public MessageImpl(String payload, Map<String, String> headers) {
         this.payload = payload;
         this.headers = headers;

@@ -5,6 +5,7 @@ import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @projectName: saga-architecture
@@ -23,6 +24,7 @@ public class CommandMessageFactory {
     public static Message makeMessage(CommandNameMapping commandNameMapping, String channel, String resource, Command command, String replyTo, Map<String, String> headers) {
         MessageBuilder builder = MessageBuilder.withPayload(JsonUtil.object2JsonStr(command))
                 .withExtraHeaders("", headers)
+                .withHeader(Message.ID, UUID.randomUUID().toString())
                 .withHeader(CommandMessageHeaders.DESTINATION, channel)
                 .withHeader(CommandMessageHeaders.COMMAND_TYPE, commandNameMapping.commandToExternalCommandType(command))
                 ;

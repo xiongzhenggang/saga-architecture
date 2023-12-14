@@ -4,7 +4,7 @@ import com.xzg.orchestrator.kit.event.DomainEvent;
 
 /**
  * @projectName: saga-architecture
- * @package: org.xzg.order.event
+ * @package: com.xzg.order.event
  * @className: DomainEventNameMapping
  * @author: xzg
  * @description: TODO

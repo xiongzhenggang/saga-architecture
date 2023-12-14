@@ -1,5 +1,40 @@
 # See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+database: hsqldb
 spring:
-  thymeleaf.cache: false
-  profiles:
-    active: test
+  sql:
+    init:
+      schema-locations: classpath:db/${database}/schema.sql
+      mode: always
+  #      data:
+#        - classpath:db/${database}/data.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+  kafka:
+    bootstrap-servers: localhost:9092
+  application:
+    name: Order_server
+  web:
+    resources:
+      chain:
+        compressed: true
+        cache: true
+      cache:
+        period: 86400
+saga:
+  topic:
+    name: orderServer
+
+logging:
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(-){faint} %clr([%t]){faint} %clr(%-40logger{39}){cyan}[%line]%clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+  level:
+    root: INFO
+    org:
+      springframework:
+        security: INFO
+      hibernate: INFO
+#  file:
+#    path: tmp/logs

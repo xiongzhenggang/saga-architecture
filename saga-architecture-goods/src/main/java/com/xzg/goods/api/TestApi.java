@@ -1,4 +1,4 @@
-package org.xzg.goods.api;
+package com.xzg.goods.api;
 
 import com.xzg.library.config.infrastructure.model.CommonResponse;
 import org.springframework.web.bind.annotation.*;

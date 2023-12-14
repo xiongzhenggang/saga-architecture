@@ -21,6 +21,6 @@ CREATE TABLE token
     expired     boolean,
     revoked  boolean,
     user_id varchar(100),
-    token_str    TEXT ,
+    token_str    varchar(100) ,
     tokenType VARCHAR(20),
 );

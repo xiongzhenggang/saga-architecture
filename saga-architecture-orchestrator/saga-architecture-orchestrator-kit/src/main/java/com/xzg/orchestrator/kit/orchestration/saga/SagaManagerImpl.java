@@ -82,7 +82,7 @@ public class SagaManagerImpl<Data>
 
     SagaInstance sagaInstance = new SagaInstance(getSagaType(),
             null,
-            "????",
+            getSagaName(),
             null,
             SagaDataSerde.serializeSagaData(sagaData), new HashSet<>());
 
@@ -144,7 +144,9 @@ public class SagaManagerImpl<Data>
   private String getSagaType() {
     return saga.getSagaType();
   }
-
+  private String getSagaName() {
+    return saga.getClass().getName();
+  }
   @Override
   public void subscribeToReplyChannel() {
     messageConsumer.subscribe(saga.getSagaType() + "-consumer", singleton(makeSagaReplyChannel()),

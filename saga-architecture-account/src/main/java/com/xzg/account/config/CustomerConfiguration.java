@@ -14,10 +14,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories
 @EnableAutoConfiguration
-@EntityScan("com.xzg.account")
-@ComponentScan
+@EnableJpaRepositories("com.xzg.account")
+@EntityScan(basePackages = "com.xzg.account")
+@ComponentScan("com.xzg")
 //@Import(OptimisticLockingDecoratorConfiguration.class)
 public class CustomerConfiguration {
   @Resource

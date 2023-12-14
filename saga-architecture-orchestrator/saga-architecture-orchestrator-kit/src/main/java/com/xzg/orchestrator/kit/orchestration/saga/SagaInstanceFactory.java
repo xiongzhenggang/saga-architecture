@@ -1,15 +1,15 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
 import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * @author xiongzhenggang
+ */
 public class SagaInstanceFactory {
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   private ConcurrentMap<Saga<?>, SagaManager<?>> sagaManagers = new ConcurrentHashMap<>();
 

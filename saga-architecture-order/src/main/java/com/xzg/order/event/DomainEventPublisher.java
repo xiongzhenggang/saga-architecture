@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @projectName: saga-architecture
- * @package: org.xzg.order.event
+ * @package: com.xzg.order.event
  * @className: DomainEventPublisher
  * @author: xzg
  * @description: TODO

@@ -1,4 +1,4 @@
-package org.xzg.orchestrator.server;
+package com.xzg.orchestrator.server;
 
 /**
  * Hello world!

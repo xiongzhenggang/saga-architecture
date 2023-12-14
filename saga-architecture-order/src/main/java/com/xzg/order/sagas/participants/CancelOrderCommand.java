@@ -1,4 +1,4 @@
-//package org.xzg.order.sagas.participants;
+//package com.xzg.order.sagas.participants;
 //
 //
 //import com.xzg.orchestrator.kit.command.Command;
