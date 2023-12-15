@@ -10,15 +10,12 @@ import com.xzg.orchestrator.kit.orchestration.dsl.ReplyMessageHeaders;
 import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
-import com.xzg.orchestrator.kit.orchestration.DestinationAndResource;
+import com.xzg.orchestrator.kit.orchestration.saga.model.DestinationAndResource;
 import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.Collections.singleton;
 
@@ -79,17 +76,14 @@ public class SagaManagerImpl<Data>
   @Override
   public SagaInstance create(Data sagaData, Optional<String> resource) {
 
-
-    SagaInstance sagaInstance = new SagaInstance(getSagaType(),
-            null,
-            getSagaName(),
-            null,
-            SagaDataSerde.serializeSagaData(sagaData), new HashSet<>());
-
+    SagaInstance sagaInstance = new SagaInstance();
+    sagaInstance.setSagaName(getSagaName());
+    sagaInstance.setSagaType(getSagaType());
+    sagaInstance.setSerializedSagaData( SagaDataSerde.serializeSagaData(sagaData));
+    sagaInstance.setDestinationsAndResources(new ArrayList<>());
     sagaInstanceRepository.save(sagaInstance);
-
     String sagaId = sagaInstance.getId();
-
+    logger.info("new sagaId ={}",sagaId);
     saga.onStarting(sagaId, sagaData);
 
     //@todo 锁定资源?
@@ -100,13 +94,10 @@ public class SagaManagerImpl<Data>
 //    });
 
     SagaActions<Data> actions = getStateDefinition().start(sagaData);
-
     actions.getLocalException().ifPresent(e -> {
       throw e;
     });
-
     processActions(saga.getSagaType(), sagaId, sagaInstance, sagaData, actions);
-
     return sagaInstance;
   }
 

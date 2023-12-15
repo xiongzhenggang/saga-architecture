@@ -5,6 +5,7 @@ import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaInstanceRepository;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -41,17 +42,18 @@ public class SagaInstanceRepositoryImpl implements SagaInstanceRepository {
     private SagaRepository sagaRepository;
     @Override
     public void save(SagaInstance sagaInstance) {
-//        sagaRepository.sa
+        sagaRepository.save(sagaInstance);
         log.info("insert saga：{}",sagaInstance);
     }
 
     @Override
     public SagaInstance find(String sagaType, String sagaId) {
-        return null;
+        return sagaRepository.findByIdAndSagaType(sagaId,sagaType);
     }
 
     @Override
     public void update(SagaInstance sagaInstance) {
         log.info("update saga：{}",sagaInstance);
+        sagaRepository.save(sagaInstance);
     }
 }

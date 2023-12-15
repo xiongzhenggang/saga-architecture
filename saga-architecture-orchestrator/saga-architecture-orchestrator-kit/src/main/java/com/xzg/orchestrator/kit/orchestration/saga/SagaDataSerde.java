@@ -2,7 +2,7 @@ package com.xzg.orchestrator.kit.orchestration.saga;
 
 
 import com.xzg.library.config.infrastructure.utility.JsonUtil;
-import com.xzg.orchestrator.kit.orchestration.SerializedSagaData;
+import com.xzg.orchestrator.kit.orchestration.saga.model.SerializedSagaData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

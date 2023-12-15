@@ -1,7 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.saga.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
+import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;
 
@@ -31,5 +31,7 @@ import java.io.Serializable;
  * @date 11/28/2023
  * </p>
  */
-public interface SagaRepository extends JpaRepository<SagaEntity, Long>, Serializable {
+public interface SagaRepository extends CrudRepository<SagaInstance, String>, Serializable {
+
+    SagaInstance findByIdAndSagaType(String sagaType, String sagaId);
 }

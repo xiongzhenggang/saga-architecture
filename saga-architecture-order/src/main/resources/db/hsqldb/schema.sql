@@ -1,6 +1,5 @@
 -- CREATE SCHEMA IF NOT EXISTS eventuate AUTHORIZATION SA;
 DROP TABLE ORDERS IF EXISTS;
-
 CREATE TABLE ORDERS
 (
     id        INTEGER IDENTITY PRIMARY KEY,
@@ -9,6 +8,25 @@ CREATE TABLE ORDERS
     version    bigint,
     customer_id bigint,
     amount     DECIMAL
+);
+DROP TABLE saga_instance IF EXISTS;
+CREATE TABLE  saga_instance(
+        id VARCHAR(100) PRIMARY KEY,
+        saga_type VARCHAR(100) NOT NULL,
+        state_name VARCHAR(100) NOT NULL,
+        last_request_id VARCHAR(100),
+        end_state TINYINT,
+        compensating TINYINT,
+        failed TINYINT,
+        saga_data_type VARCHAR(1000) NOT NULL,
+        saga_data_json VARCHAR(1000) NOT NULL
+);
+DROP TABLE destination_resource IF EXISTS;
+CREATE TABLE  destination_resource(
+        id bigint PRIMARY KEY,
+        saga_id VARCHAR(100) NOT NULL,
+        destination  VARCHAR(1000) ,
+        resource VARCHAR(1000)
 );
 
 CREATE TABLE IF NOT EXISTS aggregate_instance_subscriptions(
@@ -19,20 +37,6 @@ CREATE TABLE IF NOT EXISTS aggregate_instance_subscriptions(
      saga_type VARCHAR(200) NOT NULL,
      PRIMARY KEY(aggregate_id, event_type, saga_id, saga_type)
 );
-
-CREATE TABLE IF NOT EXISTS saga_instance(
-      saga_type VARCHAR(100) NOT NULL,
-      saga_id VARCHAR(100) NOT NULL,
-      state_name VARCHAR(100) NOT NULL,
-      last_request_id VARCHAR(100),
-      end_state TINYINT,
-      compensating TINYINT,
-      failed TINYINT,
-      saga_data_type VARCHAR(1000) NOT NULL,
-      saga_data_json VARCHAR(1000) NOT NULL,
-      PRIMARY KEY(saga_type, saga_id)
-);
-
 
 CREATE TABLE IF NOT EXISTS saga_instance_participants (
     saga_type VARCHAR(100) NOT NULL,
