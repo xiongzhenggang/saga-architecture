@@ -1,8 +1,12 @@
-package com.xzg.order.service;
+package com.xzg.orchestrator.kit.command.business;
 
 
 import com.xzg.orchestrator.kit.command.Command;
 
+/**
+ * 订单拒绝命令
+ * @author xiongzhenggang
+ */
 public class RejectOrderCommand implements Command {
 
   private long orderId;

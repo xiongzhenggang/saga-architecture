@@ -2,6 +2,7 @@ package com.xzg.orchestrator.kit.orchestration.saga.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,6 @@ import java.util.Set;
 @Entity
 public class SagaInstance {
   @Id
-  @GeneratedValue
   @Column(name="id")
   private String id;
   @Column(name = "saga_type")

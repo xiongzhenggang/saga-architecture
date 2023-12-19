@@ -1,5 +1,6 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
+import com.xzg.orchestrator.kit.command.business.SagaUnlockCommand;
 import com.xzg.orchestrator.kit.common.*;
 import com.xzg.orchestrator.kit.command.CommandMessageHeaders;
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
@@ -77,6 +78,7 @@ public class SagaManagerImpl<Data>
   public SagaInstance create(Data sagaData, Optional<String> resource) {
 
     SagaInstance sagaInstance = new SagaInstance();
+    sagaInstance.setId(UUID.randomUUID().toString());
     sagaInstance.setSagaName(getSagaName());
     sagaInstance.setSagaType(getSagaType());
     sagaInstance.setSerializedSagaData( SagaDataSerde.serializeSagaData(sagaData));

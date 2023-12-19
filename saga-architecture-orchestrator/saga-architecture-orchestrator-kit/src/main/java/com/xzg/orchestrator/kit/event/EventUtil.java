@@ -4,6 +4,7 @@ import com.xzg.library.config.infrastructure.utility.JsonUtil;
 import com.xzg.orchestrator.kit.event.constant.EventMessageHeaders;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @projectName: saga-architecture
@@ -25,6 +26,7 @@ public class EventUtil {
         return MessageBuilder
                 .withPayload(JsonUtil.object2JsonStr(event))
                 .withExtraHeaders("", headers)
+                .withHeader(Message.ID, UUID.randomUUID().toString())
                 .withHeader(Message.PARTITION_ID, aggregateIdAsString)
                 .withHeader(EventMessageHeaders.AGGREGATE_ID, aggregateIdAsString)
                 .withHeader(EventMessageHeaders.AGGREGATE_TYPE, aggregateType)

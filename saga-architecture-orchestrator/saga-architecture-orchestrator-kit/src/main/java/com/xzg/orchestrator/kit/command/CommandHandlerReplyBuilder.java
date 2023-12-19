@@ -6,6 +6,8 @@ import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
 
+import java.util.UUID;
+
 /**
  * @projectName: saga-architecture
  * @package: com.xzg.orchestrator.kit.common.command
@@ -21,6 +23,7 @@ public class CommandHandlerReplyBuilder {
     private static <T> Message with(T reply, CommandReplyOutcome outcome) {
         MessageBuilder messageBuilder = MessageBuilder
                 .withPayload(JsonUtil.object2JsonStr(reply))
+                .withHeader(Message.ID, UUID.randomUUID().toString())
                 .withHeader(ReplyMessageHeaders.REPLY_OUTCOME, outcome.name())
                 .withHeader(ReplyMessageHeaders.REPLY_TYPE, reply.getClass().getName());
         return messageBuilder.build();

@@ -1,31 +1,36 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 database: hsqldb
 server:
   port: 8081
 spring:
-  datasource:
-    schema: "classpath:db/${database}/schema.sql"
-    data: "classpath:db/${database}/data.sql"
-    sql-script-encoding: UTF-8
-  kafka:
-    bootstrap-servers: "localhost:9092"
-    consumer:
-      group-id: "order_account"
-#    producer:
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  sql:
+    init:
+      schema-locations: classpath*:db/${database}/schema.sql
+      data-locations: classpath*:db/${database}/data.sql
+      continue-on-error: false # 如果脚本执行出现异常是否继续执行后续脚本，默认false
+      encoding: UTF-8
+      mode: always
   jpa:
-    show-sql: false
+    show-sql: true
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: none #create
     open-in-view: false
-  resources:
-    chain:
-      compressed: true
-      cache: true
-    cache:
-      period: 86400
+  kafka:
+    bootstrap-servers: localhost:9092
   application:
-    name: account_server
+    name: accountServer
+  web:
+    resources:
+      chain:
+        compressed: true
+        cache: true
+      cache:
+        period: 86400
+saga:
+  topic:
+    name: accountServer
+
 logging:
   pattern:
     console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(-){faint} %clr([%t]){faint} %clr(%-40logger{39}){cyan}[%line]%clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
@@ -35,8 +40,15 @@ logging:
       springframework:
         security: INFO
       hibernate: INFO
-saga:
-    topic:
-      name: customerServer
 #  file:
 #    path: tmp/logs
+
+#  No such header: ID in this message MessageImpl(payload=null,
+#  headers={commandreply_saga_id=27fffb50-8dd3-4394-855d-552976cc2b64,
+#  reply_outcome-type=SUCCESS,
+  #commandreply_type=com.xzg.orchestrator.kit.command.business.ReserveCreditCommand,
+#  commandreply_reply_to=com.xzg.order.sagas.createorder.CreateOrderSaga-reply,
+#  commandreply_saga_type=com.xzg.order.sagas.createorder.CreateOrderSaga,
+#  reply_type=com.xzg.account.service.CustomerCreditReserved,
+#  reply_to_message_id=5ee98e02-a57d-48ac-83b6-869cc718c0b7,
+#  commandreply_destination=accountService})

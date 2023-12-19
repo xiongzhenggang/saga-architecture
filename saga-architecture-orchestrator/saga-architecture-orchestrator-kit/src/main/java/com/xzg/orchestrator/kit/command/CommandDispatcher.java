@@ -92,10 +92,24 @@ public class CommandDispatcher {
         commandReplyProducer.sendReplies(commandReplyToken, replies);
     }
 
+    /**
+     *
+     * @param commandHandler
+     * @param cm
+     * @param pathVars
+     * @param commandReplyToken
+     * @return
+     */
     protected List<Message> invoke(CommandHandler commandHandler, CommandMessage cm, Map<String, String> pathVars, CommandReplyToken commandReplyToken) {
         return commandHandler.invokeMethod(new CommandHandlerArgs(cm, new PathVariables(pathVars), commandReplyToken));
     }
 
+    /**
+     * handle exception
+     * @param commandHandler
+     * @param cause
+     * @param commandReplyToken
+     */
     private void handleException(CommandHandler commandHandler,
                                  Throwable cause,
                                  CommandReplyToken commandReplyToken) {

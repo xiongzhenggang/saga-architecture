@@ -1,5 +1,6 @@
 package com.xzg.library.config.infrastructure.utility;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,10 +92,10 @@ public class JsonUtil {
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             OBJECT_MAPPER.registerModule(javaTimeModule);
             return  OBJECT_MAPPER.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-        catch (Exception e) {
-            return null;
-        }
+        return null;
     }
     public ObjectMapper getMapper(){
         return  OBJECT_MAPPER;

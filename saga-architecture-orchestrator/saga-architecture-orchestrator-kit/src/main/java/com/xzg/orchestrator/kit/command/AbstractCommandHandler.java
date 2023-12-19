@@ -21,13 +21,22 @@ public class AbstractCommandHandler<RESULT> {
     private final Class commandClass;
     private final Function<CommandHandlerArgs<Command>, RESULT> handler;
 
+    /**
+     * handler 参数是command相关
+     * @param channel
+     * @param resource
+     * @param commandClass
+     * @param handler
+     * @param <C>
+     */
     public <C extends Command> AbstractCommandHandler(String channel, Optional<String> resource,
                                                       Class<C> commandClass,
                                                       Function<CommandHandlerArgs<C>, RESULT> handler) {
         this.channel = channel;
         this.resource = resource;
         this.commandClass = commandClass;
-        this.handler = (CommandHandlerArgs<Command> args) -> handler.apply((CommandHandlerArgs<C>)args);
+        // Function<CommandHandlerArgs<Command>, RESULT> handler
+        this.handler =(CommandHandlerArgs<Command> args) -> handler.apply((CommandHandlerArgs<C>)args);
     }
 
     public String getChannel() {

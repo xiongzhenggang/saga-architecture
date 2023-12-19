@@ -1,15 +1,21 @@
 DROP TABLE Customer IF EXISTS;
 
-CREATE TABLE Customer
+CREATE TABLE CUSTOMER
 (
     id        INTEGER IDENTITY PRIMARY KEY,
     name  VARCHAR(200),
     rejection_reason  VARCHAR(100),
     version    bigint,
-    customer_id bigint,
     amount     DECIMAL
 );
 
+-- create table customer_credit_reservations
+-- (
+--     credit_reservations_key bigint not null,
+--     customer_id bigint not null,
+--     amount DECIMAL,
+--     primary key (credit_reservations_key, customer_id)
+-- );
 -- CREATE TABLE ACCOUNT_CREDIT
 -- (
 --     id        INTEGER IDENTITY PRIMARY KEY,
@@ -17,7 +23,7 @@ CREATE TABLE Customer
 -- );
 
 CREATE TABLE credit_reservation (
-        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        id BIGINT IDENTITY PRIMARY KEY,
         customer_id BIGINT,
         order_id BIGINT,
         reservation DECIMAL

@@ -6,7 +6,7 @@ import com.xzg.orchestrator.kit.common.SagaServiceEnum;
 import com.xzg.orchestrator.kit.orchestration.dsl.CommandEndpoint;
 import com.xzg.orchestrator.kit.orchestration.dsl.CommandEndpointBuilder;
 import com.xzg.orchestrator.kit.command.business.ApproveOrderCommand;
-import com.xzg.order.service.RejectOrderCommand;
+import com.xzg.orchestrator.kit.command.business.RejectOrderCommand;
 
 public class OrderServiceProxy {
 

@@ -23,7 +23,7 @@ public class CustomerCommandHandler {
   }
 
   /**
-   * 定义命令
+   * 定义命令，收到状体变更
    * @return
    */
   public CommandHandlers commandHandlerDefinitions() {
@@ -33,6 +33,11 @@ public class CustomerCommandHandler {
             .build();
   }
 
+  /**
+   * 账户信用卡是否够用
+   * @param cm
+   * @return
+   */
   public Message reserveCredit(CommandMessage<ReserveCreditCommand> cm) {
     ReserveCreditCommand cmd = cm.getCommand();
     long customerId = cmd.getCustomerId();

@@ -4,6 +4,10 @@ package com.xzg.orchestrator.kit.command.business;
 import com.xzg.library.config.infrastructure.model.Money;
 import com.xzg.orchestrator.kit.command.Command;
 
+/**
+ * 信用卡
+ * @author xiongzhenggang
+ */
 public class ReserveCreditCommand implements Command {
   private Long orderId;
   private Money orderTotal;
