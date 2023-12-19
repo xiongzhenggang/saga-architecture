@@ -23,7 +23,14 @@ public class RestExceptionHandler {
 
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
-    public ResponseEntity handleCustomException(HttpServletRequest request, UnauthorizedException e) {
-        return new ResponseEntity<>(CommonResponse.failure(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    public CommonResponse handleCustomException(HttpServletRequest request, UnauthorizedException e) {
+        log.error("请求失败，无权限");
+        return CommonResponse.failure(HttpStatus.UNAUTHORIZED,e.getMessage());
+    }
+    @ExceptionHandler({Exception.class})
+    @ResponseBody
+    public CommonResponse handleException(HttpServletRequest request, Exception e) {
+        log.error("请求失败");
+        return CommonResponse.failure(e.getMessage());
     }
 }

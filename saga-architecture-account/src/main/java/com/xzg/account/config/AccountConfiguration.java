@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "com.xzg.account")
 @ComponentScan("com.xzg")
 //@Import(OptimisticLockingDecoratorConfiguration.class)
-public class CustomerConfiguration {
+public class AccountConfiguration {
   @Resource
   private SagaCommandDispatcherFactory sagaCommandDispatcherFactory;
   @Bean

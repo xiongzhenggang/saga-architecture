@@ -19,12 +19,33 @@ public class OrderService {
     return order;
   }
 
+  /**
+   * 更新订单状态为完成
+   * @param orderId
+   */
   public void approveOrder(Long orderId) {
-    orderRepository.findById(orderId).get().approve();
+//    orderRepository.findById(orderId).get().approve();
+     orderRepository
+            .findById(orderId)
+             .ifPresent(o -> {
+               o.approve();
+               orderRepository.save(o);
+             });
   }
 
+  /**
+   * 更新订单为拒绝
+   * @param orderId
+   * @param rejectionReason
+   */
   public void rejectOrder(Long orderId, RejectionReason rejectionReason) {
-    orderRepository.findById(orderId).get().reject(rejectionReason);
+//    orderRepository.findById(orderId).get().reject(rejectionReason);
+    orderRepository
+            .findById(orderId)
+            .ifPresent(o -> {
+              o.reject(rejectionReason);
+              orderRepository.save(o);
+            });
   }
 
 //  public Order createOrder1(OrderDetails orderDetails) {

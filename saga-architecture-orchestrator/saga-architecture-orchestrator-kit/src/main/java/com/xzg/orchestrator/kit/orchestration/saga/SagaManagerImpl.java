@@ -184,7 +184,7 @@ public class SagaManagerImpl<Data>
     String currentState = sagaInstance.getStateName();
 
     logger.info("Current state={}", currentState);
-
+    //执行回复
     SagaActions<Data> actions = getStateDefinition().handleReply(sagaType, sagaId, currentState, sagaData, message);
 
     logger.info("Handled reply. Sending commands {}", actions.getCommands());

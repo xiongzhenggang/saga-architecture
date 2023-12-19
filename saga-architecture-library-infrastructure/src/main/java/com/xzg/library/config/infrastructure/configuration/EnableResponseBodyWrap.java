@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author xiongzhenggang
  */
-@Target({ElementType.TYPE})
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EnableResponseBodyWrap {
 }

@@ -1,4 +1,9 @@
 package com.xzg.account.service;
 
-public class CustomerCreditReservationFailed implements ResultCreditResult {
+import com.xzg.orchestrator.kit.business.exception.ReserveCreditResult;
+
+/**
+ * @author xiongzhenggang
+ */
+public class CustomerCreditReservationFailed implements ReserveCreditResult {
 }

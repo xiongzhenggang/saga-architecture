@@ -9,18 +9,29 @@ import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import com.xzg.orchestrator.kit.orchestration.dsl.SimpleSaga;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaDefinition;
 import com.xzg.order.domain.Order;
-import com.xzg.order.sagas.participants.proxy.CustomerServiceProxy;
+import com.xzg.order.sagas.participants.proxy.AccountServiceProxy;
 import com.xzg.order.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author xiongzhenggang
+ * @Date 2023/12/19
+ */
+@Slf4j
 public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
 
   private OrderService orderService;
-  private CustomerServiceProxy customerService;
+  private AccountServiceProxy customerService;
 
-  public CreateOrderSaga(OrderService orderService, CustomerServiceProxy customerService) {
+  public CreateOrderSaga(OrderService orderService, AccountServiceProxy customerService) {
     this.orderService = orderService;
     this.customerService = customerService;
   }
+
+  /**
+   * 定义saga状态机转换流程
+   *
+   */
   private SagaDefinition<CreateOrderSagaData> sagaDefinition =
           step()
                   .invokeLocal(this::create)
@@ -54,6 +65,11 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
     data.setOrderId(order.getId());
   }
 
+  /**
+   * 用户账户扣款服务
+   * @param data
+   * @return
+   */
   private CommandWithDestination reserveCredit(CreateOrderSagaData data) {
     long orderId = data.getOrderId();
     Long customerId = data.getOrderDetails().getCustomerId();

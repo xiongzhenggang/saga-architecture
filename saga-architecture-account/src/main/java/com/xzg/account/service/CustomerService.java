@@ -5,6 +5,10 @@ import com.xzg.account.domain.Customer;
 import com.xzg.account.domain.CustomerDao;
 import com.xzg.library.config.infrastructure.model.Money;
 
+/**
+ * @Date 2023/12/19
+ * @author xiongzhenggang
+ */
 public class CustomerService {
 
   private CustomerDao customerDao;
@@ -17,4 +21,14 @@ public class CustomerService {
     Customer customer  = new Customer(name, creditLimit);
     return customerDao.save(customer);
   }
+
+  /**
+   *
+   * @param customerId
+   * @return
+   */
+  public Customer getCustomerById( Long customerId){
+    return customerDao.findById(customerId);
+  }
+
 }

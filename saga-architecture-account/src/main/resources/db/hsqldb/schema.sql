@@ -6,6 +6,8 @@ CREATE TABLE CUSTOMER
     name  VARCHAR(200),
     rejection_reason  VARCHAR(100),
     version    bigint,
+    create_time timestamp,
+    update_time timestamp,
     amount     DECIMAL
 );
 

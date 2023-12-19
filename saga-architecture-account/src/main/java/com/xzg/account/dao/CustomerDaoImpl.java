@@ -5,6 +5,10 @@ import com.xzg.account.domain.CustomerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author xiongzhenggang
+ * @Date 2023/12/19
+ */
 @Component
 public class CustomerDaoImpl implements CustomerDao {
   @Autowired

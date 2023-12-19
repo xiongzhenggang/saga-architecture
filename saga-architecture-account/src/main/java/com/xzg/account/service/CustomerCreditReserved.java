@@ -1,13 +1,9 @@
 package com.xzg.account.service;
 
-import lombok.Data;
-
-import java.io.Serializable;
+import com.xzg.orchestrator.kit.business.exception.ReserveCreditResult;
 
 /**
  * @author xiongzhenggang
  */
-@Data
-public class CustomerCreditReserved implements ResultCreditResult, Serializable {
-    private static final long serialVersionUID = -7254888630213798460L;
+public class CustomerCreditReserved implements ReserveCreditResult {
 }

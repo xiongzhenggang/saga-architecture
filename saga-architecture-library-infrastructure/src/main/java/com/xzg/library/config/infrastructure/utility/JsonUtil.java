@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.xzg.library.config.infrastructure.configuration.feign.JavaTimeModule;
@@ -30,6 +31,7 @@ public class JsonUtil {
         OBJECT_MAPPER.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         OBJECT_MAPPER.setDateFormat(new SimpleDateFormat(JavaTimeModule.YYYY_MM_DD_HH_MM_SS));
         JavaTimeModule javaTimeModule = new JavaTimeModule();
+        OBJECT_MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         OBJECT_MAPPER.registerModule(javaTimeModule)
                 .registerModule(new ParameterNamesModule())
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)

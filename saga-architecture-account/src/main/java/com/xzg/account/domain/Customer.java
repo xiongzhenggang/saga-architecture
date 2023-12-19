@@ -4,6 +4,8 @@ import com.xzg.library.config.infrastructure.model.Money;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name="Customer")
@@ -20,6 +22,10 @@ public class Customer {
 //  private BigDecimal amount;
   @Embedded
   private Money creditLimit;
+
+  private LocalDateTime createTime;
+
+  private LocalDateTime updateTime;
 //
 //  @ElementCollection
 //  private Map<Long, Money> creditReservations;
@@ -48,7 +54,7 @@ public class Customer {
 //      creditReservations.put(orderId, orderTotal);
         this.creditLimit = this.creditLimit.subtract(orderTotal);
     } else {
-      throw new CustomerCreditLimitExceededException();
+        throw new CustomerCreditLimitExceededException();
     }
   }
 }

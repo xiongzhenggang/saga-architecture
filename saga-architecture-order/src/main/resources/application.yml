@@ -17,7 +17,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
   application:
-    name: Order_server
+    name: orderServer
   web:
     resources:
       chain:
@@ -27,7 +27,7 @@ spring:
         period: 86400
 saga:
   topic:
-    name: orderServer
+    name: orderService
 
 logging:
   pattern:
