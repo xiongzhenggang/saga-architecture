@@ -45,7 +45,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         //构建用户信息
         var userEntity = new User();
-        userEntity.setUserName(request.getUserName());
+        userEntity.setUsername(request.getUsername());
         userEntity.setEmail(request.getEmail());
         userEntity.setPassword(passwordEncoder.encode(request.getPassword()));
         userEntity.setRole(request.getRole());
@@ -75,12 +75,11 @@ public class AuthenticationService {
         //如果认证失败会抛出异常 eg:BadCredentialsException 密码错误 UsernameNotFoundException 用户不存在
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
+                        request.getUsername(),
+                        request.getPassword())
         );
         //通过邮箱查询用户信息,当前项目email就是账号
-        var user = repository.findByEmail(request.getEmail())
+        var user = repository.findByUsername(request.getUsername())
                 .orElseThrow();
         UserAccount userAccount = UserAccount.builder().user(user).build();
         //通过JWT方法生成Token
@@ -157,7 +156,7 @@ public class AuthenticationService {
         userName = jwtService.extractUsername(refreshToken);
         if (userName != null) {
             //根据用户信息查询用户,如果用户不存在抛出异常
-            var user = this.repository.findByUserName(userName)
+            var user = this.repository.findByUsername(userName)
                     .orElseThrow();
 
             //验证Token是否有效

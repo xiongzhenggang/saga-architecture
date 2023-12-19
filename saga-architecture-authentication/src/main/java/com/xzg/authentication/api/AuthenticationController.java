@@ -4,10 +4,10 @@ import com.xzg.authentication.service.AuthenticationService;
 import com.xzg.authentication.model.request.AuthenticationRequest;
 import com.xzg.authentication.model.request.RegisterRequest;
 import com.xzg.authentication.model.rresponse.AuthenticationResponse;
+import com.xzg.library.config.infrastructure.model.CommonResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +18,7 @@ import java.io.IOException;
 /**
  * 用户注册: 接收到用户传递过来的信息,在数据库中生成用户信息(密码会通过passwordEncoder进行加密).用户信息保存成功后,会根据用户信息创建一个鉴权token和一个refreshToken
  * 用户登录: 获取到用户传递的账号密码后,会创建一个UsernamePasswordAuthenticationToken对象.然后通过authenticationManager的authenticate方法进行校验,如果出现错误会根据错误的不同抛出不同的异常.在实际开发中可以通过捕获的异常类型不同来创建响应提示.
+ * @author xiongzhenggang
  */
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -32,10 +33,10 @@ public class AuthenticationController {
      * @return ResponseEntity
      */
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    public CommonResponse<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
-        return ResponseEntity.ok(service.register(request));
+        return CommonResponse.success(service.register(request));
     }
 
     /**
@@ -43,11 +44,9 @@ public class AuthenticationController {
      * @param request 请求体
      * @return ResponseEntity
      */
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
-        return ResponseEntity.ok(service.authenticate(request));
+    @PostMapping("/login")
+    public CommonResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        return CommonResponse.success(service.authenticate(request));
     }
 
     /**

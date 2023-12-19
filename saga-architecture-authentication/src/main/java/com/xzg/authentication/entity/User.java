@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 /**
  * security中需要一个
  * UserDetails类来定义用户账户的行为.这个是用户鉴权的关键.主要有账户,密码,权限,用户状态等等.在下面
+ * @author xiongzhenggang
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -32,7 +33,7 @@ public class User extends BaseEntity {
     private String password;
 
     @NotEmpty(message = "用户姓名不允许为空")
-    private String userName;
+    private String username;
 
 
     @Pattern(regexp = "1\\d{10}", message = "手机号格式不正确")

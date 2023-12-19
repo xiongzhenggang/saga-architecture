@@ -3,6 +3,7 @@ package com.xzg.account.controller;
 import com.xzg.account.domain.Customer;
 import com.xzg.account.model.AccountDto;
 import com.xzg.account.service.CustomerService;
+import com.xzg.library.config.infrastructure.auth.ApiHeader;
 import com.xzg.library.config.infrastructure.configuration.EnableResponseBodyWrap;
 import com.xzg.library.config.infrastructure.model.CommonResponse;
 import jakarta.annotation.Resource;
@@ -19,6 +20,7 @@ public class AccountController {
     @Resource
     private CustomerService customerService;
 
+    @ApiHeader
     @GetMapping("/{customerId}")
     public CommonResponse<Customer> getName(@PathVariable("customerId") Long customerId){
         return CommonResponse.success(customerService.getCustomerById(customerId));

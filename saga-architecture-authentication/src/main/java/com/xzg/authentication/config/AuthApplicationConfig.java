@@ -34,7 +34,7 @@ public class AuthApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         //调用repository的findByEmail方法,来获取用户信息,如果存在则返回,如果不存在则抛出异常
-        return username -> repository.findByUserName(username)
+        return username -> repository.findByUsername(username)
                 .map(e-> UserAccount.builder().user(e).build())
                 //这里使用的Option的orElseThrow方法,如果存在则返回,如果不存在则抛出异常
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));

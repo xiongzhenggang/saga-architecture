@@ -21,6 +21,7 @@ import java.io.IOException;
 /**
  * 请求过滤主要是在每次请求的时候动态解析token来获取用户信息以及权限,来保证请求资源的安全性.防止越权访问等.
  * 从请求头中获取到token.验证token的有效性并解析token中的信息存储到SecurityContextHolder上下文中,方便后续的使用
+ * @author xiongzhenggang
  */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

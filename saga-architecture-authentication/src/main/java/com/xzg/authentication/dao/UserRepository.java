@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @param password
      * @return
      */
-    User findByUserNameAndPassword(String userName, String password);
+    User findByUsernameAndPassword(String userName, String password);
     /**
      *
      * @param email
@@ -28,8 +28,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     /**
      *
-     * @param userName
+     * @param username
      * @return
      */
-    Optional<User> findByUserName(String userName);
+    Optional<User> findByUsername(String username);
 }
