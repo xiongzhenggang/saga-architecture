@@ -1,6 +1,6 @@
 package com.xzg.account.service;
 
-import com.xzg.orchestrator.kit.business.exception.ReserveCreditResult;
+import com.xzg.orchestrator.kit.business.resultexception.ReserveCreditResult;
 
 /**
  * @author xiongzhenggang

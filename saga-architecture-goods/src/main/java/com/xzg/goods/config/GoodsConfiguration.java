@@ -1,8 +1,7 @@
-package com.xzg.account.config;
+package com.xzg.goods.config;
 
-import com.xzg.account.domain.CustomerDao;
-import com.xzg.account.service.CustomerCommandHandler;
-import com.xzg.account.service.CustomerService;
+import com.xzg.goods.dao.GoodsDao;
+import com.xzg.goods.service.GoodsCommandHandler;
 import com.xzg.orchestrator.kit.command.CommandDispatcher;
 import com.xzg.orchestrator.kit.participant.SagaCommandDispatcherFactory;
 import jakarta.annotation.Resource;
@@ -15,27 +14,23 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableAutoConfiguration
-@EnableJpaRepositories("com.xzg.account")
-@EntityScan(basePackages = "com.xzg.account")
+@EnableJpaRepositories("com.xzg.goods")
+@EntityScan(basePackages = "com.xzg.goods")
 @ComponentScan("com.xzg")
-public class AccountConfiguration {
+public class GoodsConfiguration {
   @Resource
   private SagaCommandDispatcherFactory sagaCommandDispatcherFactory;
-  @Bean
-  public CustomerService customerService(CustomerDao customerDao) {
-    return new CustomerService(customerDao);
-  }
 
   @Bean
-  public CustomerCommandHandler customerCommandHandler(CustomerDao customerDao) {
-    return new CustomerCommandHandler(customerDao);
+  public GoodsCommandHandler goodsCommandHandler(GoodsDao goodsDao) {
+    return new GoodsCommandHandler(goodsDao);
   }
 
   // TODO Exception handler for CustomerCreditLimitExceededException
 
   @Bean
-  public CommandDispatcher consumerCommandDispatcher(CustomerCommandHandler target) {
-    return sagaCommandDispatcherFactory.make("customerCommandDispatcher", target.commandHandlerDefinitions());
+  public CommandDispatcher consumerCommandDispatcher(GoodsCommandHandler target) {
+    return sagaCommandDispatcherFactory.make("goodsCommandDispatcher", target.commandHandlerDefinitions());
   }
 
 }

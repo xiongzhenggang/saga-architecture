@@ -26,6 +26,11 @@
             <artifactId>saga-architecture-library-infrastructure</artifactId>
             <version>${saga-archiecture-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.xzg</groupId>
+            <artifactId>saga-architecture-orchestrator-kit</artifactId>
+            <version>${saga-archiecture-version}</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

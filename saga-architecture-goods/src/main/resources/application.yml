@@ -1,27 +1,35 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 database: hsqldb
+server:
+  port: 8081
 spring:
-  datasource:
-    schema: "classpath:db/${database}/schema.sql"
-    data: "classpath:db/${database}/data.sql"
-    sql-script-encoding: UTF-8
+  sql:
+    init:
+      schema-locations: classpath*:db/${database}/schema.sql
+      data-locations: classpath*:db/${database}/data.sql
+      continue-on-error: false # 如果脚本执行出现异常是否继续执行后续脚本，默认false
+      encoding: UTF-8
+      mode: always
   jpa:
-    show-sql: false
+    show-sql: true
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: none #create
     open-in-view: false
   kafka:
     bootstrap-servers: localhost:9092
-  resources:
-    chain:
-      compressed: true
-      cache: true
-    cache:
-      period: 86400
-application:
-  name: goods_server
-  saga:
-    topic:
-      name: goodsServer
+  application:
+    name: goodsServer
+  web:
+    resources:
+      chain:
+        compressed: true
+        cache: true
+      cache:
+        period: 86400
+saga:
+  topic:
+    name: goodsService
 
 logging:
   pattern:

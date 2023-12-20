@@ -1,5 +1,6 @@
 package com.xzg.account.domain;
 
+import com.xzg.account.exception.CustomerCreditLimitExceededException;
 import com.xzg.library.config.infrastructure.model.Money;
 import jakarta.persistence.*;
 import lombok.Data;

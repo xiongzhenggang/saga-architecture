@@ -1,4 +1,4 @@
-package com.xzg.account.domain;
+package com.xzg.account.exception;
 
 /**
  * 账户余额不足

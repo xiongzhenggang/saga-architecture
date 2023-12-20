@@ -1,4 +1,4 @@
-package com.xzg.orchestrator.kit.business.exception;
+package com.xzg.orchestrator.kit.business.resultexception;
 
 /**
  * @projectName: saga-architecture

@@ -42,20 +42,3 @@ logging:
       hibernate: INFO
 #  file:
 #    path: tmp/logs
-
-#  No such header: ID in this message MessageImpl(payload=null,
-#  headers={commandreply_saga_id=27fffb50-8dd3-4394-855d-552976cc2b64,
-#  reply_outcome-type=SUCCESS,
-  #commandreply_type=com.xzg.orchestrator.kit.command.business.ReserveCreditCommand,
-#  commandreply_reply_to=com.xzg.order.sagas.createorder.CreateOrderSaga-reply,
-#  commandreply_saga_type=com.xzg.order.sagas.createorder.CreateOrderSaga,
-#  reply_type=com.xzg.account.service.CustomerCreditReserved,
-#  reply_to_message_id=5ee98e02-a57d-48ac-83b6-869cc718c0b7,
-#  commandreply_destination=accountService})
-
-#  MessageImpl(payload={}, headers={commandreply_saga_id=69ca8c9e-aab1-45d6-9743-977e9dcf6d91,
-#  reply_outcome-type=SUCCESS, commandreply_type=com.xzg.orchestrator.kit.command.business.ReserveCreditCommand,
-#  commandreply_reply_to=com.xzg.order.sagas.createorder.CreateOrderSaga-reply,
-#  commandreply_saga_type=com.xzg.order.sagas.createorder.CreateOrderSaga,
-#  ID=a9042caf-7a2e-41d8-bdb9-4004b20753ee, reply_type=com.xzg.account.service.CustomerCreditReserved,
-#  reply_to_message_id=fd5f2da9-9ea8-4163-aeb2-f958b99200af, commandreply_destination=accountService})
