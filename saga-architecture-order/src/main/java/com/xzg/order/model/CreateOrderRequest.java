@@ -33,4 +33,6 @@ import lombok.Data;
 public class CreateOrderRequest {
     private Money orderTotal;
     private Long customerId;
+    private Long goodsId;
+    private Integer goodsTotal;
 }

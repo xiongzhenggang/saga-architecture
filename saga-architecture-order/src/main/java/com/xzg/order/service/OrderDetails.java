@@ -17,25 +17,12 @@ import lombok.NoArgsConstructor;
 @Data
 @Embeddable
 public class OrderDetails {
-
   private Long customerId;
-
   @Embedded
   private Money orderTotal;
-
+  private Long goodsId;
+  private Integer goodsTotal;
   public OrderDetails() {
   }
 
-  public OrderDetails(Long customerId, Money orderTotal) {
-    this.customerId = customerId;
-    this.orderTotal = orderTotal;
-  }
-
-  public Long getCustomerId() {
-    return customerId;
-  }
-
-  public Money getOrderTotal() {
-    return orderTotal;
-  }
 }

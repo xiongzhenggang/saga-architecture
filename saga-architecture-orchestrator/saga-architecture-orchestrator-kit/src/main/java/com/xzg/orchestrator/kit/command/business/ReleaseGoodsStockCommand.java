@@ -39,4 +39,5 @@ public class ReleaseGoodsStockCommand implements Command {
      */
     private Integer goodsTotal;
     private long customerId;
+    private long goodsId;
 }
