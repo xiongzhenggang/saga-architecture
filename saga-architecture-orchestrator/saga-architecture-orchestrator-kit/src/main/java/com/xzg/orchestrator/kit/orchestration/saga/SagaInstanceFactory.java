@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author xiongzhenggang
+ * @Desc 创建saga实例
  */
 public class SagaInstanceFactory {
 

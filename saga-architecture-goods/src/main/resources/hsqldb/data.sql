@@ -1,0 +1,1 @@
+INSERT INTO GOODS (id, goods_name,total) VALUES (1, '真好吃大鸡腿',10 );

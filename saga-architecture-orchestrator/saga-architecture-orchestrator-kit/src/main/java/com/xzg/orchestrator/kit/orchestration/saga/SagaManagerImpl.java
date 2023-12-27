@@ -20,6 +20,10 @@ import java.util.*;
 
 import static java.util.Collections.singleton;
 
+/**
+ *
+ * @param <Data>
+ */
 public class SagaManagerImpl<Data>
         implements SagaManager<Data> {
 
@@ -88,7 +92,7 @@ public class SagaManagerImpl<Data>
     logger.info("new sagaId ={}",sagaId);
     saga.onStarting(sagaId, sagaData);
 
-    //@todo 锁定资源?
+    // 锁定资源?
 //    resource.ifPresent(r -> {
 //      if (!sagaLockManager.claimLock(getSagaType(), sagaId, r)) {
 //        throw new RuntimeException("Cannot claim lock for resource");
@@ -196,9 +200,9 @@ public class SagaManagerImpl<Data>
 
   private void processActions(String sagaType, String sagaId, SagaInstance sagaInstance, Data sagaData, SagaActions<Data> actions) {
 
-
+    int testnum=0;
     while (true) {
-
+      logger.info("============》invoke number={}",testnum++);
       if (actions.getLocalException().isPresent()) {
         actions = getStateDefinition().handleReply(sagaType, sagaId, actions.getUpdatedState().get(), actions.getUpdatedSagaData().get(), MessageBuilder
                 .withPayload("{}")

@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(name="Goods")
+@Table(name="GOODS")
 @Access(AccessType.FIELD)
 public class Goods {
 

@@ -7,6 +7,7 @@ import com.xzg.order.dao.OrderRepository;
 import com.xzg.order.domain.OrderDao;
 import com.xzg.order.sagas.createorder.CreateOrderSaga;
 import com.xzg.order.sagas.participants.proxy.AccountServiceProxy;
+import com.xzg.order.sagas.participants.proxy.GoodsServiceProxy;
 import com.xzg.order.service.OrderSagaService;
 import com.xzg.order.service.OrderService;
 import jakarta.annotation.Resource;
@@ -53,8 +54,8 @@ public class OrderConfiguration {
     return new OrderSagaService(orderRepository, sagaInstanceFactory, createOrderSaga);
   }
   @Bean
-  public CreateOrderSaga createOrderSaga(OrderService orderService, AccountServiceProxy customerService) {
-    return new CreateOrderSaga(orderService, customerService);
+  public CreateOrderSaga createOrderSaga(OrderService orderService, AccountServiceProxy customerService, GoodsServiceProxy goodsServiceProxy) {
+    return new CreateOrderSaga(orderService, customerService,goodsServiceProxy);
   }
   @Bean
   public OrderCommandHandler orderCommandHandler(OrderDao orderDao) {

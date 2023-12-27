@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.xzg.orchestrator.kit.command.CommandHandlerReplyBuilder.withFailure;
 import static com.xzg.orchestrator.kit.command.CommandHandlerReplyBuilder.withSuccess;
@@ -55,15 +56,16 @@ public class GoodsCommandHandler {
   public Message reserveGoodsStock(CommandMessage<ReserveGoodsStockCommand> cm) {
     ReserveGoodsStockCommand cmd = cm.getCommand();
     long goodsId = cmd.getGoodsId();
-    Goods goods = goodsDao.findById(goodsId);
-    if(Objects.isNull(goods)){
-      return withFailure(new GoodsNotFound());
-    }
     try {
-      goods.reserveGoodsStock(cmd.getGoodsTotal());
+      Optional<Goods> goods = goodsDao.findById(goodsId);
+      if(!goods.isPresent()){
+        return withFailure(new GoodsNotFound());
+      }
+      Goods goods1 = goods.get();
+      goods1.reserveGoodsStock(cmd.getGoodsTotal());
       //账户余额扣减
-      goods.setUpdateTime(LocalDateTime.now());
-      goodsDao.saveGoods(goods);
+      goods1.setUpdateTime(LocalDateTime.now());
+      goodsDao.saveGoods(goods1);
       return withSuccess(new GoodsStockReserve());
     } catch (GoodsStockLimitExceededException e) {
       log.error("库存不足：{}",e);

@@ -16,13 +16,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDetails {
   private Long customerId;
   @Embedded
   private Money orderTotal;
   private Long goodsId;
   private Integer goodsTotal;
-  public OrderDetails() {
-  }
-
 }

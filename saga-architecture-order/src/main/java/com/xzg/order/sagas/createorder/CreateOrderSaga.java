@@ -5,6 +5,7 @@ import com.xzg.library.config.infrastructure.model.Money;
 import com.xzg.orchestrator.kit.business.enums.RejectionReason;
 import com.xzg.orchestrator.kit.business.resultexception.CustomerCreditLimitExceeded;
 import com.xzg.orchestrator.kit.business.resultexception.CustomerNotFound;
+import com.xzg.orchestrator.kit.business.resultexception.GoodsNotFound;
 import com.xzg.orchestrator.kit.business.resultexception.GoodsStockLimit;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import com.xzg.orchestrator.kit.orchestration.dsl.SimpleSaga;
@@ -25,9 +26,10 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   private OrderService orderService;
   private AccountServiceProxy customerService;
   private GoodsServiceProxy goodsServiceProxy;
-  public CreateOrderSaga(OrderService orderService, AccountServiceProxy customerService) {
+  public CreateOrderSaga(OrderService orderService, AccountServiceProxy customerService,GoodsServiceProxy goodsServiceProxy) {
     this.orderService = orderService;
     this.customerService = customerService;
+    this.goodsServiceProxy = goodsServiceProxy;
   }
 
   /**
@@ -41,6 +43,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
                   .step()
                   .invokeParticipant(this::reserveGoods)
                   .onReply(GoodsStockLimit.class,this::handleGoodsLimit)
+                  .onReply(GoodsNotFound.class,this::handleGoodsNotFound)
                   .withCompensation(this::releaseGoods)
                   .step()
                   .invokeParticipant(this::reserveCredit)
@@ -53,6 +56,9 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
 
   private void handleGoodsLimit(CreateOrderSagaData data, GoodsStockLimit reply) {
     data.setRejectionReason(RejectionReason.GOODS_LIMIT);
+  }
+  private void handleGoodsNotFound(CreateOrderSagaData data, GoodsNotFound reply) {
+    data.setRejectionReason(RejectionReason.UNKNOWN_GOODS);
   }
   private void handleCustomerNotFound(CreateOrderSagaData data, CustomerNotFound reply) {
     data.setRejectionReason(RejectionReason.UNKNOWN_CUSTOMER);
@@ -79,6 +85,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
    * @return
    */
   private CommandWithDestination reserveGoods(CreateOrderSagaData data) {
+    log.info("====》正向流程扣将商品操作：{}",data);
     long orderId = data.getOrderId();
     Long goodsId = data.getOrderDetails().getGoodsId();
     Integer goodsTotal = data.getOrderDetails().getGoodsTotal();
@@ -90,6 +97,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
    * @return
    */
   private CommandWithDestination releaseGoods(CreateOrderSagaData data) {
+    log.info("====》反向流程补偿操作，给商品加上扣减得数量：{}",data);
     long orderId = data.getOrderId();
     Long goodsId = data.getOrderDetails().getGoodsId();
     Integer goodsTotal = data.getOrderDetails().getGoodsTotal();
@@ -101,6 +109,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
    * @return
    */
   private CommandWithDestination reserveCredit(CreateOrderSagaData data) {
+    log.info("====》正向流程扣减信用卡额度：{}",data);
     long orderId = data.getOrderId();
     Long customerId = data.getOrderDetails().getCustomerId();
     Money orderTotal = data.getOrderDetails().getOrderTotal();
@@ -108,10 +117,12 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   }
 
   private void approve(CreateOrderSagaData data) {
+    log.info("====》正向流程执行成功，订单完成：{}",data);
     orderService.approveOrder(data.getOrderId());
   }
 
   private void reject(CreateOrderSagaData data) {
+    log.info("====》逆向流程补偿，订单失败：{}",data);
     orderService.rejectOrder(data.getOrderId(), data.getRejectionReason());
   }
 }

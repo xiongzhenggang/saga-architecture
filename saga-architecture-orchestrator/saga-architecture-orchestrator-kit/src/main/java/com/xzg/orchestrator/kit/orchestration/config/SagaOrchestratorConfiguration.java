@@ -43,6 +43,15 @@ public class SagaOrchestratorConfiguration {
   @Bean CommonMessageConsumer messageConsumerKafka(){
     return new MessageConsumerKafkaImpl(consumerFactory);
   }
+
+  /**
+   *
+   * @param commandProducer
+   * @param messageConsumer
+   * @param sagaCommandProducer
+   * @param sagas 本工程当前只在order服务定义了CreateOrderSaga
+   * @return
+   */
   @Bean
   public SagaInstanceFactory sagaInstanceFactory(CommandProducer
           commandProducer, CommonMessageConsumer messageConsumer, SagaCommandProducer sagaCommandProducer, Collection<Saga<?>> sagas) {

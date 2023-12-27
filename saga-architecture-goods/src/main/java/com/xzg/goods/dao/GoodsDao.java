@@ -1,7 +1,10 @@
 package com.xzg.goods.dao;
 
 import com.xzg.goods.entity.Goods;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * <p>
@@ -31,6 +34,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class GoodsDao {
+    @Resource
     private GoodsRepository goodsRepository;
 
     /**
@@ -38,10 +42,8 @@ public class GoodsDao {
      * @param id
      * @return
      */
-    public Goods findById(Long id){
-        return goodsRepository.findById(id)
-                .orElseThrow(() ->
-                new IllegalArgumentException(String.format("Goods with id=%s is not found", id)));
+    public Optional<Goods> findById(Long id){
+        return goodsRepository.findById(id);
     }
 
     /**
