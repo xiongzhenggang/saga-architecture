@@ -38,7 +38,6 @@ public class ReserveGoodsStockCommand implements Command {
     /**
      * 购买商品数量
      */
-
     private Integer goodsTotal;
     /**
      * 商品编号

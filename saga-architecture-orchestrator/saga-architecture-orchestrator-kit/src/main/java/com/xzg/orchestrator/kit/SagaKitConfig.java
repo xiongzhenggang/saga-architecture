@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * Hello world!
  *
+ * @author xiongzhenggang
  */
 @Configuration
 @ComponentScan("com.xzg.orchestrator.kit")

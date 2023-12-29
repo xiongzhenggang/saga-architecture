@@ -2,11 +2,11 @@ package com.xzg.order.sagas.createorder;
 
 
 import com.xzg.library.config.infrastructure.model.Money;
-import com.xzg.orchestrator.kit.business.enums.RejectionReason;
-import com.xzg.orchestrator.kit.business.resultexception.CustomerCreditLimitExceeded;
-import com.xzg.orchestrator.kit.business.resultexception.CustomerNotFound;
-import com.xzg.orchestrator.kit.business.resultexception.GoodsNotFound;
-import com.xzg.orchestrator.kit.business.resultexception.GoodsStockLimit;
+import com.xzg.orchestrator.kit.common.enums.RejectionReason;
+import com.xzg.orchestrator.kit.participant.result.CustomerCreditLimitExceeded;
+import com.xzg.orchestrator.kit.participant.result.CustomerNotFound;
+import com.xzg.orchestrator.kit.participant.result.GoodsNotFound;
+import com.xzg.orchestrator.kit.participant.result.GoodsStockLimit;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import com.xzg.orchestrator.kit.orchestration.dsl.SimpleSaga;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaDefinition;
@@ -44,18 +44,20 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
                   .invokeParticipant(this::reserveGoods)
                   .onReply(GoodsStockLimit.class,this::handleGoodsLimit)
                   .onReply(GoodsNotFound.class,this::handleGoodsNotFound)
+                  //补偿操作要定义
                   .withCompensation(this::releaseGoods)
                   .step()
                   .invokeParticipant(this::reserveCredit)
                   .onReply(CustomerNotFound.class, this::handleCustomerNotFound)
                   .onReply(CustomerCreditLimitExceeded.class, this::handleCustomerCreditLimitExceeded)
                   .step()
+                  //最终正向流程执行完成为成功
                   .invokeLocal(this::approve)
                   .build();
 
 
   private void handleGoodsLimit(CreateOrderSagaData data, GoodsStockLimit reply) {
-    data.setRejectionReason(RejectionReason.GOODS_LIMIT);
+    data.setRejectionReason(RejectionReason.INSUFFICIENT_GOODS);
   }
   private void handleGoodsNotFound(CreateOrderSagaData data, GoodsNotFound reply) {
     data.setRejectionReason(RejectionReason.UNKNOWN_GOODS);

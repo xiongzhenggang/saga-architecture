@@ -20,7 +20,7 @@ public class AccountController {
     @Resource
     private CustomerService customerService;
 
-    @ApiHeader
+//    @ApiHeader
     @GetMapping("/{customerId}")
     public CommonResponse<Customer> getName(@PathVariable("customerId") Long customerId){
         return CommonResponse.success(customerService.getCustomerById(customerId));

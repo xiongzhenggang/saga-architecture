@@ -1,7 +1,7 @@
 package com.xzg.order.service;
 
 
-import com.xzg.orchestrator.kit.business.enums.RejectionReason;
+import com.xzg.orchestrator.kit.common.enums.RejectionReason;
 import com.xzg.order.dao.OrderRepository;
 import com.xzg.order.domain.Order;
 import jakarta.annotation.Resource;

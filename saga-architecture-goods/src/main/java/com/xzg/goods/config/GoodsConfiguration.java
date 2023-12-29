@@ -26,7 +26,6 @@ public class GoodsConfiguration {
     return new GoodsCommandHandler(goodsDao);
   }
 
-  // TODO Exception handler for CustomerCreditLimitExceededException
 
   @Bean
   public CommandDispatcher consumerCommandDispatcher(GoodsCommandHandler target) {

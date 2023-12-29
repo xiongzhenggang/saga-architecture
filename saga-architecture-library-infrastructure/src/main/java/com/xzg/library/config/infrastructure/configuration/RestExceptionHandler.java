@@ -1,5 +1,6 @@
 package com.xzg.library.config.infrastructure.configuration;
 
+import com.xzg.library.config.infrastructure.common.exception.BusinessException;
 import com.xzg.library.config.infrastructure.common.exception.UnauthorizedException;
 import com.xzg.library.config.infrastructure.model.CommonResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,9 +24,15 @@ public class RestExceptionHandler {
 
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
-    public CommonResponse handleCustomException(HttpServletRequest request, UnauthorizedException e) {
+    public CommonResponse handleAuthException(HttpServletRequest request, UnauthorizedException e) {
         log.error("请求失败，无权限");
         return CommonResponse.failure(HttpStatus.UNAUTHORIZED,e.getMessage());
+    }
+    @ExceptionHandler({BusinessException.class})
+    @ResponseBody
+    public CommonResponse handleBusinessException(HttpServletRequest request, BusinessException e) {
+        log.error("请求失败，业务失败");
+        return CommonResponse.failure(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());
     }
     @ExceptionHandler({Exception.class})
     @ResponseBody

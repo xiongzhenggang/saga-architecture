@@ -1,7 +1,7 @@
 package com.xzg.order.domain;
 
 
-import com.xzg.orchestrator.kit.business.enums.RejectionReason;
+import com.xzg.orchestrator.kit.common.enums.RejectionReason;
 import jakarta.persistence.*;
 import lombok.Data;
 import com.xzg.order.service.OrderDetails;

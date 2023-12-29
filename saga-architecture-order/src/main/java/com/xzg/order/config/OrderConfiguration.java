@@ -28,27 +28,6 @@ public class OrderConfiguration {
 
   @Resource
   private SagaCommandDispatcherFactory sagaCommandDispatcherFactory;
-//  @Bean
-//  public CreateOrderSaga createOrderSaga(DomainEventPublisher domainEventPublisher) {
-//    return new CreateOrderSaga()
-//    {
-//      @Autowired
-//      private ApplicationEventPublisher applicationEventPublisher;
-//      @Override
-//      public void onStarting(String sagaId, CreateOrderSagaData createOrderSagaData) {
-//        applicationEventPublisher.publishEvent(new SagaStartedEvent(this, sagaId));
-//      }
-//      @Override
-//      public void onSagaFailed(String sagaId, CreateOrderSagaData createOrderSagaData) {
-//        applicationEventPublisher.publishEvent(new SagaFailedEvent(this, sagaId));
-//      }
-//    }
-    ;
-//  }
-//  @Bean
-//  public LocalCreateOrderSaga localCreateOrderSaga(DomainEventPublisher domainEventPublisher, OrderDao orderDao) {
-//    return new LocalCreateOrderSaga(domainEventPublisher, orderDao);
-//  }
   @Bean
   public OrderSagaService orderSagaService(OrderRepository orderRepository, SagaInstanceFactory sagaInstanceFactory, CreateOrderSaga createOrderSaga) {
     return new OrderSagaService(orderRepository, sagaInstanceFactory, createOrderSaga);

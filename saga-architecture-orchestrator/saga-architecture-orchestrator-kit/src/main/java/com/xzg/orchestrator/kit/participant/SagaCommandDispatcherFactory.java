@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SagaCommandDispatcherFactory {
 
-//  @Resource
-//  private  MessageConsumer messageConsumer;
   @Resource
   private CommonMessageConsumer kafkaMessageConsumer;
   @Resource
@@ -22,16 +20,6 @@ public class SagaCommandDispatcherFactory {
   private  CommandNameMapping commandNameMapping;
   @Resource
   private  CommandReplyProducer commandReplyProducer;
-
-//  public SagaCommandDispatcherFactory(MessageConsumer messageConsumer,
-//                                      SagaLockManager sagaLockManager,
-//                                      CommandNameMapping commandNameMapping,
-//                                      CommandReplyProducer commandReplyProducer) {
-//    this.messageConsumer = messageConsumer;
-//    this.sagaLockManager = sagaLockManager;
-//    this.commandNameMapping = commandNameMapping;
-//    this.commandReplyProducer = commandReplyProducer;
-//  }
 
   public SagaCommandDispatcher make(String commandDispatcherId, CommandHandlers target) {
     SagaCommandDispatcher sagaCommandDispatcher = new SagaCommandDispatcher(commandDispatcherId, target, kafkaMessageConsumer, sagaLockManager, commandNameMapping, commandReplyProducer);

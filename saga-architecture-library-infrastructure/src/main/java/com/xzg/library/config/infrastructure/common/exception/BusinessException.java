@@ -1,14 +1,13 @@
-package com.xzg.order.model;
+package com.xzg.library.config.infrastructure.common.exception;
 
-import com.xzg.orchestrator.kit.common.enums.RejectionReason;
-import com.xzg.order.domain.OrderState;
 import lombok.Builder;
 import lombok.Data;
+
 
 /**
  * <p>
  * <b>项目名称： </b>:saga-architecture
- * <b>Class name</b>: GetOrderResponse
+ * <b>Class name</b>: BusinessException
  * </p>
  * <p>
  * <b>Class description</b>:
@@ -23,18 +22,17 @@ import lombok.Data;
  * <pre>
  * Date          Author       Revision     Comments
  * ----------    ----------   --------     ------------------
- * 12/13/2023   xiongzhenggang        1.0          Initial Creation
+ * 12/29/2023   xiongzhenggang        1.0          Initial Creation
  *
  * </pre>
  *
  * @author xiongzhenggang
- * @date 12/13/2023
+ * @date 12/29/2023
  * </p>
  */
-@Data
 @Builder
-public class GetOrderResponse {
-    private Long orderId;
-    private OrderState orderState;
-    private RejectionReason rejectionReason;
+@Data
+public class BusinessException extends  RuntimeException  {
+    private String message;
+
 }

@@ -1,6 +1,10 @@
-package com.xzg.goods.api;
+package com.xzg.goods.controller;
 
+import com.xzg.goods.entity.Goods;
+import com.xzg.goods.service.GoodsService;
+import com.xzg.library.config.infrastructure.configuration.EnableResponseBodyWrap;
 import com.xzg.library.config.infrastructure.model.CommonResponse;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -29,15 +33,17 @@ import org.springframework.web.bind.annotation.*;
  * @date 12/13/2023
  * </p>
  */
+@EnableResponseBodyWrap
 @RestController
-public class TestApi {
+@RequestMapping("/goods")
+public class GoodsApi {
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public CommonResponse<String> createOrder() {
-        return CommonResponse.success("succcess");
-    }
-    @GetMapping("/test1")
-    public String getName(){
-        return "xx";
+    @Resource
+    private GoodsService goodsService;
+
+    //    @ApiHeader
+    @GetMapping("/{goodsId}")
+    public CommonResponse<Goods> getName(@PathVariable("goodsId") Long goodsId){
+        return CommonResponse.success(goodsService.getGoodsById(goodsId));
     }
 }

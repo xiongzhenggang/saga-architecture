@@ -1,19 +1,17 @@
-package com.xzg.goods;
+package com.xzg.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author xiongzhenggang
  */
-@EnableTransactionManagement
-@SpringBootApplication(exclude = {ManagementWebSecurityAutoConfiguration.class,SecurityAutoConfiguration.class})
-public class App {
+@SpringBootApplication(exclude = {ManagementWebSecurityAutoConfiguration.class, SecurityAutoConfiguration.class})
+public class OrderApp {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(OrderApp.class, args);
     }
 
 }

@@ -14,7 +14,7 @@ spring:
     show-sql: true
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create #none #create
+      ddl-auto: none #none #create
     open-in-view: false
   kafka:
     bootstrap-servers: localhost:9092

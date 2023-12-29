@@ -1,9 +1,9 @@
-package com.xzg.orchestrator.kit.business.resultexception;
+package com.xzg.orchestrator.kit.participant.result;
 
 /**
  * <p>
  * <b>项目名称： </b>:saga-architecture
- * <b>Class name</b>: GoodsStockResult
+ * <b>Class name</b>: GoodsStockLimit
  * </p>
  * <p>
  * <b>Class description</b>:
@@ -26,5 +26,5 @@ package com.xzg.orchestrator.kit.business.resultexception;
  * @date 12/20/2023
  * </p>
  */
-public interface GoodsStockResult {
+public class GoodsStockReserve implements GoodsStockResult{
 }

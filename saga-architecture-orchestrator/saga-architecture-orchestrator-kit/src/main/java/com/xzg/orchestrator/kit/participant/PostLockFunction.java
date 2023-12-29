@@ -8,5 +8,5 @@ import com.xzg.orchestrator.kit.event.Message;
 
 public interface PostLockFunction<C> {
 
-  public LockTarget apply(CommandMessage<C> cm, PathVariables pvs, Message reply);
+   LockTarget apply(CommandMessage<C> cm, PathVariables pvs, Message reply);
 }

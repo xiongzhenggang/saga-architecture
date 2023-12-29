@@ -1,7 +1,7 @@
 package com.xzg.order.sagas.createorder;
 
 
-import com.xzg.orchestrator.kit.business.enums.RejectionReason;
+import com.xzg.orchestrator.kit.common.enums.RejectionReason;
 import lombok.Data;
 import com.xzg.order.service.OrderDetails;
 
