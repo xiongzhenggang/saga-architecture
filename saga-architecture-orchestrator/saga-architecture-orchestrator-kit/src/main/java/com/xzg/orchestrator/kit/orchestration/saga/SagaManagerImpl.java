@@ -11,6 +11,7 @@ import com.xzg.orchestrator.kit.orchestration.dsl.ReplyMessageHeaders;
 import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
 import com.xzg.orchestrator.kit.event.Message;
 import com.xzg.orchestrator.kit.event.MessageBuilder;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 import com.xzg.orchestrator.kit.orchestration.saga.model.DestinationAndResource;
 import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
 import org.slf4j.Logger;
@@ -64,10 +65,6 @@ public class SagaManagerImpl<Data>
   }
 
 
-//  public void setSagaLockManager(SagaLockManager sagaLockManager) {
-//    this.sagaLockManager = sagaLockManager;
-//  }
-
   @Override
   public SagaInstance create(Data sagaData) {
     return create(sagaData, Optional.empty());
@@ -112,11 +109,9 @@ public class SagaManagerImpl<Data>
     for (DestinationAndResource dr : sagaInstance.getDestinationsAndResources()) {
       Map<String, String> headers = new HashMap<>();
       headers.put(SagaCommandHeaders.SAGA_ID, sagaId);
-      // FTGO SagaCommandHandler failed without this but the OrdersAndCustomersIntegrationTest was fine?!?
       headers.put(SagaCommandHeaders.SAGA_TYPE, getSagaType());
       commandProducer.send(dr.getDestination(), dr.getResource(), new SagaUnlockCommand(), makeSagaReplyChannel(), headers);
     }
-
     if (failed) {
       saga.onSagaFailed(sagaId, sagaData);
     }

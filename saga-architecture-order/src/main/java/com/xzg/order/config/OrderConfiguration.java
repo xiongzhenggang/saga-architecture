@@ -1,7 +1,13 @@
 package com.xzg.order.config;
 
 import com.xzg.orchestrator.kit.command.CommandDispatcher;
+import com.xzg.orchestrator.kit.command.service.CommandProducer;
+import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.orchestration.saga.Saga;
+import com.xzg.orchestrator.kit.orchestration.saga.SagaCommandProducer;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaInstanceFactory;
+import com.xzg.orchestrator.kit.orchestration.saga.SagaManagerFactory;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 import com.xzg.orchestrator.kit.participant.SagaCommandDispatcherFactory;
 import com.xzg.order.dao.OrderRepository;
 import com.xzg.order.domain.OrderDao;
@@ -19,6 +25,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.xzg.order.service.OrderCommandHandler;
 
+import java.util.Collection;
+
 @Configuration
 @EnableAutoConfiguration
 @EnableJpaRepositories("com.xzg.order")
@@ -28,6 +36,9 @@ public class OrderConfiguration {
 
   @Resource
   private SagaCommandDispatcherFactory sagaCommandDispatcherFactory;
+  @Resource
+  private SagaInstanceRepository sagaInstanceRepository;
+
   @Bean
   public OrderSagaService orderSagaService(OrderRepository orderRepository, SagaInstanceFactory sagaInstanceFactory, CreateOrderSaga createOrderSaga) {
     return new OrderSagaService(orderRepository, sagaInstanceFactory, createOrderSaga);
@@ -46,4 +57,21 @@ public class OrderConfiguration {
     return sagaCommandDispatcherFactory.make("orderCommandDispatcher", target.commandHandlerDefinitions());
   }
 
+  /**
+   * saga 实例处理的配置
+   */
+  /**
+   *
+   * @param commandProducer
+   * @param messageConsumer
+   * @param sagaCommandProducer
+   * @param sagas 本工程当前只在order服务定义了CreateOrderSaga
+   * @return
+   */
+  @Bean
+  public SagaInstanceFactory sagaInstanceFactory(CommandProducer
+                                                         commandProducer, CommonMessageConsumer messageConsumer, SagaCommandProducer sagaCommandProducer, Collection<Saga<?>> sagas) {
+    SagaManagerFactory smf = new SagaManagerFactory(sagaInstanceRepository, commandProducer, messageConsumer, sagaCommandProducer);
+    return new SagaInstanceFactory(smf, sagas);
+  }
 }

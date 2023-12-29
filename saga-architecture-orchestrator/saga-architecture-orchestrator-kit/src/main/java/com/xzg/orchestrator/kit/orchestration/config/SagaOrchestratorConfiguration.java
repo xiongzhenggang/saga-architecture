@@ -8,6 +8,7 @@ import com.xzg.orchestrator.kit.event.consumer.kafka.MessageConsumerKafkaImpl;
 import com.xzg.orchestrator.kit.event.producer.MessageProducer;
 import com.xzg.orchestrator.kit.kafka.config.KafkaProduceConsumerConfig;
 import com.xzg.orchestrator.kit.orchestration.saga.*;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,6 @@ public class SagaOrchestratorConfiguration {
   @Resource
   private CommandNameMapping commandNameMapping;
   @Resource
-  private SagaInstanceRepository sagaInstanceRepository;
-  @Resource
   private ConsumerFactory<String, byte[]> consumerFactory;
   @Bean
   public CommandProducer commandProducer() {
@@ -44,18 +43,5 @@ public class SagaOrchestratorConfiguration {
     return new MessageConsumerKafkaImpl(consumerFactory);
   }
 
-  /**
-   *
-   * @param commandProducer
-   * @param messageConsumer
-   * @param sagaCommandProducer
-   * @param sagas 本工程当前只在order服务定义了CreateOrderSaga
-   * @return
-   */
-  @Bean
-  public SagaInstanceFactory sagaInstanceFactory(CommandProducer
-          commandProducer, CommonMessageConsumer messageConsumer, SagaCommandProducer sagaCommandProducer, Collection<Saga<?>> sagas) {
-    SagaManagerFactory smf = new SagaManagerFactory(sagaInstanceRepository, commandProducer, messageConsumer, sagaCommandProducer);
-    return new SagaInstanceFactory(smf, sagas);
-  }
+
 }

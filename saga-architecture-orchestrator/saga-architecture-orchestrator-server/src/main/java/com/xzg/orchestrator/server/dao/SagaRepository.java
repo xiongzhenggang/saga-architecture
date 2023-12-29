@@ -1,6 +1,6 @@
-package com.xzg.orchestrator.kit.orchestration.saga.dao;
+package com.xzg.orchestrator.server.dao;
 
-import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
+import com.xzg.orchestrator.server.model.SagaInstance;
 import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;

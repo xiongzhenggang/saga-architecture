@@ -3,13 +3,16 @@ package com.xzg.orchestrator.kit.orchestration.saga;
 
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
 import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 
+/**
+ * @author xiongzhenggang
+ */
 public class SagaManagerFactory {
 
   private final SagaInstanceRepository sagaInstanceRepository;
   private final CommandProducer commandProducer;
   private final CommonMessageConsumer messageConsumer;
-//  private final SagaLockManager sagaLockManager;
   private final SagaCommandProducer sagaCommandProducer;
 
   public SagaManagerFactory(SagaInstanceRepository sagaInstanceRepository, CommandProducer
@@ -17,7 +20,6 @@ public class SagaManagerFactory {
     this.sagaInstanceRepository = sagaInstanceRepository;
     this.commandProducer = commandProducer;
     this.messageConsumer = messageConsumer;
-//    this.sagaLockManager = sagaLockManager;
     this.sagaCommandProducer = sagaCommandProducer;
   }
 

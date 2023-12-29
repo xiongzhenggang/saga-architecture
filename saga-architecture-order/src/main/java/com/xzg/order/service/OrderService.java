@@ -7,6 +7,9 @@ import com.xzg.order.domain.Order;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author xiongzhenggang
+ */
 @Service
 public class OrderService {
 
@@ -24,7 +27,6 @@ public class OrderService {
    * @param orderId
    */
   public void approveOrder(Long orderId) {
-//    orderRepository.findById(orderId).get().approve();
      orderRepository
             .findById(orderId)
              .ifPresent(o -> {
@@ -39,7 +41,6 @@ public class OrderService {
    * @param rejectionReason
    */
   public void rejectOrder(Long orderId, RejectionReason rejectionReason) {
-//    orderRepository.findById(orderId).get().reject(rejectionReason);
     orderRepository
             .findById(orderId)
             .ifPresent(o -> {
@@ -48,29 +49,4 @@ public class OrderService {
             });
   }
 
-//  public Order createOrder1(OrderDetails orderDetails) {
-//    return eventuateTransactionTemplate.executeInTransaction(() -> {
-//      CreateOrderSagaData data = new CreateOrderSagaData(order.getId(), orderDetails);
-//      sagaInstanceFactory.create(createOrderSaga, data);
-//      return order;
-//    });
-//  }
-//
-//  public Order localCreateOrder(OrderDetails orderDetails) {
-//    return eventuateTransactionTemplate.executeInTransaction(() -> {
-//      LocalCreateOrderSagaData data = new LocalCreateOrderSagaData(orderDetails);
-//      sagaInstanceFactory.create(localCreateOrderSaga, data);
-//      return orderDao.findById(data.getOrderId());
-//    });
-//  }
-//  public void approveOrder(Long orderId) {
-//    orderRepository.findById(orderId).get().approve();
-//  }
-//
-//  public void rejectOrder(Long orderId, RejectionReason rejectionReason) {
-//    orderRepository.findById(orderId).get().reject(rejectionReason);
-//  }
-  /**
-   * Order
-   */
 }
