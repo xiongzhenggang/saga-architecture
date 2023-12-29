@@ -2,39 +2,47 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: frontend
-  namespace: bookstore-servicemesh
+  namespace: saga-servicemesh
 spec:
   host: frontend
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
+  name: order
+  namespace: saga-servicemesh
+spec:
+  host: order
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
   name: account
-  namespace: bookstore-servicemesh
+  namespace: saga-servicemesh
 spec:
   host: account
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: payment
-  namespace: bookstore-servicemesh
+  name: goods
+  namespace: saga-servicemesh
 spec:
-  host: payment
----
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
-  name: warehouse
-  namespace: bookstore-servicemesh
-spec:
-  host: warehouse
+  host: goods
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: authentication
-  namespace: bookstore-servicemesh
+  namespace: saga-servicemesh
 spec:
   host: authentication
 ---
+#apiVersion: networking.istio.io/v1alpha3
+#kind: DestinationRule
+#metadata:
+#  name: orchestrator
+#  namespace: saga-servicemesh
+#spec:
+#  host: orchestrator
+#---

@@ -11,7 +11,8 @@
     <packaging>jar</packaging>
 
     <name>saga-architecture-goods</name>
-    <url>http://maven.apache.org</url>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>saga-architecture-goods</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

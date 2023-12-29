@@ -13,9 +13,9 @@ spec:
         - operation:
             paths:
               - /restful/accounts/*
-              - /restful/products*
-              - /restful/pay/*
-              - /restful/settlements*
+              - /restful/order/*
+              - /restful/goods/*
+              - /restful/orchestrator/*
             methods: ["GET","POST","PUT","PATCH"]
     - from:
         - source:

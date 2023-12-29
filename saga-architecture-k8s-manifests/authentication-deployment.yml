@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saga-servicemesh-authentication
+  namespace: saga-servicemesh
+  labels:
+    app: authentication
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication
+  template:
+    metadata:
+      labels:
+        app: authentication
+    spec:
+      serviceAccountName: saga-admin
+      containers:
+        - name: authentication
+          image: xiongzhenggang/saga-istio-authentication
+          ports:
+            - name: http-server
+              containerPort: 80
+          volumeMounts:
+            - name: authentication-config
+              mountPath: config
+          env:
+            - name: PORT
+              value: "80"
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+      volumes:
+        - name: authentication-config
+          configMap:
+            name: authentication
+            items:
+              - key: application.yaml
+                path: application.yaml

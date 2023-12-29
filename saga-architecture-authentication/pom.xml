@@ -8,7 +8,8 @@
     </parent>
     <groupId>com.xzg</groupId>
     <artifactId>saga-architecture-authentication</artifactId>
-    <name>Archetype - saga-architecture-authentication</name>
+    <name>saga-architecture-authentication</name>
+    <version>0.0.1-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>

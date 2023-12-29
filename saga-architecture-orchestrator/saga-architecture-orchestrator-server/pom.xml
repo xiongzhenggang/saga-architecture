@@ -9,10 +9,9 @@
 
     <artifactId>saga-architecture-orchestrator-server</artifactId>
     <packaging>jar</packaging>
-
     <name>saga-architecture-orchestrator-server</name>
-    <url>http://maven.apache.org</url>
-
+    <version>0.0.1-SNAPSHOT</version>
+    <description>saga-architecture-orchestrator-server</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

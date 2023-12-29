@@ -1,6 +1,6 @@
 FROM java:21
 VOLUME /tmp
-ADD ./target/saga-architecture-account.jar /app.jar
+ADD ./target/saga-architecture-goods.jar /app.jar
 RUN bash -c 'touch /app.jar'
 RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime && echo Asia/Shanghai > /etc/timezone
 EXPOSE 8080

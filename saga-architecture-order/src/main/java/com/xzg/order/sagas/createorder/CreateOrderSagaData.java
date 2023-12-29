@@ -5,6 +5,9 @@ import com.xzg.orchestrator.kit.common.enums.RejectionReason;
 import lombok.Data;
 import com.xzg.order.service.OrderDetails;
 
+/**
+ * @author xiongzhenggang
+ */
 @Data
 public class CreateOrderSagaData  {
 

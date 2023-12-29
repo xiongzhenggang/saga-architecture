@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saga-servicemesh-order
+  namespace: saga-servicemesh
+  labels:
+    app: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      serviceAccountName: saga-admin
+      containers:
+        - name: order
+          image: xiongzhenggang/saga-istio-order
+          ports:
+            - name: http-server
+              containerPort: 80
+          volumeMounts:
+            - name: order-config
+              mountPath: config
+          env:
+            - name: PORT
+              value: "80"
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+      volumes:
+        - name: order-config
+          configMap:
+            name: order
+            items:
+              - key: application.yaml
+                path: application.yaml

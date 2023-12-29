@@ -161,13 +161,10 @@ public class SagaManagerImpl<Data>
 
 
   private void handleReply(Message message) {
-
     if (!isReplyForThisSagaType(message)) {
       return;
     }
-
     logger.debug("Handle reply: {}", message);
-
     String sagaId = message.getRequiredHeader(SagaReplyHeaders.REPLY_SAGA_ID);
     String sagaType = message.getRequiredHeader(SagaReplyHeaders.REPLY_SAGA_TYPE);
 
@@ -194,10 +191,8 @@ public class SagaManagerImpl<Data>
   }
 
   private void processActions(String sagaType, String sagaId, SagaInstance sagaInstance, Data sagaData, SagaActions<Data> actions) {
-
-    int testnum=0;
     while (true) {
-      logger.info("============》invoke number={}",testnum++);
+      //本地失败的情况，通知其他
       if (actions.getLocalException().isPresent()) {
         actions = getStateDefinition().handleReply(sagaType, sagaId, actions.getUpdatedState().get(), actions.getUpdatedSagaData().get(), MessageBuilder
                 .withPayload("{}")
@@ -208,18 +203,14 @@ public class SagaManagerImpl<Data>
         // only do this if successful
         String lastRequestId = sagaCommandProducer.sendCommands(this.getSagaType(), sagaId, actions.getCommands(), this.makeSagaReplyChannel());
         sagaInstance.setLastRequestId(lastRequestId);
-
         updateState(sagaInstance, actions);
-
         sagaInstance.setSerializedSagaData(SagaDataSerde.serializeSagaData(actions.getUpdatedSagaData().orElse(sagaData)));
-
         if (actions.isEndState()) {
           performEndStateActions(sagaId, sagaInstance, actions.isCompensating(), actions.isFailed(), sagaData);
         }
-
         sagaInstanceRepository.update(sagaInstance);
-
         if (actions.isReplyExpected()) {
+          logger.info("正常回复跳出");
           break;
         } else {
           actions = simulateSuccessfulReplyToLocalActionOrNotification(sagaType, sagaId, actions);

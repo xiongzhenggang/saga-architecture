@@ -2,7 +2,7 @@ apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
   name: authorization-request
-  namespace: bookstore-servicemesh
+  namespace: saga-servicemesh
 spec:
   action: DENY
   rules:
@@ -14,5 +14,6 @@ spec:
         - operation:
             paths:
               - /restful/accounts/*
-              - /restful/pay/*
-              - /restful/settlements*
+              - /restful/order/*
+              - /restful/goods/*
+              - /restful/orchestrator/*

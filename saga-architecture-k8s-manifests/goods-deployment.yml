@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saga-servicemesh-goods
+  namespace: saga-servicemesh
+  labels:
+    app: goods
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goods
+  template:
+    metadata:
+      labels:
+        app: goods
+    spec:
+      serviceAccountName: book-admin
+      containers:
+        - name: goods
+          image: xiongzhenggang/saga-istio-goods
+          ports:
+            - name: http-server
+              containerPort: 80
+          volumeMounts:
+            - name: goods-config
+              mountPath: config
+          env:
+            - name: PORT
+              value: "80"
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+      volumes:
+        - name: goods-config
+          configMap:
+            name: goods
+            items:
+              - key: application.yaml
+                path: application.yaml
