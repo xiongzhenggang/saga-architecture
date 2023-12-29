@@ -1,15 +1,15 @@
 # saga-architecture
 ## 代码模块说明
-saga-architecture-authentication: saga 用户鉴权服务，主要用于注册用户和登录时获取jwt
-saga-architecture-order：订单saga流程，定义订单流程saga状态机模型，管理订购整体流程
-saga-architecture-account: 订单saga流程，用户信用卡账户服务，主要支付过程余额校验扣减
-saga-architecture-goods： 订单saga流程，商品服务，主要用于购买商品检验商品库存以及补偿库存
-saga-architecture-orchestrator：
-    saga-architecture-orchestrator-server：saga独立服务（暂未使用，因为部分功能包含在order服务）
-    saga-architecture-orchestrator-kit：saga框架基本定义，命令事件组件等
-saga-architecture-library-infrastructure：基础设施依赖包，主要管理依赖，rsa加密解密，统一异常请求等公共设施
-saga-architecture-istio-manifests：为服务编写istio部署的yml脚本，以及rsa 公钥和私钥
-saga-architecture-k8s-manifests: 各个服务发布到k8s的yml文件
+1. saga-architecture-authentication: saga 用户鉴权服务，主要用于注册用户和登录时获取jwt
+2. saga-architecture-order：订单saga流程，定义订单流程saga状态机模型，管理订购整体流程
+3. saga-architecture-account: 订单saga流程，用户信用卡账户服务，主要支付过程余额校验扣减
+4. saga-architecture-goods： 订单saga流程，商品服务，主要用于购买商品检验商品库存以及补偿库存
+5. saga-architecture-orchestrator： 
+   1. saga-architecture-orchestrator-server：saga独立服务（暂未使用，因为部分功能包含在order服务） 
+   2. saga-architecture-orchestrator-kit：saga框架基本定义，命令事件组件等
+6. saga-architecture-library-infrastructure：基础设施依赖包，主要管理依赖，rsa加密解密，统一异常请求等公共设施
+7. saga-architecture-istio-manifests：为服务编写istio部署的yml脚本，以及rsa 公钥和私钥
+8. saga-architecture-k8s-manifests: 各个服务发布到k8s的yml文件
 ## 使用说明
 主服务Order中包含定义saga业务的整体流程
 > saga dsl定义
@@ -40,8 +40,13 @@ SagaDefinition<CreateOrderSagaData> sagaDefinition =
 4. JWT与RSA验签
 5. CI/CD
 ## 使用步骤
+
 ## RSA JWT生成及使用
+
+## CI/CD 设置
+
 ## 部署流程
+
 ## 测试流程
 1. 开始下单流程（构造正常，异常订单执行查看补偿是否成功）
 > POST: http://localhost:8080/orders
