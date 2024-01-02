@@ -1,6 +1,6 @@
 package com.xzg.authentication.model.request;
 
-import com.xzg.authentication.entity.Role;
+import com.xzg.authentication.entity.enums.RoleEnums;
 import lombok.Data;
 
 /**
@@ -12,5 +12,5 @@ public class RegisterRequest {
     private String username;
     private String email;
     private String password;
-    private Role role;
+    private RoleEnums role;
 }

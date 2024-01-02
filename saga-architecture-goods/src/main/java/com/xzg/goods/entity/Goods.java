@@ -1,7 +1,6 @@
 package com.xzg.goods.entity;
 
 import com.xzg.goods.exception.GoodsStockLimitExceededException;
-import com.xzg.library.config.infrastructure.model.Money;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -35,7 +34,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(name="GOODS")
+@Table(name="GOODS_INFO")
 @Access(AccessType.FIELD)
 public class Goods {
 
@@ -45,8 +44,11 @@ public class Goods {
 
     private String goodsName;
 
-    private Integer total;
-
+    private Integer stock;
+    private String desc;
+    private String url;
+    private Long createBy;
+    private Long updateBy;
     private LocalDateTime updateTime;
 
     private LocalDateTime createTime;
@@ -54,8 +56,8 @@ public class Goods {
      * 库存是否足够
      */
     public void reserveGoodsStock(Integer goodsTotal) {
-        if (this.total>=goodsTotal) {
-            this.total = this.total-goodsTotal;
+        if (this.stock >=goodsTotal) {
+            this.stock = this.stock -goodsTotal;
         } else {
             throw new GoodsStockLimitExceededException();
         }

@@ -71,12 +71,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             //如果Token有效,并且Token状态正常,将用户信息存储到SecurityContextHolder
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, //用户信息
+                        //用户信息
+                        userDetails,
                         null,
-                        userDetails.getAuthorities() //用户的权限
+                        //用户的权限
+                        userDetails.getAuthorities()
                 );
                 authToken.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request) //访问信息
+                        //访问信息
+                        new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 //将用户信息以及权限保存到 SecurityContextHolder的上下文中,方便后续使用
                 //eg: 获取当前用户id,获取当前用户权限等等

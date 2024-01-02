@@ -1,5 +1,6 @@
 package com.xzg.authentication.entity;
 
+import com.xzg.authentication.entity.enums.RoleEnums;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +27,8 @@ public class UserAccount  implements UserDetails {
     public UserAccount(User user) {
         super();
         this.user = user;
-        authorities.add(new SimpleGrantedAuthority(Role.ADMIN.name()));
+        //默认为ADMIN，后续可修改数据库中用户对应角色信息
+        authorities.add(new SimpleGrantedAuthority(RoleEnums.ADMIN.name()));
     }
 
 

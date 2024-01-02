@@ -3,19 +3,16 @@ package com.xzg.orchestrator.kit.orchestration.config;
 import com.xzg.orchestrator.kit.command.CommandNameMapping;
 import com.xzg.orchestrator.kit.command.CommandProducerImpl;
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
-import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
-import com.xzg.orchestrator.kit.event.consumer.kafka.MessageConsumerKafkaImpl;
-import com.xzg.orchestrator.kit.event.producer.MessageProducer;
+import com.xzg.orchestrator.kit.message.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.message.consumer.kafka.MessageConsumerKafkaImpl;
+import com.xzg.orchestrator.kit.message.producer.MessageProducer;
 import com.xzg.orchestrator.kit.kafka.config.KafkaProduceConsumerConfig;
 import com.xzg.orchestrator.kit.orchestration.saga.*;
-import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.kafka.core.ConsumerFactory;
-
-import java.util.Collection;
 
 /**
  * @author xiongzhenggang

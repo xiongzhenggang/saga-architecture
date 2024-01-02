@@ -3,8 +3,8 @@ package com.xzg.orchestrator.kit.participant;
 
 import com.xzg.orchestrator.kit.command.Command;
 import com.xzg.orchestrator.kit.command.CommandHandlers;
-import com.xzg.orchestrator.kit.event.CommandMessage;
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.CommandMessage;
+import com.xzg.orchestrator.kit.message.Message;
 
 import java.util.List;
 import java.util.Optional;

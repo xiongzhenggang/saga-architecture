@@ -1,6 +1,6 @@
-DROP TABLE USER IF EXISTS;
+DROP TABLE AUTH_USER IF EXISTS;
 
-CREATE TABLE USER
+CREATE TABLE AUTH_USER
 (
     id        INTEGER IDENTITY PRIMARY KEY,
     username  VARCHAR(50),
@@ -10,10 +10,10 @@ CREATE TABLE USER
     email     VARCHAR(100),
     location VARCHAR(255)
 );
-CREATE UNIQUE INDEX user_name_idx ON USER (username);
+CREATE UNIQUE INDEX user_name_idx ON AUTH_USER (username);
 
-DROP TABLE token IF EXISTS;
-CREATE TABLE token
+DROP TABLE AUTH_token IF EXISTS;
+CREATE TABLE AUTH_token
 (
     id        INTEGER IDENTITY PRIMARY KEY,
     expired     boolean,
@@ -22,3 +22,4 @@ CREATE TABLE token
     token_str    LONGVARCHAR ,
     token_type VARCHAR(20),
 );
+

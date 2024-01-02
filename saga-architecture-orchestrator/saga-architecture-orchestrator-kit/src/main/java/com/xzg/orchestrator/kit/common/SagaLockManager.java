@@ -1,7 +1,7 @@
 package com.xzg.orchestrator.kit.common;
 
 
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 
 import java.util.Optional;
 

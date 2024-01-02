@@ -1,5 +1,6 @@
 package com.xzg.authentication.entity;
 
+import com.xzg.authentication.entity.enums.RoleEnums;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "AUTH_USER")
 public class User extends BaseEntity {
 
     // 密码字段不参与序列化（但反序列化是参与的）、不参与更新（但插入是参与的）
@@ -47,7 +48,7 @@ public class User extends BaseEntity {
      * 角色枚举
      */
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleEnums role;
 //    /**
 //     * 用户关联的Token
 //     * 这里面使用了jpa的一对多映射

@@ -2,7 +2,7 @@ package com.xzg.orchestrator.kit.orchestration.dsl;
 
 
 import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 
 import java.util.List;
 import java.util.Optional;

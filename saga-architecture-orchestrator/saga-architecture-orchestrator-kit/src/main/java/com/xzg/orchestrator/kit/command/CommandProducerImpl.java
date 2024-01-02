@@ -1,8 +1,8 @@
 package com.xzg.orchestrator.kit.command;
 
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
-import com.xzg.orchestrator.kit.event.Message;
-import com.xzg.orchestrator.kit.event.producer.MessageProducer;
+import com.xzg.orchestrator.kit.message.Message;
+import com.xzg.orchestrator.kit.message.producer.MessageProducer;
 
 import java.util.Map;
 

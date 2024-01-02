@@ -1,7 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.dsl;
 
 
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 
 public interface ISagaStep<Data> {
     boolean isSuccessfulReply(boolean compensating, Message message);

@@ -1,6 +1,6 @@
 package com.xzg.orchestrator.kit.common;
 
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package com.xzg.orchestrator.kit.command;
 
 import com.xzg.library.config.infrastructure.utility.JsonUtil;
-import com.xzg.orchestrator.kit.event.Message;
-import com.xzg.orchestrator.kit.event.MessageBuilder;
+import com.xzg.orchestrator.kit.message.Message;
+import com.xzg.orchestrator.kit.message.MessageBuilder;
 
 import java.util.Map;
 import java.util.UUID;

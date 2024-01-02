@@ -1,7 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.dsl;
 
 import com.xzg.library.config.infrastructure.utility.JsonUtil;
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 import com.xzg.orchestrator.kit.orchestration.saga.SagaActions;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

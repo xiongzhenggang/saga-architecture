@@ -10,8 +10,8 @@ import com.xzg.orchestrator.kit.participant.result.CustomerNotFound;
 import com.xzg.orchestrator.kit.command.CommandHandlers;
 import com.xzg.orchestrator.kit.command.business.ReserveCreditCommand;
 import com.xzg.orchestrator.kit.common.SagaServiceEnum;
-import com.xzg.orchestrator.kit.event.CommandMessage;
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.CommandMessage;
+import com.xzg.orchestrator.kit.message.Message;
 import com.xzg.orchestrator.kit.participant.SagaCommandHandlersBuilder;
 import lombok.extern.slf4j.Slf4j;
 

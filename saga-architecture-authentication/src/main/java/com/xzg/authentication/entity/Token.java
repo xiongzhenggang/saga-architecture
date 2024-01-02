@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "token")
+@Table(name = "AUTH_TOKEN")
 public class Token extends BaseEntity {
     private  boolean expired;
     private  boolean revoked;

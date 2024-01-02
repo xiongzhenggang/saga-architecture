@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 /**
  *
  声明该类是可嵌入的
+ * @author xiongzhenggang
  */
 @Builder
 @Data
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetails {
-  private Long customerId;
+  private Long userId;
   @Embedded
   private Money orderTotal;
   private Long goodsId;

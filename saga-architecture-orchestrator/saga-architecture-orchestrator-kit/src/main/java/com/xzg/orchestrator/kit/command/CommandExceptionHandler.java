@@ -1,6 +1,6 @@
 package com.xzg.orchestrator.kit.command;
 
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 
 import java.util.List;
 

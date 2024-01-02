@@ -6,10 +6,9 @@ import com.xzg.order.domain.Order;
 import com.xzg.order.model.CreateOrderRequest;
 import com.xzg.order.model.GetOrderResponse;
 import com.xzg.order.service.OrderDetails;
-import com.xzg.order.service.OrderSagaService;
+import com.xzg.order.sagas.service.OrderSagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,7 +57,7 @@ public class OrderController {
     public CommonResponse<String> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
         Order order = orderSagaService.createOrder(
                 OrderDetails.builder()
-                        .customerId(createOrderRequest.getCustomerId())
+                        .userId(createOrderRequest.getCustomerId())
                         .goodsTotal(createOrderRequest.getGoodsTotal())
                         .goodsId(createOrderRequest.getGoodsId())
                         .orderTotal(createOrderRequest.getOrderTotal()).build());

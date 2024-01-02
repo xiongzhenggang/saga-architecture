@@ -2,7 +2,7 @@ package com.xzg.orchestrator.kit.participant;
 
 
 import com.xzg.orchestrator.kit.common.LockTarget;
-import com.xzg.orchestrator.kit.event.MessageImpl;
+import com.xzg.orchestrator.kit.message.MessageImpl;
 
 import java.util.Map;
 import java.util.Optional;

@@ -5,7 +5,7 @@ import com.xzg.orchestrator.kit.command.CommandHandlers;
 import com.xzg.orchestrator.kit.command.CommandNameMapping;
 import com.xzg.orchestrator.kit.command.CommandReplyProducer;
 import com.xzg.orchestrator.kit.common.SagaLockManager;
-import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.message.consumer.CommonMessageConsumer;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

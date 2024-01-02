@@ -6,11 +6,11 @@ import com.xzg.orchestrator.kit.command.CommandMessageHeaders;
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
 import com.xzg.orchestrator.kit.command.Failure;
 import com.xzg.orchestrator.kit.command.Success;
-import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.message.consumer.CommonMessageConsumer;
 import com.xzg.orchestrator.kit.orchestration.dsl.ReplyMessageHeaders;
 import com.xzg.orchestrator.kit.orchestration.dsl.enums.CommandReplyOutcome;
-import com.xzg.orchestrator.kit.event.Message;
-import com.xzg.orchestrator.kit.event.MessageBuilder;
+import com.xzg.orchestrator.kit.message.Message;
+import com.xzg.orchestrator.kit.message.MessageBuilder;
 import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 import com.xzg.orchestrator.kit.orchestration.saga.model.DestinationAndResource;
 import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
@@ -88,13 +88,6 @@ public class SagaManagerImpl<Data>
     String sagaId = sagaInstance.getId();
     logger.info("new sagaId ={}",sagaId);
     saga.onStarting(sagaId, sagaData);
-
-    // 锁定资源?
-//    resource.ifPresent(r -> {
-//      if (!sagaLockManager.claimLock(getSagaType(), sagaId, r)) {
-//        throw new RuntimeException("Cannot claim lock for resource");
-//      }
-//    });
 
     SagaActions<Data> actions = getStateDefinition().start(sagaData);
     actions.getLocalException().ifPresent(e -> {

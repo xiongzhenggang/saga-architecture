@@ -1,6 +1,6 @@
 package com.xzg.orchestrator.kit.command;
 
-import com.xzg.orchestrator.kit.event.CommandMessage;
+import com.xzg.orchestrator.kit.message.CommandMessage;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

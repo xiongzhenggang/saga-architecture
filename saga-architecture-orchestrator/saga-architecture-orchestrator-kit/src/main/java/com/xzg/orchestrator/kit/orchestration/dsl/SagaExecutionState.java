@@ -1,6 +1,9 @@
 package com.xzg.orchestrator.kit.orchestration.dsl;
 
 
+/**
+ * @author xiongzhenggang
+ */
 public class SagaExecutionState {
 
   private int currentlyExecuting;

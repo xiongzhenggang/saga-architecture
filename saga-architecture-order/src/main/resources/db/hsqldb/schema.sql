@@ -6,11 +6,11 @@ CREATE TABLE ORDERS
     state  VARCHAR(50),
     rejection_reason  VARCHAR(100),
     version    bigint,
-    customer_id bigint,
+    user_id bigint,
     amount     DECIMAL
 );
-DROP TABLE saga_instance IF EXISTS;
-CREATE TABLE  saga_instance(
+DROP TABLE SAGA_INSTANCE IF EXISTS;
+CREATE TABLE  SAGA_INSTANCE(
         id VARCHAR(255)  NOT NULL,
         saga_type VARCHAR(255) NOT NULL,
         state_name VARCHAR(255) NOT NULL,
@@ -31,14 +31,6 @@ CREATE TABLE  destination_resource(
         PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS aggregate_instance_subscriptions(
-     aggregate_type VARCHAR(255) DEFAULT NULL,
-     aggregate_id VARCHAR(255) NOT NULL,
-     event_type VARCHAR(200) NOT NULL,
-     saga_id VARCHAR(1000) NOT NULL,
-     saga_type VARCHAR(200) NOT NULL,
-     PRIMARY KEY(aggregate_id, event_type, saga_id, saga_type)
-);
 
 CREATE TABLE IF NOT EXISTS saga_instance_participants (
     saga_type VARCHAR(100) NOT NULL,

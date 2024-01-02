@@ -39,12 +39,13 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   private SagaDefinition<CreateOrderSagaData> sagaDefinition =
           step()
                   .invokeLocal(this::create)
+                  //本地补偿
                   .withCompensation(this::reject)
                   .step()
                   .invokeParticipant(this::reserveGoods)
                   .onReply(GoodsStockLimit.class,this::handleGoodsLimit)
                   .onReply(GoodsNotFound.class,this::handleGoodsNotFound)
-                  //补偿操作要定义
+                  //异步远程补偿操作要定义
                   .withCompensation(this::releaseGoods)
                   .step()
                   .invokeParticipant(this::reserveCredit)
@@ -113,7 +114,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   private CommandWithDestination reserveCredit(CreateOrderSagaData data) {
     log.info("====》正向流程扣减信用卡额度：{}",data);
     long orderId = data.getOrderId();
-    Long customerId = data.getOrderDetails().getCustomerId();
+    Long customerId = data.getOrderDetails().getUserId();
     Money orderTotal = data.getOrderDetails().getOrderTotal();
     return customerService.reserveCredit(orderId, customerId, orderTotal);
   }

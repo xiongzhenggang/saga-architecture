@@ -1,7 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.dsl;
 
 
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.Message;
 
 import java.util.Collections;
 import java.util.Map;
@@ -28,14 +28,17 @@ public class ParticipantInvocationStep<Data> implements SagaStep<Data> {
     return compensating ? compensation : participantInvocation;
   }
 
+  @Override
   public boolean hasAction(Data data) {
     return participantInvocation.isPresent() && participantInvocation.map(p -> p.isInvocable(data)).orElse(true);
   }
 
+  @Override
   public boolean hasCompensation(Data data) {
     return compensation.isPresent() && compensation.map(p -> p.isInvocable(data)).orElse(true);
   }
 
+  @Override
   public Optional<BiConsumer<Data, Object>> getReplyHandler(Message message, boolean compensating) {
     String replyType = message.getRequiredHeader(ReplyMessageHeaders.REPLY_TYPE);
     return Optional.ofNullable((compensating ? compensationReplyHandlers : actionReplyHandlers).get(replyType));

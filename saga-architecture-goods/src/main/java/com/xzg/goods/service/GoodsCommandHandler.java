@@ -11,8 +11,8 @@ import com.xzg.orchestrator.kit.command.CommandHandlers;
 import com.xzg.orchestrator.kit.command.business.ReleaseGoodsStockCommand;
 import com.xzg.orchestrator.kit.command.business.ReserveGoodsStockCommand;
 import com.xzg.orchestrator.kit.common.SagaServiceEnum;
-import com.xzg.orchestrator.kit.event.CommandMessage;
-import com.xzg.orchestrator.kit.event.Message;
+import com.xzg.orchestrator.kit.message.CommandMessage;
+import com.xzg.orchestrator.kit.message.Message;
 import com.xzg.orchestrator.kit.participant.SagaCommandHandlersBuilder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,7 +60,7 @@ public class GoodsCommandHandler {
         Optional<Goods> goods = goodsDao.findById(goodsId);
         goods.ifPresent(s->{
             //补偿数量
-            s.setTotal(s.getTotal()+goodsTotal);
+            s.setStock(s.getStock()+goodsTotal);
             s.setUpdateTime(LocalDateTime.now());
             goodsDao.saveGoods(s);
         });

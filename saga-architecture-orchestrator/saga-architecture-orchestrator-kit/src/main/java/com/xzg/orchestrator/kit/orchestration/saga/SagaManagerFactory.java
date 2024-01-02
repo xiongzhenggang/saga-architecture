@@ -2,7 +2,7 @@ package com.xzg.orchestrator.kit.orchestration.saga;
 
 
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
-import com.xzg.orchestrator.kit.event.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.message.consumer.CommonMessageConsumer;
 import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaInstanceRepository;
 
 /**
