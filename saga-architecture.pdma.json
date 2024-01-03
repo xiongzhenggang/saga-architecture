@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2023-11-14 10:34:05",
-  "updatedTime": "2024-1-2 15:43:27",
+  "updatedTime": "2024-1-3 11:03:07",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2792,6 +2792,23 @@
           "id": "DFA4BA24-52F2-4A59-BDB2-EDAF6CDD81A5"
         },
         {
+          "defKey": "SERIAL",
+          "defName": "消息事件流水号：同一消息幂等",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "735B1890-600A-43E8-AF6F-78A252A65531"
+        },
+        {
           "defKey": "PAYLOAD",
           "defName": "事件内容",
           "comment": "",
@@ -2843,21 +2860,21 @@
           "id": "DA8D1735-FB99-4454-8FFF-BC5889A1C202"
         },
         {
-          "defKey": "SERIAL",
-          "defName": "消息事件流水号：同一消息幂等",
+          "defKey": "HEADERS",
+          "defName": "消息头",
           "comment": "",
           "type": "",
           "len": "",
           "scale": "",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
-          "id": "735B1890-600A-43E8-AF6F-78A252A65531"
+          "id": "F8136494-72D4-487F-BEE5-365069CC4B62"
         },
         {
           "defKey": "UPDATED_TIME",
