@@ -42,12 +42,14 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
                   //本地补偿
                   .withCompensation(this::reject)
                   .step()
+                  //调用商品库存服务
                   .invokeParticipant(this::reserveGoods)
                   .onReply(GoodsStockLimit.class,this::handleGoodsLimit)
                   .onReply(GoodsNotFound.class,this::handleGoodsNotFound)
                   //异步远程补偿操作要定义
                   .withCompensation(this::releaseGoods)
                   .step()
+                  //调用账户额度服务
                   .invokeParticipant(this::reserveCredit)
                   .onReply(CustomerNotFound.class, this::handleCustomerNotFound)
                   .onReply(CustomerCreditLimitExceeded.class, this::handleCustomerCreditLimitExceeded)

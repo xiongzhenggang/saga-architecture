@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="destination_resource")
+@Table(name="saga_destination_resource")
 public class DestinationAndResource {
   public DestinationAndResource(String destination, String resource) {
     this.destination = destination;

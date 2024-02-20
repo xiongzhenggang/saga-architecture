@@ -1,14 +1,6 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: frontend
-  namespace: saga-servicemesh
-spec:
-  host: frontend
----
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
   name: order
   namespace: saga-servicemesh
 spec:

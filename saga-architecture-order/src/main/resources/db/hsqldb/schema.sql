@@ -1,44 +1,37 @@
--- CREATE SCHEMA IF NOT EXISTS eventuate AUTHORIZATION SA;
+-- CREATE SCHEMA IF NOT EXISTS EVENTUATE AUTHORIZATION SA;
 DROP TABLE ORDERS IF EXISTS;
 CREATE TABLE ORDERS
 (
-    id        INTEGER IDENTITY PRIMARY KEY,
-    state  VARCHAR(50),
-    rejection_reason  VARCHAR(100),
-    version    bigint,
-    user_id bigint,
-    amount     DECIMAL
+    ID        INTEGER IDENTITY PRIMARY KEY,
+    STATE  VARCHAR(50),
+    REJECTION_REASON  VARCHAR(100),
+    VERSION    BIGINT,
+    USER_ID BIGINT,
+    AMOUNT     DECIMAL
 );
 DROP TABLE SAGA_INSTANCE IF EXISTS;
 CREATE TABLE  SAGA_INSTANCE(
-        id VARCHAR(255)  NOT NULL,
-        saga_type VARCHAR(255) NOT NULL,
-        state_name VARCHAR(255) NOT NULL,
-        last_request_id VARCHAR(100),
-        end_state TINYINT,
-        compensating TINYINT,
-        failed TINYINT,
-        saga_data_type VARCHAR(255) NOT NULL,
-        saga_data_json VARCHAR(255) NOT NULL,
-        PRIMARY KEY (id)
+        ID VARCHAR(255)  NOT NULL,
+        SAGA_TYPE VARCHAR(255) NOT NULL,
+        STATE_NAME VARCHAR(255) NOT NULL,
+        LAST_REQUEST_ID VARCHAR(100),
+        END_STATE TINYINT,
+        COMPENSATING TINYINT,
+        FAILED TINYINT,
+        SAGA_DATA_TYPE VARCHAR(255) NOT NULL,
+        SAGA_DATA_JSON VARCHAR(255) NOT NULL,
+        PRIMARY KEY (ID)
 );
-DROP TABLE destination_resource IF EXISTS;
-CREATE TABLE  destination_resource(
-        id bigint NOT NULL,
-        saga_id VARCHAR(255) NOT NULL,
-        destination  VARCHAR(255) ,
-        resource VARCHAR(255),
-        PRIMARY KEY (id)
+DROP TABLE SAGA_DESTINATION_RESOURCE IF EXISTS;
+CREATE TABLE  SAGA_DESTINATION_RESOURCE(
+        ID BIGINT NOT NULL,
+        SAGA_ID VARCHAR(255) NOT NULL,
+        DESTINATION  VARCHAR(255) ,
+        RESOURCE VARCHAR(255),
+        PRIMARY KEY (ID)
 );
 
 
-CREATE TABLE IF NOT EXISTS saga_instance_participants (
-    saga_type VARCHAR(100) NOT NULL,
-    saga_id VARCHAR(100) NOT NULL,
-    destination VARCHAR(100) NOT NULL,
-    resource VARCHAR(100) NOT NULL,
-    PRIMARY KEY(saga_type, saga_id, destination, resource)
-);
 
 DROP TABLE IF EXISTS SAGA_MESSAGE;
 CREATE TABLE SAGA_MESSAGE(
@@ -54,18 +47,24 @@ CREATE TABLE SAGA_MESSAGE(
                              CREATED_BY VARCHAR(32)   , --创建人
                              PRIMARY KEY (ID)
 )  ; --消息事件记录
-
-create table IF NOT EXISTS saga_lock_table(
-        target VARCHAR(100) PRIMARY KEY,
-        saga_type VARCHAR(100) NOT NULL,
-        saga_Id VARCHAR(100) NOT NULL
-);
-
-create table IF NOT EXISTS saga_stash_table(
-     message_id VARCHAR(100) PRIMARY KEY,
-     target VARCHAR(100) NOT NULL,
-     saga_type VARCHAR(100) NOT NULL,
-     saga_id VARCHAR(100) NOT NULL,
-     message_headers VARCHAR(255) NOT NULL,
-     message_payload VARCHAR(255) NOT NULL
-);
+-- CREATE TABLE IF NOT EXISTS SAGA_INSTANCE_PARTICIPANTS (
+--                                                           SAGA_TYPE VARCHAR(100) NOT NULL,
+--                                                           SAGA_ID VARCHAR(100) NOT NULL,
+--                                                           DESTINATION VARCHAR(100) NOT NULL,
+--                                                           RESOURCE VARCHAR(100) NOT NULL,
+--                                                           PRIMARY KEY(SAGA_TYPE, SAGA_ID, DESTINATION, RESOURCE)
+-- );
+-- CREATE TABLE IF NOT EXISTS SAGA_LOCK_TABLE(
+--         TARGET VARCHAR(100) PRIMARY KEY,
+--         SAGA_TYPE VARCHAR(100) NOT NULL,
+--         SAGA_ID VARCHAR(100) NOT NULL
+-- );
+--
+-- CREATE TABLE IF NOT EXISTS SAGA_STASH_TABLE(
+--      MESSAGE_ID VARCHAR(100) PRIMARY KEY,
+--      TARGET VARCHAR(100) NOT NULL,
+--      SAGA_TYPE VARCHAR(100) NOT NULL,
+--      SAGA_ID VARCHAR(100) NOT NULL,
+--      MESSAGE_HEADERS VARCHAR(255) NOT NULL,
+--      MESSAGE_PAYLOAD VARCHAR(255) NOT NULL
+-- );

@@ -20,22 +20,22 @@ CREATE TABLE  destination_resource(
         PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS aggregate_instance_subscriptions(
-     aggregate_type VARCHAR(255) DEFAULT NULL,
-     aggregate_id VARCHAR(255) NOT NULL,
-     event_type VARCHAR(200) NOT NULL,
-     saga_id VARCHAR(1000) NOT NULL,
-     saga_type VARCHAR(200) NOT NULL,
-     PRIMARY KEY(aggregate_id, event_type, saga_id, saga_type)
-);
-
-CREATE TABLE IF NOT EXISTS saga_instance_participants (
-    saga_type VARCHAR(100) NOT NULL,
-    saga_id VARCHAR(100) NOT NULL,
-    destination VARCHAR(100) NOT NULL,
-    resource VARCHAR(100) NOT NULL,
-    PRIMARY KEY(saga_type, saga_id, destination, resource)
-);
+-- CREATE TABLE IF NOT EXISTS aggregate_instance_subscriptions(
+--      aggregate_type VARCHAR(255) DEFAULT NULL,
+--      aggregate_id VARCHAR(255) NOT NULL,
+--      event_type VARCHAR(200) NOT NULL,
+--      saga_id VARCHAR(1000) NOT NULL,
+--      saga_type VARCHAR(200) NOT NULL,
+--      PRIMARY KEY(aggregate_id, event_type, saga_id, saga_type)
+-- );
+--
+-- CREATE TABLE IF NOT EXISTS saga_instance_participants (
+--     saga_type VARCHAR(100) NOT NULL,
+--     saga_id VARCHAR(100) NOT NULL,
+--     destination VARCHAR(100) NOT NULL,
+--     resource VARCHAR(100) NOT NULL,
+--     PRIMARY KEY(saga_type, saga_id, destination, resource)
+-- );
 
 
 

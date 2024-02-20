@@ -49,24 +49,11 @@ spec:
           host: order
           port:
             number: 80
-#  - match:
-#      - uri:
-#          prefix: /restful/orchestrator
-#    route:
-#      - destination:
-#          host: orchestrator
-#          port:
-#            number: 80
   - match:
       - uri:
           prefix: /oauth
     route:
       - destination:
           host: authentication
-          port:
-            number: 80
-  - route:
-      - destination:
-          host: frontend
           port:
             number: 80
