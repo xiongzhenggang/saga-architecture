@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- 声明该类是可嵌入的
+ Embeddable表明该类虽然很复杂，但不需要在数据库中拥有其表。相反，它的字段可以直接嵌入到另一个实体中 声明该类是可嵌入的
  * @author xiongzhenggang
  */
 @Builder

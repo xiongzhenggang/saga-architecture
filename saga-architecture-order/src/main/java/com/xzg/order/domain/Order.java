@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import com.xzg.order.service.OrderDetails;
 
+/**
+ * @author xiongzhenggang
+ */
 @Data
 @Entity
 @Table(name="orders")

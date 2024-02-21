@@ -1,32 +1,34 @@
-DROP TABLE Customer IF EXISTS;
+DROP TABLE ACCOUNT_USER IF EXISTS;
 
-CREATE TABLE CUSTOMER
+CREATE TABLE ACCOUNT_USER
 (
-    id        INTEGER IDENTITY PRIMARY KEY,
-    name  VARCHAR(200),
-    rejection_reason  VARCHAR(100),
-    version    bigint,
-    create_time timestamp,
-    update_time timestamp,
-    amount     DECIMAL
+    ID        INTEGER IDENTITY PRIMARY KEY,
+    USER_ID BIGINT,
+    USER_NAME  VARCHAR(200),
+    VERSION    BIGINT,
+    CREATE_TIME TIMESTAMP,
+    UPDATE_TIME TIMESTAMP,
+    CREATED_BY BIGINT,
+    UPDATED_BY BIGINT,
+    AMOUNT     DECIMAL
 );
 
--- create table customer_credit_reservations
+-- CREATE TABLE CUSTOMER_CREDIT_RESERVATIONS
 -- (
---     credit_reservations_key bigint not null,
---     customer_id bigint not null,
---     amount DECIMAL,
---     primary key (credit_reservations_key, customer_id)
+--     CREDIT_RESERVATIONS_KEY BIGINT NOT NULL,
+--     CUSTOMER_ID BIGINT NOT NULL,
+--     AMOUNT DECIMAL,
+--     PRIMARY KEY (CREDIT_RESERVATIONS_KEY, CUSTOMER_ID)
 -- );
 -- CREATE TABLE ACCOUNT_CREDIT
 -- (
---     id        INTEGER IDENTITY PRIMARY KEY,
---     amount     DECIMAL
+--     ID        INTEGER IDENTITY PRIMARY KEY,
+--     AMOUNT     DECIMAL
 -- );
 
-CREATE TABLE credit_reservation (
-        id BIGINT IDENTITY PRIMARY KEY,
-        customer_id BIGINT,
-        order_id BIGINT,
-        reservation DECIMAL
+CREATE TABLE CREDIT_RESERVATION (
+        ID BIGINT IDENTITY PRIMARY KEY,
+        CUSTOMER_ID BIGINT,
+        ORDER_ID BIGINT,
+        RESERVATION DECIMAL
 );

@@ -1,6 +1,6 @@
 package com.xzg.account.dao;
 
-import com.xzg.account.domain.Customer;
+import com.xzg.account.domain.AccountUser;
 import com.xzg.account.domain.CustomerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class CustomerDaoImpl implements CustomerDao {
   private CustomerRepository customerRepository;
 
   @Override
-  public Customer findById(long id) {
+  public AccountUser findById(long id) {
     return customerRepository
             .findById(id)
             .orElseThrow(() ->
@@ -23,7 +23,7 @@ public class CustomerDaoImpl implements CustomerDao {
   }
 
   @Override
-  public Customer save(Customer customer) {
-    return customerRepository.save(customer);
+  public AccountUser save(AccountUser accountUser) {
+    return customerRepository.save(accountUser);
   }
 }

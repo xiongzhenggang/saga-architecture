@@ -8,17 +8,22 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 
+/**
+ * @author xiongzhenggang
+ */
 @Entity
-@Table(name="Customer")
+@Table(name="ACCOUNT_USER")
 @Access(AccessType.FIELD)
 @Data
-public class Customer {
+public class AccountUser {
 
   @Id
   @GeneratedValue
   private Long id;
 
-  private String name;
+  private String userName;
+
+  private Long userId;
 
 //  private BigDecimal amount;
   @Embedded
@@ -37,11 +42,12 @@ public class Customer {
 
   }
 
-  public Customer() {
+  public AccountUser() {
   }
-  public Customer(String name, Money creditLimit) {
-    this.name = name;
+  public AccountUser(String name,Long userId, Money creditLimit) {
+    this.userName = name;
     this.creditLimit = creditLimit;
+    this.userId=userId;
 //    this.creditReservations = Collections.emptyMap();
   }
 

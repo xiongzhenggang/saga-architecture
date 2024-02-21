@@ -1,7 +1,7 @@
 package com.xzg.account.service;
 
 
-import com.xzg.account.domain.Customer;
+import com.xzg.account.domain.AccountUser;
 import com.xzg.account.domain.CustomerDao;
 import com.xzg.library.config.infrastructure.auth.ApiHeaderUtil;
 import com.xzg.library.config.infrastructure.model.Money;
@@ -20,9 +20,9 @@ public class CustomerService {
     this.customerDao = customerDao;
   }
 
-  public Customer createCustomer(String name, Money creditLimit) {
-    Customer customer  = new Customer(name, creditLimit);
-    return customerDao.save(customer);
+  public AccountUser createCustomer(String name, Long userId,Money creditLimit) {
+    AccountUser accountUser = new AccountUser(name,userId, creditLimit);
+    return customerDao.save(accountUser);
   }
 
   /**
@@ -30,7 +30,7 @@ public class CustomerService {
    * @param customerId
    * @return
    */
-  public Customer getCustomerById( Long customerId){
+  public AccountUser getCustomerById(Long customerId){
     log.info("操作人：{}", ApiHeaderUtil.getHeader());
     return customerDao.findById(customerId);
   }

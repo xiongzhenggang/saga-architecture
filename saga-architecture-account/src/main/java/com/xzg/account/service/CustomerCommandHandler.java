@@ -1,7 +1,7 @@
 package com.xzg.account.service;
 
 
-import com.xzg.account.domain.Customer;
+import com.xzg.account.domain.AccountUser;
 import com.xzg.account.domain.CustomerDao;
 import com.xzg.account.exception.CustomerCreditLimitExceededException;
 import com.xzg.orchestrator.kit.participant.result.CustomerCreditLimitExceeded;
@@ -56,15 +56,15 @@ public class CustomerCommandHandler {
     public Message reserveCredit(CommandMessage<ReserveCreditCommand> cm) {
         ReserveCreditCommand cmd = cm.getCommand();
         long customerId = cmd.getCustomerId();
-        Customer customer = customerDao.findById(customerId);
-        if (Objects.isNull(customer)) {
+        AccountUser accountUser = customerDao.findById(customerId);
+        if (Objects.isNull(accountUser)) {
             return withFailure(new CustomerNotFound());
         }
         try {
-            customer.reserveCredit(cmd.getOrderId(), cmd.getOrderTotal());
+            accountUser.reserveCredit(cmd.getOrderId(), cmd.getOrderTotal());
             //账户余额扣减
-            customer.setUpdateTime(LocalDateTime.now());
-            customerDao.save(customer);
+            accountUser.setUpdateTime(LocalDateTime.now());
+            customerDao.save(accountUser);
             return withSuccess(new CustomerCreditReserved());
         } catch (CustomerCreditLimitExceededException e) {
             log.error("订单余额不足：{}", e);

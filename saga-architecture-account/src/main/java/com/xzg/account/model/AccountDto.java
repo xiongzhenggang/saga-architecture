@@ -1,7 +1,6 @@
 package com.xzg.account.model;
 
 import com.xzg.library.config.infrastructure.model.Money;
-import jakarta.persistence.Embedded;
 import lombok.Data;
 
 /**
@@ -33,6 +32,7 @@ import lombok.Data;
 @Data
 public class AccountDto {
 
-    private String name;
+    private String userName;
+    private Long userId;
     private Money creditLimit;
 }
