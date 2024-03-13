@@ -21,13 +21,17 @@ public class AccountController {
 
 //    @ApiHeader
     @GetMapping("/{customerId}")
-    public CommonResponse<AccountUser> getName(@PathVariable("customerId") Long customerId){
+    public CommonResponse<AccountUser> getById(@PathVariable("customerId") Long customerId){
         return CommonResponse.success(customerService.getCustomerById(customerId));
     }
     @PostMapping("")
-    public AccountUser createCustomer(@RequestBody AccountDto dto){
+    public AccountUser createAccount(@RequestBody AccountDto dto){
         return customerService.createCustomer(dto.getUserName(),dto.getUserId() ,dto.getCreditLimit());
     }
 
+    @PutMapping("")
+    public AccountUser updateAccount(@RequestBody AccountDto dto){
+        return customerService.update(dto.getAccountId(),dto.getCreditLimit());
+    }
 
 }

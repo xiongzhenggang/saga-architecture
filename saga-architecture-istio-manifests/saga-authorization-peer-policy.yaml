@@ -15,7 +15,7 @@ spec:
               - /restful/accounts/*
               - /restful/order/*
               - /restful/goods/*
-              - /restful/orchestrator/*
+              - /restful/authentication/*
             methods: ["GET","POST","PUT","PATCH"]
     - from:
         - source:

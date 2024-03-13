@@ -43,7 +43,16 @@ public class GoodsApi {
 
     //    @ApiHeader
     @GetMapping("/{goodsId}")
-    public CommonResponse<Goods> getName(@PathVariable("goodsId") Long goodsId){
+    public CommonResponse<Goods> getById(@PathVariable("goodsId") Long goodsId){
+        return CommonResponse.success(goodsService.getGoodsById(goodsId));
+    }
+
+    @GetMapping("/{goodsId}")
+    public CommonResponse<Goods> createGoods(@PathVariable("goodsId") Long goodsId){
+        return CommonResponse.success(goodsService.getGoodsById(goodsId));
+    }
+    @GetMapping("/{goodsId}")
+    public CommonResponse<Goods> updateGoods(@PathVariable("goodsId") Long goodsId){
         return CommonResponse.success(goodsService.getGoodsById(goodsId));
     }
 }

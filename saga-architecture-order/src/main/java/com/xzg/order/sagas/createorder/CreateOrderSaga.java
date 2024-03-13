@@ -39,7 +39,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   private SagaDefinition<CreateOrderSagaData> sagaDefinition =
           step()
                   .invokeLocal(this::create)
-                  //本地补偿
+                  //本地补偿订单操作：此处为订单失败
                   .withCompensation(this::reject)
                   .step()
                   //调用商品库存服务

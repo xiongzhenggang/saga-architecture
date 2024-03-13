@@ -27,7 +27,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /restful/accounts
+        prefix: /restful/account
     route:
     - destination:
         host: account
@@ -51,7 +51,7 @@ spec:
             number: 80
   - match:
       - uri:
-          prefix: /oauth
+          prefix: /restful/authentication
     route:
       - destination:
           host: authentication

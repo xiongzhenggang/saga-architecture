@@ -13,13 +13,16 @@ metadata:
   name: authentication-jwt-token
   namespace: saga-servicemesh
 spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
   jwtRules:
     - issuer: "saga@gmail.com"
-      # Envoy默认只认“Bearer”作为JWT前缀，之前其他地方用的都是小写，这里专门兼容一下
+      # Envoy默认只认“Bearer”作为JWT前缀
       fromHeaders:
         - name: Authorization
           prefix: "bearer "
-      # 在rsa-key目录下放了用来生成这个JWKS的证书，最初是用java keytool生成的jks格式，一般转jwks都是用pkcs12或者pem格式，为方便使用也一起附带了
+      # 在rsa-key目录下用来生成JWKS的证书
       jwks: |
         {
             "keys": [

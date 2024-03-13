@@ -32,6 +32,7 @@ import lombok.Data;
 @Data
 public class AccountDto {
 
+    private Long accountId;
     private String userName;
     private Long userId;
     private Money creditLimit;

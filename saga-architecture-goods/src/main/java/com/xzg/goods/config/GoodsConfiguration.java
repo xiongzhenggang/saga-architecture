@@ -28,7 +28,7 @@ public class GoodsConfiguration {
 
 
   @Bean
-  public CommandDispatcher consumerCommandDispatcher(GoodsCommandHandler target) {
+  public CommandDispatcher goodsCommandDispatcher(GoodsCommandHandler target) {
     return sagaCommandDispatcherFactory.make("goodsCommandDispatcher", target.commandHandlerDefinitions());
   }
 

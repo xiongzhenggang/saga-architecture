@@ -26,6 +26,18 @@ public class CustomerService {
   }
 
   /**
+   * 修改
+   * @param accountId
+   * @param creditLimit
+   * @return
+   */
+  public AccountUser update(Long accountId,Money creditLimit) {
+    AccountUser accountUser = customerDao.findById(accountId);
+    accountUser.setCreditLimit(creditLimit);
+    return customerDao.save(accountUser);
+  }
+
+  /**
    *
    * @param customerId
    * @return
