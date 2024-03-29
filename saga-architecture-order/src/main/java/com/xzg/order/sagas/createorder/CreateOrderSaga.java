@@ -85,7 +85,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   }
 
   /**
-   * 商品扣将
+   * 商品扣减
    * @param data
    * @return
    */
