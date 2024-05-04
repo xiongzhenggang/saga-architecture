@@ -11,6 +11,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * @author xiongzhenggang
+ */
 public class SagaCommandHandlerBuilder<C extends Command> implements AbstractSagaCommandHandlersBuilder {
   private final SagaCommandHandlersBuilder parent;
   private final SagaCommandHandler h;
@@ -41,15 +44,6 @@ public class SagaCommandHandlerBuilder<C extends Command> implements AbstractSag
     return parent.onMessage(commandClass, handler);
   }
 
-//  public SagaCommandHandlerBuilder<C> withPreLock(BiFunction<CommandMessage<C>, PathVariables, LockTarget> preLock) {
-//    h.setPreLock((raw, pvs) -> preLock.apply(raw, pvs));
-//    return this;
-//  }
-//
-//  public SagaCommandHandlerBuilder<C> withPostLock(PostLockFunction<C> postLock) {
-//    h.setPostLock((raw, pvs, m) -> postLock.apply(raw, pvs, m));
-//    return this;
-//  }
 
   public CommandHandlers build() {
     return parent.build();
