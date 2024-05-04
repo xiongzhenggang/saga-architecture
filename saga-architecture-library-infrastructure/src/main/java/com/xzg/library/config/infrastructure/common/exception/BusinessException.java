@@ -2,6 +2,7 @@ package com.xzg.library.config.infrastructure.common.exception;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
@@ -30,6 +31,7 @@ import lombok.Data;
  * @date 12/29/2023
  * </p>
  */
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 public class BusinessException extends  RuntimeException  {

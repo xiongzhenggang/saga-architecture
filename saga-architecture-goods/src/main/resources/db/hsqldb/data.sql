@@ -1,1 +1,2 @@
-INSERT INTO GOODS_INFO (id, goods_name,STOCK) VALUES (1, '真好吃大鸡腿',10 );
+INSERT INTO GOODS_INFO (id, UNIT_PRICE,goods_name,STOCK) VALUES (1001, 5,'chicken',100 );
+INSERT INTO GOODS_INFO (id, UNIT_PRICE,goods_name,STOCK) VALUES (1002, 10,'apple',200 );

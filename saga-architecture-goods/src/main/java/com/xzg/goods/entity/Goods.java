@@ -4,6 +4,7 @@ import com.xzg.goods.exception.GoodsStockLimitExceededException;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -45,6 +46,7 @@ public class Goods {
     private String goodsName;
 
     private Integer stock;
+    private BigDecimal unitPrice;
     private String desc;
     private String url;
     private Long createBy;
