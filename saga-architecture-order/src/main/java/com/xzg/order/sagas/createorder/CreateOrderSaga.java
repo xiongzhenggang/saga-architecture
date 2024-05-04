@@ -25,7 +25,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
 
   private OrderService orderService;
   private AccountServiceProxy customerService;
-  private GoodsServiceProxy goodsServiceProxy;
+    private GoodsServiceProxy goodsServiceProxy;
   public CreateOrderSaga(OrderService orderService, AccountServiceProxy customerService,GoodsServiceProxy goodsServiceProxy) {
     this.orderService = orderService;
     this.customerService = customerService;
