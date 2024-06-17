@@ -7,6 +7,20 @@ import com.xzg.order.service.OrderDetails;
 
 /**
  * @author xiongzhenggang
+{
+"orderId": 1,
+"orderDetails": {
+"userId": 1001,
+"orderTotal": {
+"amount": 50
+},
+"goodsId": 2001,
+"goodsTotal": 5
+},
+"rejectionReason": {
+
+}
+}
  */
 @Data
 public class CreateOrderSagaData  {

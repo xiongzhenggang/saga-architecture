@@ -1,40 +1,40 @@
-DROP TABLE saga_instance IF EXISTS;
-CREATE TABLE  saga_instance(
-        id VARCHAR(255)  NOT NULL,
-        saga_type VARCHAR(255) NOT NULL,
-        state_name VARCHAR(255) NOT NULL,
-        last_request_id VARCHAR(100),
-        end_state TINYINT,
-        compensating TINYINT,
-        failed TINYINT,
-        saga_data_type VARCHAR(255) NOT NULL,
-        saga_data_json VARCHAR(255) NOT NULL,
-        PRIMARY KEY (id)
+DROP TABLE SAGA_INSTANCE IF EXISTS;
+CREATE TABLE  SAGA_INSTANCE(
+        ID VARCHAR(255)  NOT NULL,
+        SAGA_TYPE VARCHAR(255) NOT NULL,
+        STATE_NAME VARCHAR(255) NOT NULL,
+        LAST_REQUEST_ID VARCHAR(100),
+        END_STATE TINYINT,
+        COMPENSATING TINYINT,
+        FAILED TINYINT,
+        SAGA_DATA_TYPE VARCHAR(255) NOT NULL,
+        SAGA_DATA_JSON VARCHAR(255) NOT NULL,
+        PRIMARY KEY (ID)
 );
-DROP TABLE destination_resource IF EXISTS;
-CREATE TABLE  destination_resource(
-        id bigint NOT NULL,
-        saga_id VARCHAR(255) NOT NULL,
-        destination  VARCHAR(255) ,
-        resource VARCHAR(255),
-        PRIMARY KEY (id)
+DROP TABLE DESTINATION_RESOURCE IF EXISTS;
+CREATE TABLE  DESTINATION_RESOURCE(
+        ID BIGINT NOT NULL,
+        SAGA_ID VARCHAR(255) NOT NULL,
+        DESTINATION  VARCHAR(255) ,
+        RESOURCE VARCHAR(255),
+        PRIMARY KEY (ID)
 );
 
--- CREATE TABLE IF NOT EXISTS aggregate_instance_subscriptions(
---      aggregate_type VARCHAR(255) DEFAULT NULL,
---      aggregate_id VARCHAR(255) NOT NULL,
---      event_type VARCHAR(200) NOT NULL,
---      saga_id VARCHAR(1000) NOT NULL,
---      saga_type VARCHAR(200) NOT NULL,
---      PRIMARY KEY(aggregate_id, event_type, saga_id, saga_type)
+-- CREATE TABLE IF NOT EXISTS AGGREGATE_INSTANCE_SUBSCRIPTIONS(
+--      AGGREGATE_TYPE VARCHAR(255) DEFAULT NULL,
+--      AGGREGATE_ID VARCHAR(255) NOT NULL,
+--      EVENT_TYPE VARCHAR(200) NOT NULL,
+--      SAGA_ID VARCHAR(1000) NOT NULL,
+--      SAGA_TYPE VARCHAR(200) NOT NULL,
+--      PRIMARY KEY(AGGREGATE_ID, EVENT_TYPE, SAGA_ID, SAGA_TYPE)
 -- );
 --
--- CREATE TABLE IF NOT EXISTS saga_instance_participants (
---     saga_type VARCHAR(100) NOT NULL,
---     saga_id VARCHAR(100) NOT NULL,
---     destination VARCHAR(100) NOT NULL,
---     resource VARCHAR(100) NOT NULL,
---     PRIMARY KEY(saga_type, saga_id, destination, resource)
+-- CREATE TABLE IF NOT EXISTS SAGA_INSTANCE_PARTICIPANTS (
+--     SAGA_TYPE VARCHAR(100) NOT NULL,
+--     SAGA_ID VARCHAR(100) NOT NULL,
+--     DESTINATION VARCHAR(100) NOT NULL,
+--     RESOURCE VARCHAR(100) NOT NULL,
+--     PRIMARY KEY(SAGA_TYPE, SAGA_ID, DESTINATION, RESOURCE)
 -- );
 
 

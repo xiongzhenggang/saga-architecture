@@ -56,6 +56,7 @@ public class SagaMessage {
     private String type;
     /**
      * 事件发送状态，发送中，已完成
+     * SENDING SEND_COMPLETED
      */
     private String sendStatus;
     /**
