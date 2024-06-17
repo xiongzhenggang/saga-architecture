@@ -37,6 +37,17 @@ public abstract class AbstractSimpleSagaDefinition<Data, Step extends ISagaStep<
                 .build());
     }
 
+    /**
+     *
+     * @param sagaType
+     * @param sagaId
+     * @param sagaData
+     * @param message
+     * @param state
+     * @param currentStep
+     * @param compensating
+     * @return
+     */
     protected Provider sagaActionsForNextStep(String sagaType, String sagaId, Data sagaData, Message message,
                                               SagaExecutionState state, Step currentStep, boolean compensating) {
         if (currentStep.isSuccessfulReply(compensating, message)) {
@@ -64,17 +75,17 @@ public abstract class AbstractSimpleSagaDefinition<Data, Step extends ISagaStep<
         return makeSagaActionsProvider(makeEndStateSagaActions(state));
     }
 
-    protected <T> T invokeReplyHandler(Message message, Data data, BiFunction<Data, Object, T> handler) {
+    protected <T> void invokeReplyHandler(Message message, Data data, BiFunction<Data, Object, T> handler) {
         Class<?> m;
         try {
                 String className = message.getRequiredHeader(ReplyMessageHeaders.REPLY_TYPE);
-            m = Class.forName(className, true, Thread.currentThread().getContextClassLoader());
+                m = Class.forName(className, true, Thread.currentThread().getContextClassLoader());
         } catch (ClassNotFoundException e) {
             logger.error("Class not found", e);
             throw new RuntimeException("Class not found", e);
         }
         Object reply = JsonUtil.jsonStr2obj(message.getPayload(),m);
-        return handler.apply(data, reply);
+        handler.apply(data, reply);
     }
 
     protected SagaActions<Data> makeEndStateSagaActions(SagaExecutionState state) {

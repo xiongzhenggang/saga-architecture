@@ -1,6 +1,6 @@
 package com.xzg.order.sagas.dao;
 
-import com.xzg.orchestrator.kit.orchestration.saga.model.SagaInstance;
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaMessage;
 import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * <p>
  * <b>项目名称： </b>:saga-architecture
- * <b>Class name</b>: SagaRepository
+ * <b>Class name</b>: SagaMessageRepository
  * </p>
  * <p>
  * <b>Class description</b>:
@@ -23,15 +23,13 @@ import java.io.Serializable;
  * <pre>
  * Date          Author       Revision     Comments
  * ----------    ----------   --------     ------------------
- * 11/28/2023   xiongzhenggang        1.0          Initial Creation
+ * 1/3/2024   xiongzhenggang        1.0          Initial Creation
  *
  * </pre>
  *
  * @author xiongzhenggang
- * @date 11/28/2023
+ * @date 1/3/2024
  * </p>
  */
-public interface SagaRepository extends CrudRepository<SagaInstance, String>, Serializable {
-
-    SagaInstance findByIdAndSagaType(String sagaType, String sagaId);
+public interface SagaMessageDaoRepository extends CrudRepository<SagaMessage, String>, Serializable {
 }

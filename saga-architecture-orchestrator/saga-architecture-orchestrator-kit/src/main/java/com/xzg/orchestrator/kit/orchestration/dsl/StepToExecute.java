@@ -10,16 +10,18 @@ public class StepToExecute<Data> extends AbstractStepToExecute<Data, SagaStep<Da
     super(step, skipped, compensating);
   }
 
-
+  /**
+   *
+   * @param data
+   * @param currentState
+   * @return
+   */
   public SagaActions<Data> executeStep(Data data, SagaExecutionState currentState) {
     SagaExecutionState newState = currentState.nextState(size());
     SagaActions.Builder<Data> builder = SagaActions.builder();
     boolean compensating = currentState.isCompensating();
-
     step.makeStepOutcome(data, this.compensating).visit(builder::withIsLocal, builder::withCommands);
-
     return makeSagaActions(builder, data, newState, compensating);
   }
-
 
 }

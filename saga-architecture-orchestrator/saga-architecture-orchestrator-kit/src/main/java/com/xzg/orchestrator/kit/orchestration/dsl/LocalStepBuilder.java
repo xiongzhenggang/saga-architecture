@@ -17,14 +17,14 @@ public class LocalStepBuilder<Data>  {
   private final List<LocalExceptionSaver<Data>> localExceptionSavers = new LinkedList<>();
   private final List<Class<RuntimeException>> rollbackExceptions = new LinkedList<>();
 
-  public LocalStepBuilder(SimpleSagaDefinitionBuilder<Data> parent, Consumer<Data> localFunction) {
-    this.parent = parent;
-    this.localFunction = localFunction;
-  }
-
   public LocalStepBuilder<Data> withCompensation(Consumer<Data> localCompensation) {
     this.compensation = Optional.of(localCompensation);
      return this;
+  }
+
+  public LocalStepBuilder(SimpleSagaDefinitionBuilder<Data> parent, Consumer<Data> localFunction) {
+    this.parent = parent;
+    this.localFunction = localFunction;
   }
 
 

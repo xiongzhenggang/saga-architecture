@@ -17,6 +17,7 @@ import static java.util.stream.Collectors.toSet;
  * @date: 18/11/2023-下午 5:52
  * @version: 1.0
  */
+
 public class CommandHandlers {
     private List<CommandHandler> handlers;
 

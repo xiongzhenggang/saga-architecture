@@ -36,8 +36,13 @@ public class CommandReplyProducer {
         return sendReplies(commandReplyToken, Arrays.asList(replies));
     }
 
+    /**
+     * 消费者收到消息处理后发送处理结果
+     * @param commandReplyToken
+     * @param replies
+     * @return
+     */
     public List<Message> sendReplies(CommandReplyToken commandReplyToken, List<Message> replies) {
-
         if (commandReplyToken.getReplyChannel() == null) {
             if (!replies.isEmpty()) {
                 throw new RuntimeException("Replies to send but not replyTo channel");
@@ -49,7 +54,6 @@ public class CommandReplyProducer {
         }
         String replyChannel = commandReplyToken.getReplyChannel();
         List<Message> results = new ArrayList<>(replies.size());
-
         for (Message reply : replies) {
             Message message = MessageBuilder
                     .withMessage(reply)

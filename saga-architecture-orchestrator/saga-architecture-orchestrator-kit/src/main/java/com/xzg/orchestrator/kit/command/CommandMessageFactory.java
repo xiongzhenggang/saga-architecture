@@ -26,17 +26,13 @@ public class CommandMessageFactory {
                 .withExtraHeaders("", headers)
                 .withHeader(Message.ID, UUID.randomUUID().toString())
                 .withHeader(CommandMessageHeaders.DESTINATION, channel)
-                .withHeader(CommandMessageHeaders.COMMAND_TYPE, commandNameMapping.commandToExternalCommandType(command))
-                ;
-
+                .withHeader(CommandMessageHeaders.COMMAND_TYPE, commandNameMapping.commandToExternalCommandType(command));
         if (replyTo != null) {
             builder.withHeader(CommandMessageHeaders.REPLY_TO, replyTo);
         }
-
         if (resource != null) {
             builder.withHeader(CommandMessageHeaders.RESOURCE, resource);
         }
-
         return builder.build();
     }
 }

@@ -1,6 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
 import com.xzg.orchestrator.kit.orchestration.CommandWithDestinationAndType;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 public class SagaActions<Data> {
 
 
+  @Getter
   private final List<CommandWithDestinationAndType> commands;
   private final Optional<Data> updatedSagaData;
   private final Optional<String> updatedState;
@@ -29,10 +31,6 @@ public class SagaActions<Data> {
     this.local = local;
     this.localException = localException;
     this.failed = failed;
-  }
-
-  public List<CommandWithDestinationAndType> getCommands() {
-    return commands;
   }
 
   public Optional<Data> getUpdatedSagaData() {
@@ -95,9 +93,11 @@ public class SagaActions<Data> {
       return this;
     }
 
-    public Builder<Data> withCommands(List<CommandWithDestinationAndType> commands) {
+    /**
+     * @param commands
+     */
+    public void withCommands(List<CommandWithDestinationAndType> commands) {
       this.commands.addAll(commands);
-      return this;
     }
 
     public Builder<Data> withIsEndState(boolean endState) {

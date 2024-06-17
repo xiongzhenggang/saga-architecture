@@ -78,7 +78,7 @@ public class GoodsCommandHandler {
         long goodsId = cmd.getGoodsId();
         try {
             Optional<Goods> goods = goodsDao.findById(goodsId);
-            if (!goods.isPresent()) {
+            if (goods.isEmpty()) {
                 return withFailure(new GoodsNotFound());
             }
             Goods goods1 = goods.get();
@@ -88,7 +88,7 @@ public class GoodsCommandHandler {
             goodsDao.saveGoods(goods1);
             return withSuccess(new GoodsStockReserve());
         } catch (GoodsStockLimitExceededException e) {
-            log.error("库存不足：{}", e);
+            log.error("库存不足：{}", e.getMessage());
             return withFailure(new GoodsStockLimit());
         }
     }

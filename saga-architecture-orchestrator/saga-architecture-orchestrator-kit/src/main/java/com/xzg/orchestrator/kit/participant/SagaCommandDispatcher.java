@@ -36,7 +36,6 @@ public class SagaCommandDispatcher extends CommandDispatcher {
   public void messageHandler(Message message) {
     log.info("receive message=:{}",message.getPayload());
     if (isUnlockMessage(message)) {
-      String sagaType = getSagaType(message);
       String sagaId = getSagaId(message);
       String target = message.getRequiredHeader(CommandMessageHeaders.RESOURCE);
       sagaLockManager.unlock(sagaId, target).ifPresent(m -> super.messageHandler(message));

@@ -1,6 +1,7 @@
 package com.xzg.orchestrator.kit.command.service;
 
 import com.xzg.orchestrator.kit.command.Command;
+import com.xzg.orchestrator.kit.message.Message;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public interface CommandProducer {
      * @param headers additional headers
      * @return the id of the sent command
      */
-    String send(String channel, Command command, String replyTo,
+    Message send(String channel, Command command, String replyTo,
                 Map<String, String> headers);
     /**
      * Sends a command
@@ -32,7 +33,7 @@ public interface CommandProducer {
      * @param headers additional headers
      * @return the id of the sent command
      */
-    String sendNotification(String channel, Command command,
+    Message sendNotification(String channel, Command command,
                             Map<String, String> headers);
 
     /**
@@ -44,7 +45,7 @@ public interface CommandProducer {
      * @param headers additional headers
      * @return the id of the sent command
      */
-    String send(String channel, String resource, Command command, String replyTo, Map<String, String> headers);
+    Message send(String channel, String resource, Command command, String replyTo, Map<String, String> headers);
 }
 
 

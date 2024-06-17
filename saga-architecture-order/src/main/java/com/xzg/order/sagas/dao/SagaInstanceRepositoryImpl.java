@@ -37,7 +37,7 @@ import org.springframework.stereotype.Repository;
 public class SagaInstanceRepositoryImpl implements SagaInstanceRepository {
 
     @Resource
-    private SagaRepository sagaRepository;
+    private SagaInstanceDaoRepository sagaRepository;
     @Override
     public void save(SagaInstance sagaInstance) {
         sagaRepository.save(sagaInstance);

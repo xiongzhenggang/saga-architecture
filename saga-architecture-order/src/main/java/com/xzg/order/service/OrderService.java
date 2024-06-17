@@ -16,6 +16,11 @@ public class OrderService {
   @Resource
   private OrderRepository orderRepository;
 
+    /**
+     * 初始创建原始订单
+     * @param orderDetails
+     * @return
+     */
   public Order createOrder(OrderDetails orderDetails) {
     Order order = Order.createOrder(orderDetails);
     orderRepository.save(order);

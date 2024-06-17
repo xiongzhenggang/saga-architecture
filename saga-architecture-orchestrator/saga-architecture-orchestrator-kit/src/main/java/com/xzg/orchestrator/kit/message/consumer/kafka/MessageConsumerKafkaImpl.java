@@ -4,14 +4,11 @@ import com.xzg.library.config.infrastructure.utility.JsonUtil;
 import com.xzg.orchestrator.kit.message.MessageImpl;
 import com.xzg.orchestrator.kit.message.consumer.*;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.function.BiConsumer;
 
@@ -27,10 +24,6 @@ import java.util.function.BiConsumer;
 @Slf4j
 public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
-    private final String id = UUID.randomUUID().toString();
-
     private List<EventuateKafkaConsumer> consumers = new ArrayList<>();
     private EventuateKafkaMultiMessageConverter eventuateKafkaMultiMessageConverter = new EventuateKafkaMultiMessageConverter();
     private final ConsumerFactory<String, byte[]> consumerFactory;
@@ -38,11 +31,17 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
     public MessageConsumerKafkaImpl(ConsumerFactory<String, byte[]> consumerFactory) {
         this.consumerFactory = consumerFactory;
     }
+
+    /**
+     * 消息监听
+     * @param subscriberId
+     * @param channels
+     * @param handler
+     * @return
+     */
     @Override
     public KafkaSubscription subscribe(String subscriberId, Set<String> channels, KafkaMessageHandler handler) {
-
         SwimlaneBasedDispatcher swimlaneBasedDispatcher = new SwimlaneBasedDispatcher(subscriberId, Executors.newCachedThreadPool());
-
         EventuateKafkaConsumerMessageHandler kcHandler = (record, callback) -> swimlaneBasedDispatcher.dispatch(new RawKafkaMessage(record.value()),
                 record.partition(),
                 message -> handle(message, callback, handler));
@@ -72,8 +71,7 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
             } else {
                 String jsonStr = StringBinaryMessageEncoding.bytesToString(message.getPayload());
                 log.info("parser jsonStr=：{}",jsonStr);
-                kafkaMessageHandler.accept(
-                        JsonUtil.jsonStr2obj(jsonStr,MessageImpl.class));
+                kafkaMessageHandler.accept(JsonUtil.jsonStr2obj(jsonStr,MessageImpl.class));
             }
             callback.accept(null, null);
         } catch (Throwable e) {
@@ -87,7 +85,4 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
         consumers.forEach(EventuateKafkaConsumer::stop);
     }
 
-    public String getId() {
-        return id;
-    }
 }

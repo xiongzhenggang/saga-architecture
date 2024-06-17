@@ -87,7 +87,7 @@ public class OrderController {
     @RequestMapping(value="/orders/customer/{customerId}", method= RequestMethod.GET)
     public CommonResponse<List<GetOrderResponse>> getOrdersByCustomerId(@PathVariable Long customerId) {
         return CommonResponse.success(orderRepository
-                .findAllByOrderDetailsCustomerId(customerId)
+                .findAllByOrderDetailsUserId(customerId)
                 .stream()
                 .map(o ->GetOrderResponse.builder().orderId(o.getId())
                         .orderState(o.getState())

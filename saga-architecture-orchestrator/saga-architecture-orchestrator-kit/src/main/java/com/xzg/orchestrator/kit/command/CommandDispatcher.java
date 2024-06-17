@@ -31,8 +31,6 @@ public class CommandDispatcher {
 
     private final CommandHandlers commandHandlers;
 
-//    private final MessageConsumer messageConsumer;
-
     private final CommonMessageConsumer messageConsumer;
     private final CommandNameMapping commandNameMapping;
 
@@ -57,29 +55,31 @@ public class CommandDispatcher {
 
     }
 
+    /**
+     * 监听消费者收到消息后处理逻辑
+     * @param message
+     */
     public void messageHandler(Message message) {
         logger.trace("Received message {} {}", commandDispatcherId, message);
-
         message.setHeader(CommandMessageHeaders.COMMAND_TYPE,
                 commandNameMapping.externalCommandTypeToCommandClassName(message.getRequiredHeader(CommandMessageHeaders.COMMAND_TYPE)));
-
         Optional<CommandHandler> possibleMethod = commandHandlers.findTargetMethod(message);
-        if (!possibleMethod.isPresent()) {
+        if (possibleMethod.isEmpty()) {
             throw new RuntimeException("No method for " + message);
         }
-
+        /**
+         * 具体处理
+         */
         CommandHandler m = possibleMethod.get();
-
+        logger.info("handle this message by :{}",m.getClass());
         CommandHandlerParams commandHandlerParams = new CommandHandlerParams(message, m.getCommandClass(), m.getResource());
         CommandReplyToken commandReplyToken = new CommandReplyToken(commandHandlerParams.getCorrelationHeaders(), commandHandlerParams.getDefaultReplyChannel().orElse(null));
-
         List<Message> replies;
         try {
             CommandMessage cm = new CommandMessage(message.getId(),
                     commandHandlerParams.getCommand(),
                     commandHandlerParams.getCorrelationHeaders(),
                     message);
-
             replies = invoke(m, cm, commandHandlerParams.getPathVars(), commandReplyToken);
             logger.trace("Generated replies {} {} {}", commandDispatcherId, message, replies);
         } catch (Exception e) {
@@ -88,7 +88,6 @@ public class CommandDispatcher {
             handleException(m, e, commandReplyToken);
             return;
         }
-
         commandReplyProducer.sendReplies(commandReplyToken, replies);
     }
 

@@ -27,5 +27,8 @@ public class AccountServiceProxy {
           .to(SagaServiceEnum.ACCOUNT_SERVICE.getType())
           .build();
   }
+  /**
+   * 账户扣减一定成功
+   */
 
 }

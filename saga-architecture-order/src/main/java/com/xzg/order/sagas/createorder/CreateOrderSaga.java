@@ -33,8 +33,8 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
   }
 
   /**
-   * 定义订单saga状态机转换流程
-   *
+   * DSL定义订单saga状态机转换流程
+   * 定义步骤保存到 List<SagaStep<Data>> sagaSteps：LocalStep->ParticipantInvocationStep->ParticipantInvocationStep->LocalStep
    */
   private SagaDefinition<CreateOrderSagaData> sagaDefinition =
           step()
@@ -44,6 +44,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
                   .step()
                   //调用商品库存服务
                   .invokeParticipant(this::reserveGoods)
+                  //actionReplyHandlers 保存
                   .onReply(GoodsStockLimit.class,this::handleGoodsLimit)
                   .onReply(GoodsNotFound.class,this::handleGoodsNotFound)
                   //异步远程补偿操作要定义
@@ -58,27 +59,55 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
                   .invokeLocal(this::approve)
                   .build();
 
-
+  /**
+   * 处理商品库存不足
+   * @param data
+   * @param reply
+   */
   private void handleGoodsLimit(CreateOrderSagaData data, GoodsStockLimit reply) {
     data.setRejectionReason(RejectionReason.INSUFFICIENT_GOODS);
   }
+
+  /**
+   * 处理商品不存在
+   * @param data
+   * @param reply
+   */
   private void handleGoodsNotFound(CreateOrderSagaData data, GoodsNotFound reply) {
     data.setRejectionReason(RejectionReason.UNKNOWN_GOODS);
   }
+
+  /**
+   * 处理账户不存在
+   * @param data
+   * @param reply
+   */
   private void handleCustomerNotFound(CreateOrderSagaData data, CustomerNotFound reply) {
     data.setRejectionReason(RejectionReason.UNKNOWN_CUSTOMER);
   }
 
+  /**
+   * 处理账户额度不足
+   * @param data
+   * @param reply
+   */
   private void handleCustomerCreditLimitExceeded(CreateOrderSagaData data, CustomerCreditLimitExceeded reply) {
     data.setRejectionReason(RejectionReason.INSUFFICIENT_CREDIT);
   }
 
-
+  /**
+   * 获取定义的订单Saga
+   * @return
+   */
   @Override
   public SagaDefinition<CreateOrderSagaData> getSagaDefinition() {
     return this.sagaDefinition;
   }
 
+  /**
+   * 下单
+   * @param data
+   */
   private void create(CreateOrderSagaData data) {
     Order order = orderService.createOrder(data.getOrderDetails());
     data.setOrderId(order.getId());
@@ -121,11 +150,19 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
     return customerService.reserveCredit(orderId, customerId, orderTotal);
   }
 
+  /**
+   * 订单完成
+   * @param data
+   */
   private void approve(CreateOrderSagaData data) {
     log.info("====》正向流程执行成功，订单完成：{}",data);
     orderService.approveOrder(data.getOrderId());
   }
 
+  /**
+   * 订单失败
+   * @param data
+   */
   private void reject(CreateOrderSagaData data) {
     log.info("====》逆向流程补偿，订单失败：{}",data);
     orderService.rejectOrder(data.getOrderId(), data.getRejectionReason());
