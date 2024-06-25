@@ -26,5 +26,9 @@ package com.xzg.orchestrator.kit.participant.result;
  * @date 12/20/2023
  * </p>
  */
-public class GoodsStockLimit implements GoodsStockResult{
+public class GoodsStockLimit extends AbstractReplayResult {
+    @Override
+    boolean localTransaction() {
+        return false;
+    }
 }

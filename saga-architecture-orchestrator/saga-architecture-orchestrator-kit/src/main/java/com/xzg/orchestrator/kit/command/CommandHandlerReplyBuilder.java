@@ -28,7 +28,6 @@ public class CommandHandlerReplyBuilder {
                 .withHeader(ReplyMessageHeaders.REPLY_TYPE, reply.getClass().getName());
         return messageBuilder.build();
     }
-
     public static Message withSuccess(Object reply) {
         return with(reply, CommandReplyOutcome.SUCCESS);
     }

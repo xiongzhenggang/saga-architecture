@@ -73,6 +73,7 @@ public class MessageConsumerKafkaImpl implements CommonMessageConsumer {
                 log.info("parser jsonStr=：{}",jsonStr);
                 kafkaMessageHandler.accept(JsonUtil.jsonStr2obj(jsonStr,MessageImpl.class));
             }
+            //@TODO SagaMessage check and save
             callback.accept(null, null);
         } catch (Throwable e) {
             callback.accept(null, e);

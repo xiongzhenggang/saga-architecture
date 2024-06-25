@@ -37,7 +37,7 @@ public enum SagaServiceEnum {
 
     private String type;
 
-    private SagaServiceEnum(String type) {
+    SagaServiceEnum(String type) {
         this.type = type;
     }
 

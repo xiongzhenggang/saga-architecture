@@ -4,9 +4,6 @@ package com.xzg.goods.service;
 import com.xzg.goods.dao.GoodsDao;
 import com.xzg.goods.entity.Goods;
 import com.xzg.goods.exception.GoodsStockLimitExceededException;
-import com.xzg.orchestrator.kit.participant.result.GoodsNotFound;
-import com.xzg.orchestrator.kit.participant.result.GoodsStockLimit;
-import com.xzg.orchestrator.kit.participant.result.GoodsStockReserve;
 import com.xzg.orchestrator.kit.command.CommandHandlers;
 import com.xzg.orchestrator.kit.command.business.ReleaseGoodsStockCommand;
 import com.xzg.orchestrator.kit.command.business.ReserveGoodsStockCommand;
@@ -14,6 +11,10 @@ import com.xzg.orchestrator.kit.common.SagaServiceEnum;
 import com.xzg.orchestrator.kit.message.CommandMessage;
 import com.xzg.orchestrator.kit.message.Message;
 import com.xzg.orchestrator.kit.participant.SagaCommandHandlersBuilder;
+import com.xzg.orchestrator.kit.participant.result.GoodsLocalTransCompensation;
+import com.xzg.orchestrator.kit.participant.result.GoodsNotFound;
+import com.xzg.orchestrator.kit.participant.result.GoodsStockLimit;
+import com.xzg.orchestrator.kit.participant.result.GoodsStockReserve;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -65,7 +66,7 @@ public class GoodsCommandHandler {
             goodsDao.saveGoods(s);
         });
         //补偿成功
-        return withSuccess();
+        return withSuccess(new GoodsLocalTransCompensation());
     }
     /**
      * 账户信用卡是否够用
@@ -92,6 +93,5 @@ public class GoodsCommandHandler {
             return withFailure(new GoodsStockLimit());
         }
     }
-
 
 }

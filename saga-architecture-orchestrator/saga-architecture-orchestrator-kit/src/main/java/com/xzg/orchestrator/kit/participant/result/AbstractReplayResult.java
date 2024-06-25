@@ -1,5 +1,7 @@
 package com.xzg.orchestrator.kit.participant.result;
 
+import lombok.Data;
+
 /**
  * <p>
  * <b>项目名称： </b>:saga-architecture
@@ -26,5 +28,8 @@ package com.xzg.orchestrator.kit.participant.result;
  * @date 12/20/2023
  * </p>
  */
-public interface GoodsStockResult {
+@Data
+public abstract class AbstractReplayResult {
+    boolean localTransaction = localTransaction();
+    abstract boolean localTransaction();
 }

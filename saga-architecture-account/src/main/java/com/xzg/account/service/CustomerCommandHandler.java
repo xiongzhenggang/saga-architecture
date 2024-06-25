@@ -4,6 +4,7 @@ package com.xzg.account.service;
 import com.xzg.account.domain.AccountUser;
 import com.xzg.account.domain.CustomerDao;
 import com.xzg.account.exception.CustomerCreditLimitExceededException;
+import com.xzg.library.config.infrastructure.utility.JsonUtil;
 import com.xzg.orchestrator.kit.participant.result.CustomerCreditLimitExceeded;
 import com.xzg.orchestrator.kit.participant.result.CustomerCreditReserved;
 import com.xzg.orchestrator.kit.participant.result.CustomerNotFound;
@@ -73,4 +74,7 @@ public class CustomerCommandHandler {
     }
 
 
+    public static void main(String[] args) {
+        System.out.println(JsonUtil.object2JsonStr(new CustomerCreditReserved()));
+    }
 }

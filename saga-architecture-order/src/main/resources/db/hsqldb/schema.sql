@@ -31,21 +31,21 @@ CREATE TABLE  SAGA_DESTINATION_RESOURCE(
         PRIMARY KEY (ID)
 );
 
-
-
 DROP TABLE IF EXISTS SAGA_MESSAGE;
 CREATE TABLE SAGA_MESSAGE(
-                             ID INTEGER NOT NULL  , --租户号
-                             SERIAL VARCHAR(255) NOT NULL  , --消息事件流水号：同一消息幂等
-                             PAYLOAD VARCHAR(900)   , --事件内容
-                             TYPE VARCHAR(32)   , --事件消息类型
-                             SEND_STATUS VARCHAR(32)   , --事件发送状态，发送中，已完成
-                             HEADERS VARCHAR(255)   , --消息头
-                             UPDATED_TIME NUMERIC   , --更新时间
-                             UPDATED_BY VARCHAR(32)   , --更新人
-                             CREATED_TIME NUMERIC   , --创建时间
-                             CREATED_BY VARCHAR(32)   , --创建人
-                             PRIMARY KEY (ID)
+     ID INTEGER NOT NULL  , --租户号
+     SERIAL VARCHAR(255) NOT NULL  , --消息事件流水号：同一消息幂等
+     SAGA_ID VARCHAR(255) NOT NULL  ,
+     PAYLOAD VARCHAR(900)   , --事件内容
+     TYPE VARCHAR(32)   , --事件消息类型
+     SEND_STATUS VARCHAR(32)   , --事件发送状态，发送中，已完成
+     SOURCE VARCHAR(32)   , --事件来源
+     HEADERS VARCHAR(255)   , --消息头
+     UPDATED_TIME NUMERIC   , --更新时间
+     UPDATED_BY VARCHAR(32)   , --更新人
+     CREATED_TIME NUMERIC   , --创建时间
+     CREATED_BY VARCHAR(32)   , --创建人
+     PRIMARY KEY (ID)
 )  ; --消息事件记录
 -- CREATE TABLE IF NOT EXISTS SAGA_INSTANCE_PARTICIPANTS (
 --                                                           SAGA_TYPE VARCHAR(100) NOT NULL,

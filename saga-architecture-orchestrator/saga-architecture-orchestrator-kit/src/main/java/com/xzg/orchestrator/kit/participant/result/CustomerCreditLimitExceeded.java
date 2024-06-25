@@ -9,7 +9,11 @@ package com.xzg.orchestrator.kit.participant.result;
  * @date: 19/11/2023-下午 3:35
  * @version: 1.0
  */
-public class CustomerCreditLimitExceeded implements ReserveCreditResult {
+public class CustomerCreditLimitExceeded extends AbstractReplayResult {
+    @Override
+    public boolean localTransaction() {
+        return false;
+    }
 }
 
 

@@ -47,11 +47,20 @@ public class SagaMessage {
     /**
      * 消息事件流水号：同一消息幂等
      */
+    private String sagaId;
+    /**
+     * 消息事件流水号：同一消息幂等
+     */
     private String serial;
     /**
      * 事件内容
      */
     private String payload;
+    /**
+     * 数据来源
+     * SEND/RECEIVE
+     */
+    private String source;
     /**
      * 事件消息类型
      */
