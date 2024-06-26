@@ -1,6 +1,7 @@
 package com.xzg.orchestrator.kit.orchestration.saga;
 
 
+import com.xzg.orchestrator.kit.command.CommandMessageHeaders;
 import com.xzg.orchestrator.kit.command.CommandWithDestination;
 import com.xzg.orchestrator.kit.command.service.CommandProducer;
 import com.xzg.orchestrator.kit.common.SagaCommandHeaders;
@@ -42,26 +43,25 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
         message = commandProducer.send(command.getDestinationChannel(), command.getResource(), command.getCommand(), sagaReplyChannel, headers);
       }
       //本地事务消息保存
-      saveSagaMessage(sagaMessageRepository,sagaType,sagaId,message);
+      saveSagaMessage(sagaMessageRepository,sagaId,message);
     }
     return message.getId();
   }
 
   /**
    * @param sagaMessageRepository
-   * @param sagaType
    * @param sagaId
    * @param message
    */
   private void saveSagaMessage(SagaMessageRepository sagaMessageRepository,
-                               String sagaType,
                                String sagaId,
                                Message message){
     SagaMessage sagaMessage = new SagaMessage();
     sagaMessage.setSagaId(sagaId);
     sagaMessage.setHeaders(message.getHeaders().toString());
     sagaMessage.setPayload(message.getPayload());
-    sagaMessage.setType(sagaType);
+    message.getHeader(SagaCommandHeaders.SAGA_ID).ifPresent(sagaMessage::setSagaId);
+    message.getHeader(CommandMessageHeaders.COMMAND_TYPE).ifPresent(sagaMessage::setType);
     sagaMessage.setSerial(message.getId());
     sagaMessage.setSource(SourceEnum.SEND.getValue());
     sagaMessage.setSendStatus(SendStatusEnum.SUCCESS.name());
@@ -69,9 +69,4 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
     sagaMessageRepository.save(sagaMessage);
   }
 
-//  private void updateSagaMessage(SagaMessage sagaMessage,SagaMessageRepository sagaMessageRepository){
-//    sagaMessage.setSendStatus(SendStatusEnum.SENDING.name());
-//    sagaMessage.setUpdatedTime(LocalDateTime.now());
-//    sagaMessageRepository.save(sagaMessage);
-//  }
 }

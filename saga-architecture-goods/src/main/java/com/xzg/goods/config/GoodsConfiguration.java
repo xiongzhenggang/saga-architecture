@@ -3,6 +3,7 @@ package com.xzg.goods.config;
 import com.xzg.goods.dao.GoodsDao;
 import com.xzg.goods.service.GoodsCommandHandler;
 import com.xzg.orchestrator.kit.command.CommandDispatcher;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaMessageRepository;
 import com.xzg.orchestrator.kit.participant.SagaCommandDispatcherFactory;
 import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,7 +21,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class GoodsConfiguration {
   @Resource
   private SagaCommandDispatcherFactory sagaCommandDispatcherFactory;
-
+  @Resource
+  private SagaMessageRepository sagaMessageRepository;
   @Bean
   public GoodsCommandHandler goodsCommandHandler(GoodsDao goodsDao) {
     return new GoodsCommandHandler(goodsDao);
@@ -29,7 +31,7 @@ public class GoodsConfiguration {
 
   @Bean
   public CommandDispatcher goodsCommandDispatcher(GoodsCommandHandler target) {
-    return sagaCommandDispatcherFactory.make("goodsCommandDispatcher", target.commandHandlerDefinitions());
+    return sagaCommandDispatcherFactory.make("goodsCommandDispatcher", target.commandHandlerDefinitions(),sagaMessageRepository);
   }
 
 }

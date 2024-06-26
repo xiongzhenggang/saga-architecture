@@ -42,7 +42,6 @@ public class OrderConfiguration {
 
   @Resource
   private SagaMessageRepository sagaMessageRepository;
-
   @Bean
   public OrderSagaService orderSagaService(OrderRepository orderRepository, SagaInstanceFactory sagaInstanceFactory, CreateOrderSaga createOrderSaga) {
     return new OrderSagaService(orderRepository, sagaInstanceFactory, createOrderSaga);
@@ -58,7 +57,7 @@ public class OrderConfiguration {
 
   @Bean
   public CommandDispatcher orderCommandDispatcher(OrderCommandHandler target) {
-    return sagaCommandDispatcherFactory.make("orderCommandDispatcher", target.commandHandlerDefinitions());
+    return sagaCommandDispatcherFactory.make("orderCommandDispatcher", target.commandHandlerDefinitions(),sagaMessageRepository);
   }
 
   /**

@@ -44,6 +44,7 @@ public class KafkaMessageProcessor {
     public void process(ConsumerRecord<String, byte[]> record) {
         throwFailureException();
         offsetTracker.noteUnprocessed(new TopicPartition(record.topic(), record.partition()), record.offset());
+        //receive message and handle
         MessageConsumerBacklog consumerBacklog = handler.apply(record, (result, t) -> {
             if (t != null) {
                 logger.error("Got exception: ", t);

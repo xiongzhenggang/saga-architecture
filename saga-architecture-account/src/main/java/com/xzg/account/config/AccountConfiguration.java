@@ -4,6 +4,7 @@ import com.xzg.account.domain.CustomerDao;
 import com.xzg.account.service.CustomerCommandHandler;
 import com.xzg.account.service.CustomerService;
 import com.xzg.orchestrator.kit.command.CommandDispatcher;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaMessageRepository;
 import com.xzg.orchestrator.kit.participant.SagaCommandDispatcherFactory;
 import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -21,6 +22,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class AccountConfiguration {
   @Resource
   private SagaCommandDispatcherFactory sagaCommandDispatcherFactory;
+  @Resource
+  private SagaMessageRepository sagaMessageRepository;
   @Bean
   public CustomerService customerService(CustomerDao customerDao) {
     return new CustomerService(customerDao);
@@ -33,7 +36,7 @@ public class AccountConfiguration {
 
   @Bean
   public CommandDispatcher consumerCommandDispatcher(CustomerCommandHandler target) {
-    return sagaCommandDispatcherFactory.make("customerCommandDispatcher", target.commandHandlerDefinitions());
+    return sagaCommandDispatcherFactory.make("customerCommandDispatcher", target.commandHandlerDefinitions(),sagaMessageRepository);
   }
 
 }

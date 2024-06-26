@@ -8,8 +8,13 @@ import com.xzg.orchestrator.kit.message.CommandMessage;
 import com.xzg.orchestrator.kit.message.Message;
 import com.xzg.orchestrator.kit.message.MessageBuilder;
 import com.xzg.orchestrator.kit.message.consumer.CommonMessageConsumer;
+import com.xzg.orchestrator.kit.orchestration.saga.dao.SagaMessageRepository;
+import com.xzg.orchestrator.kit.orchestration.saga.enums.SendStatusEnum;
+import com.xzg.orchestrator.kit.orchestration.saga.enums.SourceEnum;
+import com.xzg.orchestrator.kit.orchestration.saga.model.SagaMessage;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,18 +28,24 @@ public class SagaCommandDispatcher extends CommandDispatcher {
 
   private SagaLockManager sagaLockManager;
 
+  private SagaMessageRepository sagaMessageRepository;
   public SagaCommandDispatcher(String commandDispatcherId,
                                CommandHandlers target,
                                CommonMessageConsumer messageConsumer,
                                SagaLockManager sagaLockManager,
-                               CommandNameMapping commandNameMapping, CommandReplyProducer commandReplyProducer) {
+                               CommandNameMapping commandNameMapping,
+                               CommandReplyProducer commandReplyProducer,
+                               SagaMessageRepository sagaMessageRepository) {
     super(commandDispatcherId, target, messageConsumer, commandNameMapping, commandReplyProducer);
     this.sagaLockManager = sagaLockManager;
+    this.sagaMessageRepository = sagaMessageRepository;
   }
 
   @Override
   public void messageHandler(Message message) {
     log.info("receive message=:{}",message.getPayload());
+    //保存
+    saveSagaMessage(message);
     if (isUnlockMessage(message)) {
       String sagaId = getSagaId(message);
       String target = message.getRequiredHeader(CommandMessageHeaders.RESOURCE);
@@ -50,6 +61,24 @@ public class SagaCommandDispatcher extends CommandDispatcher {
       }
     }
   }
+
+    /**
+     * @param message
+     */
+    private void saveSagaMessage(Message message){
+      String serial = message.getId();
+      //@todo validate duplicate message by serial
+      SagaMessage sagaMessage = new SagaMessage();
+      message.getHeader(SagaCommandHeaders.SAGA_ID).ifPresent(sagaMessage::setSagaId);
+      message.getHeader(CommandMessageHeaders.COMMAND_TYPE).ifPresent(sagaMessage::setType);
+      sagaMessage.setHeaders(message.getHeaders().toString());
+      sagaMessage.setPayload(message.getPayload());
+      sagaMessage.setSerial(serial);
+      sagaMessage.setSource(SourceEnum.RECEIVE.getValue());
+      sagaMessage.setSendStatus(SendStatusEnum.SUCCESS.name());
+      sagaMessage.setCreatedTime(LocalDateTime.now());
+      sagaMessageRepository.save(sagaMessage);
+    }
 
   private String getSagaId(Message message) {
     return message.getRequiredHeader(SagaCommandHeaders.SAGA_ID);

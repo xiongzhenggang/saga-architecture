@@ -61,6 +61,7 @@ public class CommandDispatcher {
      */
     public void messageHandler(Message message) {
         logger.trace("Received message {} {}", commandDispatcherId, message);
+
         message.setHeader(CommandMessageHeaders.COMMAND_TYPE,
                 commandNameMapping.externalCommandTypeToCommandClassName(message.getRequiredHeader(CommandMessageHeaders.COMMAND_TYPE)));
         Optional<CommandHandler> possibleMethod = commandHandlers.findTargetMethod(message);

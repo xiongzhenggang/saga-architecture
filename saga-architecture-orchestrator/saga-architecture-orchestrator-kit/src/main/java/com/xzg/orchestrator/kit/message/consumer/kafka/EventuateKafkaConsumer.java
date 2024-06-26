@@ -62,6 +62,12 @@ public class EventuateKafkaConsumer {
         this.closeConsumerOnStop = closeConsumerOnStop;
     }
 
+    /**
+     *
+     * @param consumer
+     * @param topic
+     * @return
+     */
     public static List<PartitionInfo> verifyTopicExistsBeforeSubscribing(KafkaMessageConsumer consumer, String topic) {
         try {
             logger.debug("Verifying Topic {}", topic);
@@ -85,7 +91,9 @@ public class EventuateKafkaConsumer {
             consumerCallbacks.ifPresent(ConsumerCallbacks::onCommitedCallback);
         }
     }
-
+/**
+ * start kafka consumer
+ */
     public void start() {
         try {
             KafkaMessageConsumer consumer = DefaultKafkaMessageConsumer.create(consumerFactory);
@@ -95,6 +103,7 @@ public class EventuateKafkaConsumer {
                 verifyTopicExistsBeforeSubscribing(consumer, topic);
             }
             subscribe(consumer);
+//            replace Thread.ofVirtual().start();
             new Thread(() -> {
                 try {
                     runPollingLoop(consumer, processor, backpressureManager);
@@ -119,7 +128,6 @@ public class EventuateKafkaConsumer {
             }, "Eventuate-subscriber-" + subscriberId).start();
 
             state = EventuateKafkaConsumerState.STARTED;
-
         } catch (Exception e) {
             logger.error("Error subscribing", e);
             state = EventuateKafkaConsumerState.FAILED_TO_START;
