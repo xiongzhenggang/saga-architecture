@@ -31,5 +31,5 @@ import java.io.Serializable;
  * @date 1/3/2024
  * </p>
  */
-public interface SagaMessageDaoRepository extends CrudRepository<SagaMessage, String>, Serializable {
+public interface SagaMessageDaoRepository extends CrudRepository<SagaMessage, Integer>, Serializable {
 }
