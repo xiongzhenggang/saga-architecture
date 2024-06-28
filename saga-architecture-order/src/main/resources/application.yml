@@ -5,7 +5,8 @@ server:
 spring:
   sql:
     init:
-      schema-locations: classpath:db/${database}/schema.sql
+      schema-locations:
+        - classpath:db/${database}/schema.sql
       mode: always
   #      data:
 #        - classpath:db/${database}/data.sql

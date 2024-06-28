@@ -32,6 +32,7 @@ public class SagaMessageRepositoryImpl implements SagaMessageRepository {
         log.info("update sagaMessage：{}",sagaMessage);
         daoRepository.save(sagaMessage);
     }
+
 }
 
 

@@ -64,9 +64,9 @@ public class KafkaProduceConsumerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         //发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
-        props.put(ProducerConfig.RETRIES_CONFIG,3);
+        props.put(ProducerConfig.RETRIES_CONFIG,"3");
         //生产者发送过来的数据，Leader 收到数据后应答。
-        props.put(ProducerConfig.ACKS_CONFIG,1);
+        props.put(ProducerConfig.ACKS_CONFIG,"all");
 //        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG,1);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class);

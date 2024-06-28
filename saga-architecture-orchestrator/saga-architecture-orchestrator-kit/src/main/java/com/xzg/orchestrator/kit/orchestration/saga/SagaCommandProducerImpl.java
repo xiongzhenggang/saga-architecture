@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class SagaCommandProducerImpl implements SagaCommandProducer {
 
@@ -45,7 +46,7 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
       //本地事务消息保存
       saveSagaMessage(sagaMessageRepository,sagaId,message);
     }
-    return message.getId();
+    return Objects.isNull(message)?null:message.getId();
   }
 
   /**

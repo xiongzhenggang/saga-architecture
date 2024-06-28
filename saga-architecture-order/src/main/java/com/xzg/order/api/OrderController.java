@@ -54,14 +54,16 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.POST)
-    public CommonResponse<String> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
+    public CommonResponse<GetOrderResponse> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
         Order order = orderSagaService.createOrder(
                 OrderDetails.builder()
                         .userId(createOrderRequest.getCustomerId())
                         .goodsTotal(createOrderRequest.getGoodsTotal())
                         .goodsId(createOrderRequest.getGoodsId())
                         .orderTotal(createOrderRequest.getOrderTotal()).build());
-        return CommonResponse.success(order.getId());
+        return CommonResponse
+                .success(GetOrderResponse.builder()
+                .orderId(order.getId()).build());
     }
 
     @RequestMapping(value="/orders", method= RequestMethod.GET)

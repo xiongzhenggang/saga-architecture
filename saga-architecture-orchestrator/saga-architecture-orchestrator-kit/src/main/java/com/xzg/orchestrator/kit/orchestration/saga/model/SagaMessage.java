@@ -1,9 +1,6 @@
 package com.xzg.orchestrator.kit.orchestration.saga.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -55,6 +52,7 @@ public class SagaMessage {
     /**
      * 事件内容
      */
+    @Column(name = "PAYLOAD", length = 1024)
     private String payload;
     /**
      * 数据来源
@@ -72,6 +70,7 @@ public class SagaMessage {
     /**
      * 消息头
      */
+    @Column(name = "HEADERS", length = 1024)
     private String headers;
     /**
      * 更新时间

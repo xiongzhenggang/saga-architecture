@@ -25,7 +25,7 @@ public enum SendStatusEnum {
      * 发送中
      */
 
-    SENDING;
+    PENDING;
 
 
 }
