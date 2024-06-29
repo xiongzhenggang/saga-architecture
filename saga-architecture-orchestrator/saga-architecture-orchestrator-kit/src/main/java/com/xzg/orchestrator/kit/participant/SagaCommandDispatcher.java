@@ -45,8 +45,7 @@ public class SagaCommandDispatcher extends CommandDispatcher {
   public void messageHandler(Message message) {
     log.info("receive message=:{}",message.getPayload());
     //保存
-    SagaMessage sagaMessage = saveSagaMessage(message);
-    //@TODO 一下部分属同一事务中 PlatformTransactionManager
+    saveSagaMessage(message);
     if (isUnlockMessage(message)) {
       String sagaId = getSagaId(message);
       String target = message.getRequiredHeader(CommandMessageHeaders.RESOURCE);
@@ -61,14 +60,12 @@ public class SagaCommandDispatcher extends CommandDispatcher {
         sagaLockManager.stashMessage(sagaType, sagaId, target, message);
       }
     }
-    //update success
-    updateLocalSagaMessageComplete(sagaMessage);
   }
 
     /**
      * @param message
      */
-    private SagaMessage saveSagaMessage(Message message){
+    private void saveSagaMessage(Message message){
       String serial = message.getId();
       //@todo validate duplicate message by serial
       SagaMessage sagaMessage = new SagaMessage();
@@ -78,21 +75,11 @@ public class SagaCommandDispatcher extends CommandDispatcher {
       sagaMessage.setPayload(message.getPayload());
       sagaMessage.setSerial(serial);
       sagaMessage.setSource(SourceEnum.RECEIVE.getValue());
-      //处理中
-      sagaMessage.setSendStatus(SendStatusEnum.PENDING.name());
+      sagaMessage.setSendStatus(SendStatusEnum.SUCCESS.name());
       sagaMessage.setCreatedTime(LocalDateTime.now());
-      return sagaMessageRepository.save(sagaMessage);
+      sagaMessageRepository.save(sagaMessage);
     }
 
-  /**
-   *
-   * @param sagaMessage
-   */
-  private void updateLocalSagaMessageComplete(SagaMessage sagaMessage){
-    sagaMessage.setSendStatus(SendStatusEnum.SUCCESS.name());
-    sagaMessage.setUpdatedTime(LocalDateTime.now());
-    sagaMessageRepository.update(sagaMessage);
-  }
   private String getSagaId(Message message) {
     return message.getRequiredHeader(SagaCommandHeaders.SAGA_ID);
   }
