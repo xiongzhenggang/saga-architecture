@@ -39,8 +39,9 @@ public class SagaMessage {
      * 租户号
      */
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     /**
      * 消息事件流水号：同一消息幂等
      */

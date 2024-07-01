@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {project.artifactId}
+  labels:
+    app: {project.artifactId}
+    teams: xzg
+spec:
+  replicas: ${pod.replicas}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    spec:
+      containers:
+        - name: {project.artifactId}
+          image: {docker.registry}/${image.namespace}/{project.artifactId}:{image.tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: JAVA_OPTS
+              value: "-Dspring.profiles.active=${spring.profiles.active} -Dloback.path=/app"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"

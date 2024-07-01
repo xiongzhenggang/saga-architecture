@@ -1,8 +1,9 @@
-# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-database: hsqldb
+database: @database.type@
 server:
   port: 8082
 spring:
+  profiles:
+    active: @spring.profiles.active@
   sql:
     init:
       schema-locations: classpath*:db/${database}/schema.sql

@@ -41,18 +41,9 @@ public class GoodsApi {
     @Resource
     private GoodsService goodsService;
 
-    //    @ApiHeader
-    @GetMapping("/{goodsId}")
-    public CommonResponse<Goods> getById(@PathVariable("goodsId") Long goodsId){
-        return CommonResponse.success(goodsService.getGoodsById(goodsId));
-    }
 
     @GetMapping("/{goodsId}")
     public CommonResponse<Goods> createGoods(@PathVariable("goodsId") Long goodsId){
-        return CommonResponse.success(goodsService.getGoodsById(goodsId));
-    }
-    @GetMapping("/{goodsId}")
-    public CommonResponse<Goods> updateGoods(@PathVariable("goodsId") Long goodsId){
         return CommonResponse.success(goodsService.getGoodsById(goodsId));
     }
 }

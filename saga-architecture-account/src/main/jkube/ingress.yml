@@ -1,0 +1,20 @@
+appVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${project.artifactId}
+  labels:
+    app: ${project.artifactId}
+    team: xzg
+spec:
+  rules:
+    - host: ${project.artifactId}.${ingress.host}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ${project.artifactId}
+                port:
+                  number: 8080
+  ingressClassName: nginx

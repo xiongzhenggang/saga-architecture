@@ -22,6 +22,22 @@
   <name>saga-architecture</name>
   <description>Service Mesh Architecture Demonstrate with Istio Infrastructure</description>
   <properties>
+    <docker.registry>registry.cn-hangzhou.aliyuncs.com</docker.registry>
+    <docker.registry.name>user</docker.registry.name>
+    <docker.registry.password>password</docker.registry.password>
+    <image.namespace>${docker.registry}/${docker.registry.name}</image.namespace>
+    <kube.context>docker-desktop</kube.context>
+    <kube.namespace>default</kube.namespace>
+    <ingress.host>localhost</ingress.host>
+    <pod.replicas>1</pod.replicas>
+    <git-commit.id-maven-version>9.0.0</git-commit.id-maven-version>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    <image.tag>${user.name}-${timestamp}</image.tag>
+    <maven.exec.plugin.version>3.3.0</maven.exec.plugin.version>
+    <jkube.version>1.16.1</jkube.version>
+    <git-commit.id-maven-version>9.0.0</git-commit.id-maven-version>
+
     <java.version>21</java.version>
     <spring-cloud-kubernetes.version>3.0.4</spring-cloud-kubernetes.version>
 <!--    2023.0.0  2022.0.4-->
@@ -37,13 +53,6 @@
   </properties>
   <dependencyManagement>
     <dependencies>
-<!--      <dependency>-->
-<!--        <groupId>org.springframework.cloud</groupId>-->
-<!--        <artifactId>spring-cloud-kubernetes-dependencies</artifactId>-->
-<!--        <version>${spring-cloud-kubernetes.version}</version>-->
-<!--        <type>pom</type>-->
-<!--        <scope>import</scope>-->
-<!--      </dependency>-->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
@@ -76,14 +85,86 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
+          <groupId>io.github.git-commit-id</groupId>
+              <artifactId>git-commit-id-maven-plugin</artifactId>
+              <version>${git-commit.id-maven-version}</version>
+              <executions>
+                      <execution>
+                            <id>get-the-git-infos</id>
+                            <goals>
+                                  <goal>revision</goal>
+                            </goals>
+                            <phase>initialize</phase>
+                      </execution>
+              </executions>
+          <configuration>
+                  <verbose>false</verbose>
+          <dateFormat>yyyyMMddHHmmss</dateFormat>
+          <doGitDirectory>${project.basedir}/.git</doGitDirectory>
+          <generateGitPropertiesFile>false</generateGitPropertiesFile>
+          </configuration>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>mojo-parent</artifactId>
+          <version>${maven.exec.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>set_context</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <configuration>
+                <executable>kubectl</executable>
+                <arguments>
+                  <argument>config</argument>
+                  <argument>use-context</argument>
+                  <argument>${kube.context}</argument>
+                </arguments>
+                <successCodes>0</successCodes>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.jkube</groupId>
+          <artifactId>kubernetes-maven-plugin</artifactId>
+          <version>${jkube.version}</version>
+          <configuration>
+            <verbose>true</verbose>
+            <registry>${docker.registry}</registry>
+            <authConfig>
+              <username>${docker.registry.name}</username>
+              <password>${docker.registry.password}</password>
+            </authConfig>
+            <images>
+              <image>
+                <name>${docker.registry}/${image.namespace}/${project.artifactId}:${project.version}</name>
+                <build>
+                  <cotextDir>${project.basedir}/src/main/docker</cotextDir>
+                  <dockerFile>${project.basedir}/src/main/docker/Dockerfile</dockerFile>
+                  <filter>@</filter>
+                  <tags>
+                    <tag>latest</tag>
+                    <tag>${project.version}</tag>
+                  </tags>
+                </build>
+              </image>
+            </images>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 </project>

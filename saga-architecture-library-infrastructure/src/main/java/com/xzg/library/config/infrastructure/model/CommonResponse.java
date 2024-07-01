@@ -37,7 +37,7 @@ public class CommonResponse<T> {
     /**
      * 向客户端发送自定义操作信息
      */
-    public static CommonResponse send(HttpStatus status, String message) {
+    public static <T>CommonResponse send(HttpStatus status, String message) {
         return CommonResponse.builder().messages(Collections.singletonList(message))
                 .status(status.value()).build();
     }
@@ -48,38 +48,39 @@ public class CommonResponse<T> {
         return CommonResponse.builder()
                 .result(result)
                 .messages(Collections.singletonList(message))
-                .status(status.value()).build();
+                .status(status.value())
+                .build();
     }
     /**
      * 向客户端发送操作失败的信息
      */
-    public static CommonResponse failure(String message) {
+    public static <T>CommonResponse<T> failure(String message) {
         return send(HttpStatus.INTERNAL_SERVER_ERROR, message);
     }
     /**
      * 向客户端发送操作失败状态
      */
-    public static CommonResponse failure(HttpStatus status,String msg) {
+    public static <T>CommonResponse<T> failure(HttpStatus status,String msg) {
         return send(status, msg);
     }
     /**
      * 向客户端发送操作成功的信息
      */
-    public static <T> CommonResponse success(String message,T result) {
+    public static <T> CommonResponse<T> success(String message,T result) {
         return send(HttpStatus.OK, message,result);
     }
 
     /**
      * 向客户端发送操作成功的信息
      */
-    public static CommonResponse success() {
+    public static <T>CommonResponse<T> success() {
         return send(HttpStatus.OK, "操作已成功");
     }
 
     /**
      * 向客户端发送操作成功的信息
      */
-    public static <T> CommonResponse success(T result) {
+    public static <T> CommonResponse<T> success(T result) {
         return send(HttpStatus.OK, "操作已成功",result);
     }
 
@@ -87,7 +88,7 @@ public class CommonResponse<T> {
      * 执行操作，并根据操作是否成功返回给客户端相应信息
      * 封装了在服务端接口中很常见的执行操作，成功返回成功标志、失败返回失败标志的通用操作，用于简化编码
      */
-    public static CommonResponse op(Runnable executor) {
+    public static <T>CommonResponse<T> op(Runnable executor) {
         return op(executor, e -> log.error(e.getMessage(), e));
     }
 
@@ -95,7 +96,7 @@ public class CommonResponse<T> {
      * 执行操作（带自定义的失败处理），并根据操作是否成功返回给客户端相应信息
      * 封装了在服务端接口中很常见的执行操作，成功返回成功标志、失败返回失败标志的通用操作，用于简化编码
      */
-    public static CommonResponse op(Runnable executor, Consumer<Exception> exceptionConsumer) {
+    public static <T>CommonResponse<T> op(Runnable executor, Consumer<Exception> exceptionConsumer) {
         try {
             executor.run();
             return CommonResponse.success();
