@@ -5,15 +5,15 @@ server:
 spring:
   sql:
     init:
-      schema-locations:
-        - classpath:db/${database}/schema.sql
+      schema-locations: classpath*:db/${database}/schema.sql
+      data-locations: classpath*:db/${database}/data.sql
+      continue-on-error: false # 如果脚本执行出现异常是否继续执行后续脚本，默认false
+      encoding: UTF-8
       mode: always
-  #      data:
-#        - classpath:db/${database}/data.sql
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     open-in-view: false
   kafka:
     bootstrap-servers: localhost:9092

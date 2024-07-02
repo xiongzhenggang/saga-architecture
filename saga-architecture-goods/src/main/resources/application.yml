@@ -1,7 +1,7 @@
 # See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 database: hsqldb
 server:
-  port: 8081
+  port: 8080
 spring:
   sql:
     init:

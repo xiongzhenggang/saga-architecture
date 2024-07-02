@@ -40,8 +40,8 @@ public class SagaInstanceRepositoryImpl implements SagaInstanceRepository {
     private SagaInstanceDaoRepository sagaRepository;
     @Override
     public void save(SagaInstance sagaInstance) {
-        sagaRepository.save(sagaInstance);
         log.info("insert saga：{}",sagaInstance);
+        sagaRepository.save(sagaInstance);
     }
 
     @Override

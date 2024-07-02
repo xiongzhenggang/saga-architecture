@@ -4,6 +4,7 @@ import com.xzg.goods.dao.GoodsDao;
 import com.xzg.goods.entity.Goods;
 import com.xzg.library.config.infrastructure.common.exception.BusinessException;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,6 +34,7 @@ import org.springframework.stereotype.Service;
  * </p>
  */
 @Service
+@Slf4j
 public class GoodsService {
     @Resource
     private GoodsDao goodsDao;
@@ -41,5 +43,10 @@ public class GoodsService {
         return goodsDao.findById(goodsId).orElseThrow(()->BusinessException.builder()
                 .message("not fund goods")
                 .build());
+    }
+    public void saveGoods(Goods goods){
+        log.info("save goods:{}",goods);
+        goodsDao.saveGoods (goods);
+
     }
 }

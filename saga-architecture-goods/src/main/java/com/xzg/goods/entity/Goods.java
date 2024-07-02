@@ -40,7 +40,7 @@ import java.time.LocalDateTime;
 public class Goods {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String goodsName;
@@ -49,8 +49,8 @@ public class Goods {
     private BigDecimal unitPrice;
     private String desc;
     private String url;
-    private Long createBy;
-    private Long updateBy;
+    private String createdBy;
+    private String updatedBy;
     private LocalDateTime updateTime;
 
     private LocalDateTime createTime;

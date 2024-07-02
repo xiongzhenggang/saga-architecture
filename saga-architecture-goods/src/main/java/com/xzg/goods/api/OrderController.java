@@ -1,9 +1,16 @@
 package com.xzg.goods.api;
 
+import com.xzg.goods.entity.Goods;
+import com.xzg.goods.service.GoodsService;
 import com.xzg.library.config.infrastructure.model.CommonResponse;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * <p>
@@ -34,9 +41,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
-
+    @Resource
+    GoodsService goodsService;
     @RequestMapping(value = "/orders", method = RequestMethod.POST)
     public CommonResponse<String> createOrder() {
+        Goods goods = new Goods();
+        goods.setGoodsName(UUID.randomUUID().toString());
+        goods.setStock(1);
+        goods.setUnitPrice(new BigDecimal(1));
+        goods.setCreateTime(LocalDateTime.now());
+        goodsService.saveGoods(goods);
         return CommonResponse
                 .success("");
     }
