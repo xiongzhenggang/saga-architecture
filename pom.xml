@@ -22,18 +22,20 @@
   <name>saga-architecture</name>
   <description>Service Mesh Architecture Demonstrate with Istio Infrastructure</description>
   <properties>
-    <docker.registry>registry.cn-hangzhou.aliyuncs.com</docker.registry>
-    <docker.registry.name>user</docker.registry.name>
+    <docker.registry>registry.docker.com</docker.registry>
+    <docker.registry.name>xiongzhenggang</docker.registry.name>
     <docker.registry.password>password</docker.registry.password>
-    <image.namespace>${docker.registry}/${docker.registry.name}</image.namespace>
+    <image.namespace>${docker.registry.name}</image.namespace>
     <kube.context>docker-desktop</kube.context>
     <kube.namespace>default</kube.namespace>
     <ingress.host>localhost</ingress.host>
+    <base.image>eclipse-temurin:21-jre</base.image>
     <pod.replicas>1</pod.replicas>
+    <target.jar.filename>${project.artifactId}.jar</target.jar.filename>
     <git-commit.id-maven-version>9.0.0</git-commit.id-maven-version>
     <timestamp>${maven.build.timestamp}</timestamp>
     <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-    <image.tag>${user.name}-${timestamp}</image.tag>
+    <image.tag>${project.version}</image.tag>
     <maven.exec.plugin.version>3.3.0</maven.exec.plugin.version>
     <jkube.version>1.16.1</jkube.version>
     <git-commit.id-maven-version>9.0.0</git-commit.id-maven-version>
@@ -100,13 +102,13 @@
           <configuration>
                   <verbose>false</verbose>
           <dateFormat>yyyyMMddHHmmss</dateFormat>
-          <doGitDirectory>${project.basedir}/.git</doGitDirectory>
+          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
           <generateGitPropertiesFile>false</generateGitPropertiesFile>
           </configuration>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
-          <artifactId>mojo-parent</artifactId>
+          <artifactId>exec-maven-plugin</artifactId>
           <version>${maven.exec.plugin.version}</version>
           <executions>
             <execution>
@@ -140,13 +142,12 @@
             </authConfig>
             <images>
               <image>
-                <name>${docker.registry}/${image.namespace}/${project.artifactId}:${project.version}</name>
+                <name>${image.namespace}/${project.artifactId}:${project.version}</name>
                 <build>
-                  <cotextDir>${project.basedir}/src/main/docker</cotextDir>
+                  <contextDir>${project.basedir}/src/main/docker</contextDir>
                   <dockerFile>${project.basedir}/src/main/docker/Dockerfile</dockerFile>
                   <filter>@</filter>
                   <tags>
-                    <tag>latest</tag>
                     <tag>${project.version}</tag>
                   </tags>
                 </build>
@@ -154,13 +155,15 @@
             </images>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+        </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
-    </plugins>
   </build>
 </project>

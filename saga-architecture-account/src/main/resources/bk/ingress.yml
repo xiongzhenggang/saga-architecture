@@ -5,10 +5,12 @@ metadata:
   labels:
     app: ${project.artifactId}
     team: xzg
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-    - host: ${project.artifactId}.${ingress.host}
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
@@ -16,5 +18,4 @@ spec:
               service:
                 name: ${project.artifactId}
                 port:
-                  number: 8080
-  ingressClassName: nginx
+                  number: 80

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saga-kafka
+  labels:
+    app: saga-kafka
+spec:
+  selector:
+    matchLabels:
+      app: saga-kafka
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: saga-kafka
+    spec:
+      containers:
+        - name: saga-kafka
+          image: apache/kafka:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9092
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: saga-kafka
+  namespace: default
+  labels:
+    app: saga-kafka
+    team: xzg
+spec:
+  type: NodePort
+  selector:
+    app: saga-kafka
+  ports:
+    - port: 9092
+      targetPort: 9092
+      protocol: TCP
+      nodePort: 31092

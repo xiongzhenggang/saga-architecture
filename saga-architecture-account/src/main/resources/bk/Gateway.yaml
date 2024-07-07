@@ -1,0 +1,35 @@
+#apiVersion: gateway.networking.k8s.io/v1
+#kind: GatewayClass
+#metadata:
+#  name: ${project.artifactId}
+#spec:
+#  controllerName: lkp.com/gateway-controller
+#---
+#apiVersion: gateway.networking.k8s.io/v1
+#kind: Gateway
+#metadata:
+#  name: ${project.artifactId}
+#spec:
+#  gatewayClassName: lkp-class
+#  listeners:
+#    - name: http
+#      protocol: HTTP
+#      port: 80
+#---
+#apiVersion: gateway.networking.k8s.io/v1
+#kind: HTTPRoute
+#metadata:
+#  name: ${project.artifactId}
+#spec:
+#  parentRefs:
+#    - name: ${project.artifactId}
+#  hostnames:
+#    - "www.lkp.com"
+#  rules:
+#    - matches:
+#        - path:
+#            type: PathPrefix
+#            value: /
+#      backendRefs:
+#        - name: ${project.artifactId}
+#          port: 8080

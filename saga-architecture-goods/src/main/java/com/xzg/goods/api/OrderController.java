@@ -44,13 +44,14 @@ public class OrderController {
     @Resource
     GoodsService goodsService;
     @RequestMapping(value = "/orders", method = RequestMethod.POST)
-    public CommonResponse<String> createOrder() {
+    public CommonResponse<String> createOrder()  {
         Goods goods = new Goods();
         goods.setGoodsName(UUID.randomUUID().toString());
         goods.setStock(1);
         goods.setUnitPrice(new BigDecimal(1));
         goods.setCreateTime(LocalDateTime.now());
         goodsService.saveGoods(goods);
+//        Thread.sleep(1000);
         return CommonResponse
                 .success("");
     }

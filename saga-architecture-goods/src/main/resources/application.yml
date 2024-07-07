@@ -1,8 +1,9 @@
-# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-database: hsqldb
+database: @database.type@
 server:
   port: 8080
 spring:
+  profiles:
+    active: @spring.profiles.active@
   sql:
     init:
       schema-locations: classpath*:db/${database}/schema.sql
@@ -17,7 +18,7 @@ spring:
       ddl-auto: none #none #create
     open-in-view: false
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 192.168.0.102:9092
   application:
     name: goodsServer
   web:

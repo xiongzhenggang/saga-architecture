@@ -7,9 +7,8 @@
         <artifactId>saga-architecture</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.xzg</groupId>
     <artifactId>saga-architecture-account</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>saga-architecture-account</name>
     <description>saga-architecture-account</description>
     <profiles>
@@ -27,10 +26,10 @@
         <profile>
                 <id>lkp</id>
                 <properties>
-                        <profiles.active>lkp</profiles.active>
+                        <profiles.active>local</profiles.active>
                         <kube.context>docker-desktop</kube.context>
-                        <kube.namespace>saga-architecture</kube.namespace>
-                        <ingress.host>saga-architecture.local</ingress.host>
+                        <kube.namespace>default</kube.namespace>
+                        <ingress.host>localhost</ingress.host>
                         <pod.relicas>1</pod.relicas>
                 <!--        <pod.cpu>100m</pod.cpu>-->
                         <jkube.debug.enabled>true</jkube.debug.enabled>
@@ -46,7 +45,7 @@
                         <artifactId>exec-maven-plugin</artifactId>
                     </plugin>
                     <plugin>
-                            <groupId>org.eclipse.jkube</groupId>
+                        <groupId>org.eclipse.jkube</groupId>
                         <artifactId>kubernetes-maven-plugin</artifactId>
                     </plugin>
                 </plugins>
@@ -58,6 +57,7 @@
         <spring-cloud.version>4</spring-cloud.version>
         <saga-archiecture-version>1.0-SNAPSHOT</saga-archiecture-version>
         <service.port>${server.port}</service.port>
+        <target.jar.filename>${project.artifactId}.jar</target.jar.filename>
     </properties>
     <dependencies>
         <dependency>
@@ -86,7 +86,7 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/java</directory>
+                <directory>src/main/java/</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*.properties</include>
@@ -96,11 +96,8 @@
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>false</skipTests>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
