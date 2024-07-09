@@ -26,7 +26,7 @@
         <profile>
                 <id>lkp</id>
                 <properties>
-                        <profiles.active>local</profiles.active>
+                        <profiles.active>lkp</profiles.active>
                         <kube.context>docker-desktop</kube.context>
                         <kube.namespace>default</kube.namespace>
                         <ingress.host>localhost</ingress.host>

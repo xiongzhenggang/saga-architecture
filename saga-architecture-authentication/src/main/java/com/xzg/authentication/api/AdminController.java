@@ -4,8 +4,10 @@ import com.xzg.authentication.dao.UserRepository;
 import com.xzg.authentication.entity.User;
 import com.xzg.library.config.infrastructure.auth.ApiHeader;
 import jakarta.annotation.Resource;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -17,10 +19,10 @@ public class AdminController {
     @Resource
     private UserRepository repository; //访问user数据库
 
-    @GetMapping("/${userName}")
+    @GetMapping("/{userName}")
 //    @PreAuthorize("hasAuthority('admin:read')") //用户需要admin:read权限才能访问
     @ApiHeader
-    public User getUserByName(@PathVariable String userName) {
+    public User getUserByName(@PathVariable(value = "userName") String userName) {
         return repository.findByUsername(userName).orElse(new User());
     }
 //    @PostMapping

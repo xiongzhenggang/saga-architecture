@@ -72,6 +72,20 @@ kafka事务性消息实践
 ## RSA JWT生成及使用
 
 ## CI/CD 设置
+>本地部署
+> k8s deploy
+```shell
+mvn clean package k8s:build k8s:push k8s:resource k8s:apply -Plkp  -DskipTests -Ddocker.registry.user=%DOCKER_REGISTRY_USER% -Ddocker.registry.password=%DOCKER_REGISTRY_PASSWORD%
+```
+> k8s undeploy
+```shell
+mvn k8s:undeploy
+```
+> k8s 查看服务
+```shell
+kubect get all -n default
+kubect get ingress 
+```  
 
 ## 部署流程
 

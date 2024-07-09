@@ -1,19 +1,21 @@
-database: hsqldb
+database: @database.type@
 server:
-  port: 8082
+  port: 8080
 spring:
+  profiles:
+    active: @spring.profiles.active@
   sql:
     init:
-      schema-locations: classpath:db/${database}/schema.sql
-      data-locations: classpath:db/${database}/data.sql
+      schema-locations: classpath*:db/${database}/schema.sql
+      data-locations: classpath*:db/${database}/data.sql
+      platform: ${database}
       continue-on-error: false # 如果脚本执行出现异常是否继续执行后续脚本，默认false
       encoding: UTF-8
       mode: always
   jpa:
     show-sql: true
-    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: none #create
+      ddl-auto: create
     open-in-view: false
   application:
     name: authServer

@@ -3,6 +3,7 @@ package com.xzg.authentication.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +33,7 @@ import java.time.LocalDateTime;
  * @date 1/2/2024
  * </p>
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="AUTH_ROLE")
 @Data
