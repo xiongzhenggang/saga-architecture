@@ -1,0 +1,163 @@
+2024-07-14T21:10:29.956+08:00  INFO 21436 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : Starting AuthenticationApp using Java 21 with PID 21436 (D:\workspace\javaspace\paper\cloudsaga\saga-architecture\saga-architecture-authentication\target\classes started by xiong in D:\workspace\javaspace\paper\cloudsaga\saga-architecture)
+2024-07-14T21:10:29.958+08:00  INFO 21436 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : The following 1 profile is active: "lkp"
+2024-07-14T21:10:31.074+08:00  INFO 21436 --- [authServer] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14T21:10:31.126+08:00  INFO 21436 --- [authServer] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 2 JPA repository interfaces.
+2024-07-14T21:10:31.489+08:00  INFO 21436 --- [authServer] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=a601589f-afb2-3f80-a2de-d03a694504bb
+2024-07-14T21:10:32.273+08:00  INFO 21436 --- [authServer] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-14T21:10:32.281+08:00  INFO 21436 --- [authServer] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-14T21:10:32.282+08:00  INFO 21436 --- [authServer] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-07-14T21:10:32.337+08:00  INFO 21436 --- [authServer] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-14T21:10:32.338+08:00  INFO 21436 --- [authServer] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2342 ms
+2024-07-14T21:10:32.834+08:00  INFO 21436 --- [authServer] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14T21:10:32.889+08:00  INFO 21436 --- [authServer] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-07-14T21:10:32.927+08:00  INFO 21436 --- [authServer] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-14T21:10:33.164+08:00  INFO 21436 --- [authServer] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-14T21:10:33.190+08:00  INFO 21436 --- [authServer] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-14T21:10:33.451+08:00  INFO 21436 --- [authServer] [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+2024-07-14T21:10:33.452+08:00  INFO 21436 --- [authServer] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.hsqldb.jdbc.JDBCConnection@2d5e051e
+2024-07-14T21:10:33.454+08:00  INFO 21436 --- [authServer] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-14T21:10:34.171+08:00  INFO 21436 --- [authServer] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-14T21:10:34.194+08:00  INFO 21436 --- [authServer] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14T21:10:36.007+08:00  INFO 21436 --- [authServer] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-07-14T21:10:36.122+08:00  INFO 21436 --- [authServer] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@38c464df, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45957b8f, org.springframework.security.web.context.SecurityContextHolderFilter@60af08b2, org.springframework.security.web.header.HeaderWriterFilter@5d9ac1ff, org.springframework.web.filter.CorsFilter@70ad9a9b, org.springframework.security.web.authentication.logout.LogoutFilter@6fc98c70, com.xzg.authentication.config.filter.JwtAuthenticationFilter@2cbc0224, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d2ec1f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@30e3544d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@300cdf3f, org.springframework.security.web.session.SessionManagementFilter@2f7765f1, org.springframework.security.web.access.ExceptionTranslationFilter@ceb4f91, org.springframework.security.web.access.intercept.AuthorizationFilter@6c31ed81]
+2024-07-14T21:10:37.228+08:00  INFO 21436 --- [authServer] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-14T21:10:37.261+08:00  INFO 21436 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : Started AuthenticationApp in 7.773 seconds (process running for 8.598)
+2024-07-14T21:10:37.549+08:00  INFO 21436 --- [authServer] [RMI TCP Connection(6)-192.168.0.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-14T21:10:37.549+08:00  INFO 21436 --- [authServer] [RMI TCP Connection(6)-192.168.0.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-14T21:10:37.551+08:00  INFO 21436 --- [authServer] [RMI TCP Connection(6)-192.168.0.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-14T21:32:30.905+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2024-07-14T21:32:30.918+08:00  WARN 21436 --- [authServer] [http-nio-8080-exec-2] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/api/v1/auth/login' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-07-14T21:32:30.923+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:32:30.925+08:00  WARN 21436 --- [authServer] [http-nio-8080-exec-2] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/api/v1/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-07-14T21:32:30.929+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2024-07-14T21:32:31.256+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'admin'
+2024-07-14T21:32:31.259+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:32:31.263+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /error
+2024-07-14T21:32:31.266+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:32:31.268+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:32:44.719+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2024-07-14T21:32:44.720+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:32:44.721+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2024-07-14T21:32:44.800+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'admin'
+2024-07-14T21:32:44.801+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:32:44.802+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /error
+2024-07-14T21:32:44.803+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:32:44.804+08:00 DEBUG 21436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:36:38.356+08:00  INFO 21436 --- [authServer] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14T21:36:38.358+08:00  INFO 21436 --- [authServer] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-07-14T21:36:38.359+08:00  INFO 21436 --- [authServer] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-07-14T21:36:47.380+08:00  INFO 22436 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : Starting AuthenticationApp using Java 21 with PID 22436 (D:\workspace\javaspace\paper\cloudsaga\saga-architecture\saga-architecture-authentication\target\classes started by xiong in D:\workspace\javaspace\paper\cloudsaga\saga-architecture)
+2024-07-14T21:36:47.382+08:00  INFO 22436 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : The following 1 profile is active: "lkp"
+2024-07-14T21:36:48.226+08:00  INFO 22436 --- [authServer] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14T21:36:48.270+08:00  INFO 22436 --- [authServer] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 2 JPA repository interfaces.
+2024-07-14T21:36:48.514+08:00  INFO 22436 --- [authServer] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=a601589f-afb2-3f80-a2de-d03a694504bb
+2024-07-14T21:36:49.201+08:00  INFO 22436 --- [authServer] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-14T21:36:49.208+08:00  INFO 22436 --- [authServer] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-14T21:36:49.209+08:00  INFO 22436 --- [authServer] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-07-14T21:36:49.254+08:00  INFO 22436 --- [authServer] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-14T21:36:49.255+08:00  INFO 22436 --- [authServer] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1836 ms
+2024-07-14T21:36:49.708+08:00  INFO 22436 --- [authServer] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14T21:36:49.762+08:00  INFO 22436 --- [authServer] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-07-14T21:36:49.793+08:00  INFO 22436 --- [authServer] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-14T21:36:49.978+08:00  INFO 22436 --- [authServer] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-14T21:36:49.998+08:00  INFO 22436 --- [authServer] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-14T21:36:50.242+08:00  INFO 22436 --- [authServer] [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+2024-07-14T21:36:50.243+08:00  INFO 22436 --- [authServer] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.hsqldb.jdbc.JDBCConnection@6a7ea7c
+2024-07-14T21:36:50.244+08:00  INFO 22436 --- [authServer] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-14T21:36:50.921+08:00  INFO 22436 --- [authServer] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-14T21:36:50.924+08:00  INFO 22436 --- [authServer] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14T21:36:52.645+08:00  INFO 22436 --- [authServer] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-07-14T21:36:52.808+08:00  INFO 22436 --- [authServer] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3f07eede, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b276a08, org.springframework.security.web.context.SecurityContextHolderFilter@4928a347, org.springframework.security.web.header.HeaderWriterFilter@6fa73db5, org.springframework.web.filter.CorsFilter@328a1843, org.springframework.security.web.authentication.logout.LogoutFilter@75b994f7, com.xzg.authentication.config.filter.JwtAuthenticationFilter@5ce9c9e8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d24def, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3662dc9b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3b07b706, org.springframework.security.web.session.SessionManagementFilter@a8e649e, org.springframework.security.web.access.ExceptionTranslationFilter@139f1db4, org.springframework.security.web.access.intercept.AuthorizationFilter@8f2513c]
+2024-07-14T21:36:53.789+08:00  INFO 22436 --- [authServer] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-14T21:36:53.824+08:00  INFO 22436 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : Started AuthenticationApp in 6.952 seconds (process running for 7.535)
+2024-07-14T21:36:54.043+08:00  INFO 22436 --- [authServer] [RMI TCP Connection(2)-192.168.0.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-14T21:36:54.043+08:00  INFO 22436 --- [authServer] [RMI TCP Connection(2)-192.168.0.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-14T21:36:54.044+08:00  INFO 22436 --- [authServer] [RMI TCP Connection(2)-192.168.0.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-14T21:37:04.273+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2024-07-14T21:37:04.280+08:00  WARN 22436 --- [authServer] [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/api/v1/auth/login' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-07-14T21:37:04.284+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:37:04.286+08:00  WARN 22436 --- [authServer] [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/api/v1/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-07-14T21:37:04.289+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2024-07-14T21:37:04.514+08:00  WARN 22436 --- [authServer] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -5501, SQLState: 42501
+2024-07-14T21:37:04.515+08:00 ERROR 22436 --- [authServer] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : user lacks privilege or object not found: AUTH_USER in statement [select u1_0.id,u1_0.email,u1_0.location,u1_0.password,u1_0.role,u1_0.telephone,u1_0.username from auth_user u1_0 where u1_0.username=?]
+2024-07-14T21:37:04.522+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] .s.a.DefaultAuthenticationEventPublisher : No event was found for the exception org.springframework.security.authentication.InternalAuthenticationServiceException
+2024-07-14T21:37:04.524+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:37:04.527+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /error
+2024-07-14T21:37:04.529+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:37:04.531+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:37:05.588+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2024-07-14T21:37:05.589+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:37:05.590+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2024-07-14T21:37:05.593+08:00  WARN 22436 --- [authServer] [http-nio-8080-exec-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: -5501, SQLState: 42501
+2024-07-14T21:37:05.593+08:00 ERROR 22436 --- [authServer] [http-nio-8080-exec-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : user lacks privilege or object not found: AUTH_USER in statement [select u1_0.id,u1_0.email,u1_0.location,u1_0.password,u1_0.role,u1_0.telephone,u1_0.username from auth_user u1_0 where u1_0.username=?]
+2024-07-14T21:37:05.593+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] .s.a.DefaultAuthenticationEventPublisher : No event was found for the exception org.springframework.security.authentication.InternalAuthenticationServiceException
+2024-07-14T21:37:05.593+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:37:05.594+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /error
+2024-07-14T21:37:05.595+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:37:05.596+08:00 DEBUG 22436 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T21:38:26.575+08:00  INFO 22436 --- [authServer] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14T21:38:26.577+08:00  INFO 22436 --- [authServer] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-07-14T21:38:26.578+08:00  INFO 22436 --- [authServer] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-07-14T21:38:34.568+08:00  INFO 8152 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : Starting AuthenticationApp using Java 21 with PID 8152 (D:\workspace\javaspace\paper\cloudsaga\saga-architecture\saga-architecture-authentication\target\classes started by xiong in D:\workspace\javaspace\paper\cloudsaga\saga-architecture)
+2024-07-14T21:38:34.571+08:00  INFO 8152 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : The following 1 profile is active: "lkp"
+2024-07-14T21:38:35.500+08:00  INFO 8152 --- [authServer] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14T21:38:35.549+08:00  INFO 8152 --- [authServer] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 2 JPA repository interfaces.
+2024-07-14T21:38:35.798+08:00  INFO 8152 --- [authServer] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=a601589f-afb2-3f80-a2de-d03a694504bb
+2024-07-14T21:38:36.506+08:00  INFO 8152 --- [authServer] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-14T21:38:36.513+08:00  INFO 8152 --- [authServer] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-14T21:38:36.513+08:00  INFO 8152 --- [authServer] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-07-14T21:38:36.564+08:00  INFO 8152 --- [authServer] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-14T21:38:36.564+08:00  INFO 8152 --- [authServer] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1957 ms
+2024-07-14T21:38:37.022+08:00  INFO 8152 --- [authServer] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14T21:38:37.069+08:00  INFO 8152 --- [authServer] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-07-14T21:38:37.096+08:00  INFO 8152 --- [authServer] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-14T21:38:37.269+08:00  INFO 8152 --- [authServer] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-14T21:38:37.289+08:00  INFO 8152 --- [authServer] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-07-14T21:38:37.535+08:00  INFO 8152 --- [authServer] [main] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+2024-07-14T21:38:37.536+08:00  INFO 8152 --- [authServer] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.hsqldb.jdbc.JDBCConnection@3ee200ae
+2024-07-14T21:38:37.537+08:00  INFO 8152 --- [authServer] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-07-14T21:38:38.229+08:00  INFO 8152 --- [authServer] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-14T21:38:38.250+08:00  INFO 8152 --- [authServer] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14T21:38:39.901+08:00  INFO 8152 --- [authServer] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-07-14T21:38:40.012+08:00  INFO 8152 --- [authServer] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@d7b20d9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b7ecd37, org.springframework.security.web.context.SecurityContextHolderFilter@59464f08, org.springframework.security.web.header.HeaderWriterFilter@3f7e72a7, org.springframework.web.filter.CorsFilter@28c06c3c, org.springframework.security.web.authentication.logout.LogoutFilter@2a080ba3, com.xzg.authentication.config.filter.JwtAuthenticationFilter@58052571, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5b1b5daf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@379cfc77, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3c8802cf, org.springframework.security.web.session.SessionManagementFilter@7b4185ea, org.springframework.security.web.access.ExceptionTranslationFilter@4c94621d, org.springframework.security.web.access.intercept.AuthorizationFilter@4caeeab6]
+2024-07-14T21:38:41.061+08:00  INFO 8152 --- [authServer] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-14T21:38:41.094+08:00  INFO 8152 --- [authServer] [main] c.xzg.authentication.AuthenticationApp   : Started AuthenticationApp in 7.03 seconds (process running for 7.634)
+2024-07-14T21:38:41.241+08:00  INFO 8152 --- [authServer] [RMI TCP Connection(3)-192.168.0.102] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-14T21:38:41.242+08:00  INFO 8152 --- [authServer] [RMI TCP Connection(3)-192.168.0.102] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-14T21:38:41.242+08:00  INFO 8152 --- [authServer] [RMI TCP Connection(3)-192.168.0.102] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-07-14T21:39:45.770+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/register
+2024-07-14T21:39:45.779+08:00  WARN 8152 --- [authServer] [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/api/v1/auth/register' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-07-14T21:39:45.784+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:39:45.787+08:00  WARN 8152 --- [authServer] [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/api/v1/auth/register' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-07-14T21:39:45.790+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/register
+2024-07-14T21:40:36.831+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/register
+2024-07-14T21:40:36.832+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:40:36.833+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/register
+2024-07-14T21:42:59.796+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/register
+2024-07-14T21:42:59.797+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:42:59.798+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/register
+2024-07-14T21:44:15.557+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/register
+2024-07-14T21:44:15.558+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T21:44:15.559+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/register
+2024-07-14T22:05:00.980+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2024-07-14T22:05:00.982+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T22:05:00.983+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2024-07-14T22:05:01.192+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] .s.a.DefaultAuthenticationEventPublisher : No event was found for the exception org.springframework.security.authentication.InternalAuthenticationServiceException
+2024-07-14T22:05:01.195+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T22:05:01.200+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /error
+2024-07-14T22:05:01.202+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T22:05:01.205+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-1] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T22:05:33.449+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2024-07-14T22:05:33.450+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T22:05:33.450+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2024-07-14T22:05:33.453+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] .s.a.DefaultAuthenticationEventPublisher : No event was found for the exception org.springframework.security.authentication.InternalAuthenticationServiceException
+2024-07-14T22:05:33.453+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T22:05:33.454+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /error
+2024-07-14T22:05:33.455+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T22:05:33.455+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2024-07-14T22:06:26.028+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/register
+2024-07-14T22:06:26.029+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-07-14T22:06:26.030+08:00 DEBUG 8152 --- [authServer] [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/register
+2024-07-14T23:31:37.374+08:00  INFO 8152 --- [authServer] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14T23:31:37.378+08:00  INFO 8152 --- [authServer] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-07-14T23:31:37.380+08:00  INFO 8152 --- [authServer] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

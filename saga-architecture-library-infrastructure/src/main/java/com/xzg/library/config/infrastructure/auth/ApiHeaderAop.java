@@ -5,6 +5,7 @@ import com.xzg.library.config.infrastructure.common.constant.SystemMessage;
 import com.xzg.library.config.infrastructure.common.exception.UnauthorizedException;
 import com.xzg.library.config.infrastructure.model.HeaderUserModel;
 import com.xzg.library.config.infrastructure.utility.SplitHeaderToken;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -63,13 +64,17 @@ public class ApiHeaderAop {
                             String userName = jwtService.extractUsername(jwtToken);
                             HeaderUserModel userModel = HeaderUserModel.builder().userName(userName).build();
                             if (userModel == null) {
-                                throw new UnauthorizedException(SystemMessage.SYS_USER_PERMISSION_LIMIT);
+                                throw new UnauthorizedException(SystemMessage.SYS_USER_PERMISSION_ERROR);
                             }
                             // 写header线程缓存
                             ApiHeaderUtil.setHeader(userModel);
-                        } catch (Exception e) {
+                        }catch (ExpiredJwtException expiredJwtException){
+                            log.error("header {}:{}", jwtToken,expiredJwtException.getMessage());
+                            throw new UnauthorizedException(SystemMessage.SYS_USER_PERMISSION_EXPIRED);
+                        }
+                        catch (Exception e) {
                             log.warn("header {}:{}", jwtToken,e.getMessage());
-                            throw new UnauthorizedException(SystemMessage.SYS_USER_PERMISSION_LIMIT);
+                            throw new UnauthorizedException(SystemMessage.SYS_USER_PERMISSION_ERROR);
                         }
                     }
                 }

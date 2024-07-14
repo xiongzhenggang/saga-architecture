@@ -6,7 +6,7 @@ import com.xzg.library.config.infrastructure.model.CommonResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -37,6 +37,12 @@ public class RestExceptionHandler {
     @ExceptionHandler({Exception.class})
     @ResponseBody
     public CommonResponse handleException(HttpServletRequest request, Exception e) {
+        log.error("请求失败");
+        return CommonResponse.failure(e.getMessage());
+    }
+    @ExceptionHandler({UsernameNotFoundException.class})
+    @ResponseBody
+    public CommonResponse handleUserException(HttpServletRequest request, UsernameNotFoundException e) {
         log.error("请求失败");
         return CommonResponse.failure(e.getMessage());
     }

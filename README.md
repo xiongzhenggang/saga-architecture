@@ -90,6 +90,12 @@ kubect get ingress
 ## 部署流程
 
 ## 测试流程
+
+1. 登录获取JWT
+> POST: http://localhost:8080/api/v1/auth/login
+```
+{"username":"admin","password":"123"}
+```
 1. 开始下单流程（构造正常，异常订单执行查看补偿是否成功）
 > POST: http://localhost:8080/orders
 ```json
