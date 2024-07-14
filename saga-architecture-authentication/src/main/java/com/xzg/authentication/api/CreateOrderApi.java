@@ -22,13 +22,18 @@ public class CreateOrderApi {
     @Resource
     private UserRepository repository; //访问user数据库
     @RequestMapping(value = "/api/v1/auth/orders", method = RequestMethod.POST)
-    public CommonResponse<String> createOrder()  {
+    public CommonResponse<String> createOrder() {
         User user = new User();
-        user.setUsername("xuzhigang");
+        String userName = "xzg"+System.currentTimeMillis();
+        user.setUsername(userName);
         user.setPassword("123456");
         user.setEmail("123456789@qq.com");
         user.setTelephone("15478781231");
         repository.save(user);
+        //
+//        User userSearch = new User();
+//        userSearch.setUsername(userName);
+//        repository.findAll(Example.of(userSearch));
         return CommonResponse.success("create order success");
     }
 }

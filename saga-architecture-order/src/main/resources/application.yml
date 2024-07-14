@@ -1,7 +1,9 @@
-database: hsqldb
+database: @database.type@
 server:
   port: 8080
 spring:
+  profiles:
+    active: @spring.profiles.active@
   sql:
     init:
       schema-locations: classpath*:db/${database}/schema.sql
