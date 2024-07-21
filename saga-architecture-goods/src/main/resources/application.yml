@@ -1,6 +1,6 @@
 database: @database.type@
 server:
-  port: 8081
+  port: 8080
 spring:
   profiles:
     active: @spring.profiles.active@
