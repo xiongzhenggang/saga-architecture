@@ -2,7 +2,6 @@ package com.xzg.goods.api;
 
 import com.xzg.goods.entity.Goods;
 import com.xzg.goods.service.GoodsService;
-import com.xzg.library.config.infrastructure.auth.ApiHeader;
 import com.xzg.library.config.infrastructure.configuration.EnableResponseBodyWrap;
 import com.xzg.library.config.infrastructure.model.CommonResponse;
 import jakarta.annotation.Resource;
@@ -46,7 +45,7 @@ public class OrderController {
 
     @Resource
     GoodsService goodsService;
-    @ApiHeader
+//    @ApiHeader
     @RequestMapping(value = "/orders", method = RequestMethod.POST)
     public CommonResponse<String> createOrder()  {
         Goods goods = new Goods();

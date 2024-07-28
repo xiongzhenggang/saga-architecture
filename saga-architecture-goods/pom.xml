@@ -75,6 +75,10 @@
             <artifactId>saga-architecture-orchestrator-kit</artifactId>
             <version>${saga-archiecture-version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <filters>

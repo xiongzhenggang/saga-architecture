@@ -1,0 +1,8 @@
+## 修改 prometheus.yml 配置文件
+scrape_configs:
+  - job_name: 'spring-boot-actuator-exporter'
+    metrics_path: '/actuator/prometheus' #指定抓取的路径
+    static_configs:
+      - targets: ['192.168.0.102:8080','192.168.0.103:8080']
+        labels:
+          nodename: 'order-saga'

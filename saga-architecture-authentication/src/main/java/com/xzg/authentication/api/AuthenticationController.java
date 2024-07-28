@@ -1,19 +1,18 @@
 package com.xzg.authentication.api;
 
-import com.xzg.authentication.service.AuthenticationService;
 import com.xzg.authentication.model.request.AuthenticationRequest;
 import com.xzg.authentication.model.request.RegisterRequest;
 import com.xzg.authentication.model.rresponse.AuthenticationResponse;
+import com.xzg.authentication.service.AuthenticationService;
 import com.xzg.library.config.infrastructure.model.CommonResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户注册: 接收到用户传递过来的信息,在数据库中生成用户信息(密码会通过passwordEncoder进行加密).用户信息保存成功后,会根据用户信息创建一个鉴权token和一个refreshToken
@@ -61,5 +60,13 @@ public class AuthenticationController {
             HttpServletResponse response
     ) throws IOException {
         service.refreshToken(request, response);
+    }
+
+    @RequestMapping(value = "/orders", method = RequestMethod.POST)
+    public CommonResponse createOrder()  {
+        Map result = new HashMap<String,Long>();
+        result.put("orderId", 2L);
+        return CommonResponse
+                .success(result);
     }
 }
