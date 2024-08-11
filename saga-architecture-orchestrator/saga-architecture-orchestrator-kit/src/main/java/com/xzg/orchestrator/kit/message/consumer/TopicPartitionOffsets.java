@@ -1,6 +1,7 @@
 package com.xzg.orchestrator.kit.message.consumer;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.*;
 import java.util.stream.Collectors;

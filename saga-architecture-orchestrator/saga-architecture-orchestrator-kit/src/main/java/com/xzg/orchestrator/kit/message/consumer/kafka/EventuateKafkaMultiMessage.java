@@ -2,8 +2,8 @@ package com.xzg.orchestrator.kit.message.consumer.kafka;
 
 import com.xzg.orchestrator.kit.message.consumer.KeyValue;
 import com.xzg.orchestrator.kit.message.consumer.MultiMessageEncoder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Collections;
 import java.util.List;

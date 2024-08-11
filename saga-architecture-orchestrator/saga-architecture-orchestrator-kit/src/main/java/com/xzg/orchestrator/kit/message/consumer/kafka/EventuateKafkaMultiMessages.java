@@ -1,8 +1,8 @@
 package com.xzg.orchestrator.kit.message.consumer.kafka;
 
 import com.xzg.orchestrator.kit.message.consumer.KeyValue;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Collections;
 import java.util.List;

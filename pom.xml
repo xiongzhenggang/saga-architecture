@@ -50,7 +50,7 @@
     <caffeine.version>3.1.8</caffeine.version>
     <mysql.version>8.0.33</mysql.version>
     <saga-archiecture-version>1.0-SNAPSHOT</saga-archiecture-version>
-    <common-lang.version>2.6</common-lang.version>
+    <common-lang3.version>3.16.0</common-lang3.version>
     <agrona.version>1.20.0</agrona.version>
     <prometheus.version>1.13.2</prometheus.version>
   </properties>
@@ -68,11 +68,11 @@
         <artifactId>saga-architecture-library-infrastructure</artifactId>
         <version>${saga-archiecture-version}</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+      <!-- https://mvnrepository.com/artifact/commons-lang3/commons-lang -->
       <dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>${common-lang.version}</version>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${common-lang3.version}</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/org.agrona/agrona -->
       <dependency>

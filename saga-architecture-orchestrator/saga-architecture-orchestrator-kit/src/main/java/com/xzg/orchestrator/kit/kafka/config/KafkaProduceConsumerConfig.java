@@ -57,6 +57,8 @@ public class KafkaProduceConsumerConfig {
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        //生产者幂等性：通过设置enable.idempotence参数为true，Kafka生产者可以保证消息的幂等性，即消息在发送过程中不会因为网络或其他问题而重复发送
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG,"true");
         //发生错误后，消息重发的次数 ，0为不启用重试机制，默认int最大值
         props.put(ProducerConfig.RETRIES_CONFIG,"3");
         //生产者发送过来的数据，Leader 收到数据后应答。

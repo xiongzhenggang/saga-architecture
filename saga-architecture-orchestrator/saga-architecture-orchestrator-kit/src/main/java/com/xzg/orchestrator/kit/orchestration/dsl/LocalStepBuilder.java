@@ -17,6 +17,11 @@ public class LocalStepBuilder<Data>  {
   private final List<LocalExceptionSaver<Data>> localExceptionSavers = new LinkedList<>();
   private final List<Class<RuntimeException>> rollbackExceptions = new LinkedList<>();
 
+  /**
+   * add compensation action
+   * @param localCompensation
+   * @return
+   */
   public LocalStepBuilder<Data> withCompensation(Consumer<Data> localCompensation) {
     this.compensation = Optional.of(localCompensation);
      return this;
@@ -27,12 +32,19 @@ public class LocalStepBuilder<Data>  {
     this.localFunction = localFunction;
   }
 
-
+  /**
+   * next step action
+   * @return
+   */
   public StepBuilder<Data> step() {
     parent.addStep(makeLocalStep());
     return new StepBuilder<>(parent);
   }
 
+  /**
+   * next local step action
+   * @return
+   */
   private LocalStep<Data> makeLocalStep() {
     return new LocalStep<>(localFunction, compensation, localExceptionSavers, rollbackExceptions);
   }
