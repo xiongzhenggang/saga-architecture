@@ -44,7 +44,7 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
         message = commandProducer.send(command.getDestinationChannel(), command.getResource(), command.getCommand(), sagaReplyChannel, headers);
       }
       //本地事务消息保存
-      saveSagaMessage(sagaMessageRepository,sagaId,message);
+      saveSagaMessage(sagaMessageRepository,sagaId,message,SendStatusEnum.SUCCESS);
     }
     return Objects.isNull(message)?null:message.getId();
   }
@@ -56,7 +56,8 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
    */
   private void saveSagaMessage(SagaMessageRepository sagaMessageRepository,
                                String sagaId,
-                               Message message){
+                               Message message,
+                               SendStatusEnum statusEnum){
     SagaMessage sagaMessage = new SagaMessage();
     sagaMessage.setSagaId(sagaId);
     sagaMessage.setHeaders(message.getHeaders().toString());
@@ -65,7 +66,7 @@ public class SagaCommandProducerImpl implements SagaCommandProducer {
     message.getHeader(CommandMessageHeaders.COMMAND_TYPE).ifPresent(sagaMessage::setType);
     sagaMessage.setSerial(message.getId());
     sagaMessage.setSource(SourceEnum.SEND.getValue());
-    sagaMessage.setSendStatus(SendStatusEnum.SUCCESS.name());
+    sagaMessage.setSendStatus(statusEnum.name());
     sagaMessage.setCreatedTime(LocalDateTime.now());
     sagaMessageRepository.save(sagaMessage);
   }

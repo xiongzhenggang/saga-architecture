@@ -5,13 +5,12 @@ import com.xzg.orchestrator.kit.common.SagaCommandHeaders;
 import com.xzg.orchestrator.kit.message.Message;
 import com.xzg.orchestrator.kit.message.consumer.StringBinaryMessageEncoding;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.springframework.kafka.core.KafkaOperations;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 /**
  * kafka发送
@@ -21,7 +20,7 @@ import java.util.function.Consumer;
 public class SagaKafkaProducer implements MessageProducer {
 
   @Resource
-  private KafkaTemplate kafkaTemplate;
+  private KafkaTemplate<String,byte[]> kafkaTemplate;
   /**
    * Saga发送kafka或者应用内部
    * @param destination the destination channel
@@ -29,7 +28,8 @@ public class SagaKafkaProducer implements MessageProducer {
    */
   @Override
   public void send(String destination, Message message) {
-     send(destination, message.getHeader(SagaCommandHeaders.SAGA_TYPE).orElse(""), JsonUtil.object2JsonStr(message));
+//     send(destination, message.getHeader(SagaCommandHeaders.SAGA_TYPE).orElse(""), JsonUtil.object2JsonStr(message));
+    sendTransaction(destination,message);
   }
   public CompletableFuture<?> send(String topic, String key, String body) {
     return send(topic, key, StringBinaryMessageEncoding.stringToBytes(body));
@@ -49,27 +49,30 @@ public class SagaKafkaProducer implements MessageProducer {
 
   private CompletableFuture<?> send(ProducerRecord<String, byte[]> producerRecord) {
     return kafkaTemplate.send(producerRecord);
-//    CompletableFuture<Object> result = new CompletableFuture<>();
-//    kafkaTemplate.send(producerRecord, (metadata, exception) -> {
-//      if (exception == null)
-//        result.complete(metadata);
-//      else
-//        result.completeExceptionally(exception);
-//    });
   }
 
+  /**
+   *  事务消息发送
+   * @param destination
+   * @param message
+   */
+  public   void sendTransaction(String destination, Message message){
+    String jsonObject  = JsonUtil.object2JsonStr(message);
+    if(StringUtils.isEmpty(jsonObject)){
+      throw new RuntimeException("message is null");
+    }
+    byte[] bytes = StringBinaryMessageEncoding.stringToBytes(jsonObject);
+    ProducerRecord<String, byte[]> producerRecord = new ProducerRecord<>(destination, message.getHeader(SagaCommandHeaders.SAGA_TYPE).orElse(""), bytes);
+    sendTransaction(producerRecord);
+  }
   /**
    * 事务消息发送
    * 保证consumer处理和发送在同一个事务
    */
-  private  void sendTransaction(String destination, Consumer<Message> consumer,Message message) {
-    ProducerRecord producerRecord =new ProducerRecord<>(destination,
-            message.getHeader(SagaCommandHeaders.SAGA_TYPE).orElse(""),
-            StringBinaryMessageEncoding.stringToBytes( JsonUtil.object2JsonStr(message)));
-    kafkaTemplate.executeInTransaction(kafkaOperations -> {
+  private  void sendTransaction(ProducerRecord<String, byte[]> producerRecord) {
+      kafkaTemplate.executeInTransaction(kafkaOperations -> {
       kafkaOperations.send(producerRecord);
       //其他处理
-      consumer.accept(message);
       return true;
     });
   }

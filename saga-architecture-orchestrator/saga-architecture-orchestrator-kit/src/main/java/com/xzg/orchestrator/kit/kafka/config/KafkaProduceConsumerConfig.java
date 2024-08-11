@@ -71,13 +71,15 @@ public class KafkaProduceConsumerConfig {
 
     @Bean
     public ProducerFactory<String, byte[]> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
+        DefaultKafkaProducerFactory<String, byte[]> producerFactory =  new DefaultKafkaProducerFactory<>(producerConfigs());
+        //设置开启生产者事务
+        producerFactory.setTransactionIdPrefix("tx-");
+        return producerFactory;
     }
 
     @Bean
     public KafkaTemplate<String, byte[]> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
 
 }
