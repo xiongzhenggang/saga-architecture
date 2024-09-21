@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: saga-gitlab-pvc
+  namespace: saga-servicemesh
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nas
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab
+  namespace: saga-servicemesh
+  labels:
+    name: gitlab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      name: gitlab
+      labels:
+        name: gitlab
+    spec:
+      containers:
+        - name: gitlab
+          image: gitlab/gitlab-ce:17.1.1-ce.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+            - name: GITLAB_TIMEZONE
+              value: Beijing
+            - name: GITLAB_SECRETS_DB_KEY_BASE
+              value: long-and-random-alpha-numeric-string
+            - name: GITLAB_SECRETS_SECRET_KEY_BASE
+              value: long-and-random-alpha-numeric-string
+            - name: GITLAB_SECRETS_OTP_KEY_BASE
+              value: long-and-random-alpha-numeric-string
+            - name: GITLAB_ROOT_PASSWORD
+              value: admin123456
+            - name: GITLAB_ROOT_EMAIL
+              value: saga@saga.com
+            - name: GITLAB_HOST
+              value: xxx.example.com
+            - name: GITLAB_PORT
+              value: "80"
+            - name: GITLAB_SSH_PORT
+              value: "22"
+            - name: GITLAB_NOTIFY_ON_BROKEN_BUILDS
+              value: "true"
+            - name: GITLAB_NOTIFY_PUSHER
+              value: "false"
+            - name: GITLAB_BACKUP_SCHEDULE
+              value: daily
+            - name: GITLAB_BACKUP_TIME
+              value: 01:00
+          ports:
+            - name: http
+              containerPort: 80
+            - name: ssh
+              containerPort: 22
+          volumeMounts:
+            - mountPath: /home/git/data
+              name: data
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 900
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName:  saga-gitlab-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab
+  namespace: saga-servicemesh
+  labels:
+    name: gitlab
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: ssh
+      port: 22
+      targetPort: ssh
+  selector:
+    name: gitlab
