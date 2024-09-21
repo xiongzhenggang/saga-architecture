@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  jenkins:
+    # 这里的版本号，使用从官网上查看的最新 LTS 版本号
+    image: jenkins/jenkins:lts-jdk21
+    container_name: jenkins
+    privileged: true
+    restart: always
+    ports:
+      # web访问端口
+      - "9090:8080"
+      # 基于JNLP的Jenkins代理端口
+      - "50000:50000"
+    volumes:
+      # jenkins的数据和配置文件目录映射
+      - /app/jenkins/data:/var/jenkins_home
+      # 将外部的jdk目录映射到容器内部
+      - /app/jdk:/app/jdk
+      # 将外部的maven目录映射到容器内部
+      - /app/maven:/app/maven
