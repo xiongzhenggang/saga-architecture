@@ -34,7 +34,7 @@ public class CreateOrderSaga implements SimpleSaga<CreateOrderSagaData> {
 
   /**
    * DSL定义订单saga状态机转换流程
-   * 定义步骤保存到 List<SagaStep<Data>> sagaSteps：LocalStep->ParticipantInvocationStep->ParticipantInvocationStep->LocalStep
+   * 定义步骤 List<SagaStep<Data>> sagaSteps:LocalStep->ParticipantInvocationStep->ParticipantInvocationStep->LocalStep
    */
   private SagaDefinition<CreateOrderSagaData> sagaDefinition =
           step()

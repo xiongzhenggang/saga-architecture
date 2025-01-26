@@ -1,0 +1,49 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractSagaActionsProvider<Data, SuppliedValue> {
+  + toSagaActions(Function<SagaActions<Data>, SuppliedValue>, Function<SuppliedValue, SuppliedValue>): SuppliedValue
+}
+class AbstractSimpleSagaDefinition<Data, Step, ToExecute, Provider> {
+  # makeSagaActionsProvider(SagaActions<Data>): Provider
+  # makeEndStateSagaActions(SagaExecutionState): SagaActions<Data>
+  # firstStepToExecute(Data): Provider
+  # sagaActionsForNextStep(String, String, Data, Message, SagaExecutionState, Step, boolean): Provider
+  # makeSagaActionsProvider(ToExecute, Data, SagaExecutionState): Provider
+  # handleFailedCompensatingTransaction(String, String, SagaExecutionState, Message): Provider
+  # invokeReplyHandler(Message, Data, BiFunction<Data, Object, T>): void
+  # nextStepToExecute(SagaExecutionState, Data): Provider
+  # makeStepToExecute(int, boolean, Step): ToExecute
+}
+class AbstractStepToExecute<Data, SagaStep> {
+  # makeSagaActions(Builder<Data>, Data, SagaExecutionState, boolean): SagaActions<Data>
+  # size(): int
+}
+interface ISagaStep<Data> << interface >> {
+  + hasAction(Data): boolean
+  + hasCompensation(Data): boolean
+  + isSuccessfulReply(boolean, Message): boolean
+}
+interface SagaDefinition<Data> << interface >> {
+  + start(Data): SagaActions<Data>
+  + handleReply(String, String, String, Data, Message): SagaActions<Data>
+}
+class SimpleSagaDefinition<Data> {
+  + start(Data): SagaActions<Data>
+  - toSagaActions(SagaActionsProvider<Data>): SagaActions<Data>
+  + handleReply(String, String, String, Data, Message): SagaActions<Data>
+  # makeSagaActionsProvider(SagaActions<Data>): SagaActionsProvider<Data>
+  # makeStepToExecute(int, boolean, SagaStep<Data>): StepToExecute<Data>
+  # makeSagaActionsProvider(StepToExecute<Data>, Data, SagaExecutionState): SagaActionsProvider<Data>
+}
+
+AbstractSimpleSagaDefinition  -[#595959,dashed]->  AbstractSagaActionsProvider  
+AbstractSimpleSagaDefinition  -[#595959,dashed]->  AbstractStepToExecute        
+AbstractSimpleSagaDefinition  -[#595959,dashed]->  ISagaStep                    
+AbstractStepToExecute         -[#595959,dashed]->  ISagaStep                    
+SimpleSagaDefinition          -[#000082,plain]-^  AbstractSimpleSagaDefinition 
+SimpleSagaDefinition          -[#008200,dashed]-^  SagaDefinition               
+@enduml

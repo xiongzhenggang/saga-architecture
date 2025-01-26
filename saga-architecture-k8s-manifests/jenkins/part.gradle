@@ -1,0 +1,34 @@
+stages {
+    stage('编译源码') {
+        steps {
+           script { sh "mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true"}
+        }
+    }
+    stage('构建镜像') {
+        steps {
+            script {
+                // 构建 Docker 镜像
+                sh "docker build -t ${DOCKER_REGISTRY}/saga-order:latest ."
+                // 登录 Docker 仓库
+                sh "echo ${DOCKER_PASS} | " +
+                "docker login ${DOCKER_REGISTRY} -u ${DOCKER_USER} --password-stdin"
+                // 推送镜像到 Docker 仓库
+                sh "docker push ${DOCKER_REGISTRY}/saga-order:latest"
+            }
+        }
+    }
+    // 部署到云原生基础设施平台
+    stage('自动化部署') {
+        steps {
+            script {
+                sh "kubectl set image deployment/saga-order" +
+                    "=${DOCKER_REGISTRY}/saga-order:latest -n ${K8S_NAMESPACE}"
+            }
+        }
+    }
+}
+
+
+
+
+

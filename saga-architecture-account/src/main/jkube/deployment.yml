@@ -27,6 +27,12 @@ spec:
           env:
             - name: JAVA_OPTS
               value: "-Dspring.profiles.active=${spring.profiles.active} -Dloback.path=/app"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
           resources:
             requests:
               memory: "512Mi"
